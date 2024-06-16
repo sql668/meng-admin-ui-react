@@ -1,2 +1,4 @@
 # meng-admin-ui-react
-meng admin react ui
+
+基于react18 + vite5 + antd5后台管理系统 前端模块
+
