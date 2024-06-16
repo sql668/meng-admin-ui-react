@@ -77,15 +77,16 @@ export default function MengLayout() {
   const menuItemClick = useCallback(
     (e: any) => {
       debugger
-      console.log(e)
-
       const menu = getMenu(menuData, e.key)
-      console.log(menu)
       if (menu?.viewType === '2') {
         if (ishttp(menu.linkUrl || '')) {
           window.open(menu.linkUrl, '_blank')
         } else {
-          window.open(import.meta.env.VITE_BASE_URL + menu.linkUrl, '_blank')
+          const url =
+            import.meta.env.VITE_BASE_URL !== '/'
+              ? import.meta.env.VITE_BASE_URL + menu.linkUrl
+              : menu.linkUrl
+          window.open(url, '_blank')
         }
       } else {
         if (menu && menu.children && menu.children.length > 0) {
@@ -156,25 +157,32 @@ export default function MengLayout() {
   /** 计算 slider 的宽度 */
   //const leftSiderWidth = getPaddingInlineStart(!!hasLeftPadding, collapsed, siderWidth)
 
+  const customTokenContext = useMemo(
+    () => ({
+      headerBgcolor: 'rgba(255,255,255,0.6)',
+      heightLayoutHeader: 50,
+    }),
+    [],
+  )
+
+  const routerContext = useMemo(
+    () => ({
+      isMobile: isMobile,
+      location,
+      menuItemClick,
+      menuData: menuData,
+      matchMenuKeys: matchMenuKeys,
+      collapsed,
+      onCollapse,
+      siderWidth,
+    }),
+    [isMobile, location, menuItemClick, menuData, matchMenuKeys, collapsed, onCollapse, siderWidth],
+  )
+
   return (
     <AuthRouter>
-      <ThemeProvider<MengThemeToken>
-        themeMode={themeMode}
-        customToken={{
-          headerBgcolor: 'rgba(255,255,255,0.6)',
-          heightLayoutHeader: 50,
-        }}>
-        <RouteContext.Provider
-          value={{
-            isMobile: isMobile,
-            location,
-            menuItemClick,
-            menuData: menuData,
-            matchMenuKeys: matchMenuKeys,
-            collapsed,
-            onCollapse,
-            siderWidth,
-          }}>
+      <ThemeProvider<MengThemeToken> themeMode={themeMode} customToken={customTokenContext}>
+        <RouteContext.Provider value={routerContext}>
           <BaseLayout>Layouts</BaseLayout>
         </RouteContext.Provider>
       </ThemeProvider>

@@ -6,6 +6,7 @@ import LayoutAside from '../component/aside'
 import LayoutMain from '../component/main'
 import TagsView from '../navBars/tagsView'
 import Footer from '../footer'
+import React from 'react'
 
 const useStyles = createStyles(() => {
   return {
@@ -33,5 +34,7 @@ const MixLayout = () => {
     </div>
   )
 }
-
-export default MixLayout
+if (process.env.NODE_ENV !== 'production') {
+  (MixLayout as any).whyDidYouRender = false
+}
+export default React.memo(MixLayout)

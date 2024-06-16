@@ -35,5 +35,9 @@ const BaseLayout: React.FC<BaseLayoutType> = () => {
 BaseLayout.defaultProps = {
   prefixCls: 'mu',
 }
+
+if (process.env.NODE_ENV !== 'production') {
+  (BaseLayout as any).whyDidYouRender = true
+}
 //export default BaseLayout
 export default React.memo(BaseLayout)
