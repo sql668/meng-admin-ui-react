@@ -1,0 +1,61 @@
+@import "./style/index.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  font-size: 4px;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.header-action-icon{
+
+}
+
+.login-container {
+  background-image: url('@/assets/img/bg.svg');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+/* logo 过渡动画
+------------------------------- */
+@keyframes logoAnimation {
+  0% {
+    transform: scale(0);
+  }
+
+  80% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

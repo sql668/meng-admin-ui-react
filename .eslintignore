@@ -1,0 +1,4 @@
+node_modules
+.eslintrc.cjs
+dist
+path2reg.js

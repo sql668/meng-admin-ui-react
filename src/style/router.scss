@@ -1,0 +1,65 @@
+// 页面切换过渡动画
+.ra-scale {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+}
+
+// 页面切换过渡动画 --- 进入
+.ra-scale-enter {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+// 页面切换过渡动画 --- 进入（被激活）
+.ra-scale-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+// 页面切换过渡动画 --- 离开
+.ra-scale-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// 页面切换过渡动画 --- 离开（被激活）
+.ra-scale-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+
+.ra-fade-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.ra-fade-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 0.5s;
+}
+
+.ra-fade-enter-done {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.ra-fade-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.ra-fade-exit-active {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.5s;
+}
+
+.ra-fade-exit-done {
+  opacity: 0;
+  transform: translateX(30px);
+}

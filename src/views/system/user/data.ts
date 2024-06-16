@@ -1,0 +1,420 @@
+export const searchFormSchema = {
+  form: {
+    labelWidth: 80,
+    colon: true,
+  },
+  schema: {
+    type: 'object',
+    properties: {
+      x8eq6touz2n: {
+        type: 'void',
+        'x-component': 'FormGrid',
+        'x-validator': [],
+        'x-component-props': {
+          maxColumns: 4,
+          minWidth: 300,
+          strictAutoFit: true,
+          columnGap: 40,
+        },
+        'x-designable-id': 'x8eq6touz2n',
+        properties: {
+          '8ld7vho8ce9': {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': '8ld7vho8ce9',
+            properties: {
+              userName: {
+                type: 'string',
+                title: '用户名称',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-validator': [],
+                'x-component-props': {
+                  placeholder: '请输入用户名称',
+                },
+                'x-decorator-props': {},
+                name: 'userName',
+                description: '',
+                'x-display': 'visible',
+                'x-pattern': 'editable',
+                'x-designable-id': 'eyswcd63qj8',
+                'x-index': 0,
+              },
+            },
+            'x-index': 0,
+          },
+          cozgxf2qyxo: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': 'cozgxf2qyxo',
+            properties: {
+              phone: {
+                type: 'string',
+                title: '手机号码',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-validator': [],
+                'x-component-props': {
+                  placeholder: '请输入手机号码',
+                },
+                'x-decorator-props': {},
+                name: 'phone',
+                'x-designable-id': 'vgvb07c77fc',
+                'x-index': 0,
+              },
+            },
+            'x-index': 1,
+          },
+          ee2mxpbcb06: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-validator': [],
+            'x-component-props': {},
+            'x-designable-id': 'ee2mxpbcb06',
+            properties: {
+              status: {
+                title: '状态',
+                'x-decorator': 'FormItem',
+                'x-component': 'Select',
+                'x-validator': [],
+                'x-component-props': {},
+                'x-decorator-props': {},
+                name: 'status',
+                enum: [
+                  {
+                    children: [],
+                    label: '正常',
+                    value: 1,
+                  },
+                  {
+                    children: [],
+                    label: '停用',
+                    value: 0,
+                  },
+                ],
+                'x-designable-id': 'x51hkzb1icu',
+                'x-index': 0,
+              },
+            },
+            'x-index': 2,
+          },
+          r31jkdoirv5: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-component-props': {
+              children: '{{actionSlot}}',
+              gridSpan: -1,
+              className: 'form-action',
+            },
+          },
+        },
+        'x-index': 0,
+      },
+    },
+    'x-designable-id': 'tils69zec7f',
+  },
+}
+
+export const editFormSchema = {
+  form: {
+    labelWidth: 100,
+  },
+  schema: {
+    type: 'object',
+    properties: {
+      dhoq58omnmg: {
+        type: 'void',
+        'x-component': 'FormGrid',
+        'x-validator': [],
+        'x-component-props': {
+          minColumns: 2,
+          maxColumns: 2,
+          columnGap: 20,
+        },
+        'x-designable-id': 'dhoq58omnmg',
+        properties: {
+          '9focn2hqm0d': {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': '9focn2hqm0d',
+            properties: {
+              nickName: {
+                type: 'string',
+                title: '用户昵称',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-validator': [],
+                'x-component-props': {
+                  placeholder: '请输入用户昵称',
+                },
+                'x-decorator-props': {
+                  tooltip: '用户真实姓名',
+                  gridSpan: null,
+                },
+                name: 'nickName',
+                required: true,
+                'x-designable-id': '5efhjyydtk3',
+                'x-index': 0,
+              },
+            },
+            'x-index': 0,
+          },
+          '9fhztvmgzhl': {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-validator': [],
+            'x-component-props': {},
+            'x-designable-id': '9fhztvmgzhl',
+            properties: {
+              deptId: {
+                title: '所属部门',
+                'x-decorator': 'FormItem',
+                'x-component': 'TreeSelect',
+                'x-validator': [],
+                'x-component-props': {
+                  autoFocus: true,
+                  placeholder: '请选择部门',
+                  fieldNames: {
+                    label: 'deptName',
+                    value: 'deptId',
+                  },
+                },
+                'x-decorator-props': {},
+                name: 'deptId',
+                required: true,
+                'x-designable-id': 'ffcxr1384hv',
+                'x-index': 0,
+                'x-reactions': ['{{useAsyncDataSource(loadDataGroup.deptId)}}'],
+              },
+            },
+            'x-index': 1,
+          },
+          dvw9l0x29or: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': 'dvw9l0x29or',
+            properties: {
+              phone: {
+                type: 'string',
+                title: '手机号码',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-validator': 'phone',
+                'x-component-props': {
+                  placeholder: '请输入手机号码',
+                },
+                'x-decorator-props': {},
+                name: 'phone',
+                'x-designable-id': 'retyrgw3o29',
+                'x-index': 0,
+              },
+            },
+            'x-index': 2,
+          },
+          ogfz06157io: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': 'ogfz06157io',
+            properties: {
+              email: {
+                type: 'string',
+                title: '邮箱',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-validator': 'email',
+                'x-component-props': {
+                  placeholder: '请输入邮箱',
+                },
+                'x-decorator-props': {
+                  tooltip: '',
+                },
+                name: 'email',
+                'x-designable-id': 'vbqueblzrlx',
+                'x-index': 0,
+              },
+            },
+            'x-index': 3,
+          },
+          hjcx2mgm0yx: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': 'hjcx2mgm0yx',
+            properties: {
+              userName: {
+                type: 'string',
+                title: '用户名称',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-validator': [],
+                'x-component-props': {
+                  placeholder: '请输入用户名称',
+                  maxLength: 20,
+                },
+                'x-decorator-props': {
+                  tooltip: '用作登录账户',
+                },
+                name: 'userName',
+                required: true,
+                'x-designable-id': '80finj64fah',
+                'x-index': 0,
+              },
+            },
+            'x-index': 4,
+          },
+          wri5i5qn98f: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': 'wri5i5qn98f',
+            properties: {
+              password: {
+                title: '密码',
+                'x-decorator': 'FormItem',
+                'x-component': 'Password',
+                'x-validator': [],
+                'x-component-props': {},
+                'x-decorator-props': {},
+                name: 'password',
+                required: true,
+                default: '123456',
+                'x-designable-id': 'o8x3p8xqkzl',
+                'x-index': 0,
+              },
+            },
+            'x-index': 5,
+          },
+          '2w9w4dnwu6d': {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': '2w9w4dnwu6d',
+            properties: {
+              sex: {
+                title: '性别',
+                'x-decorator': 'FormItem',
+                'x-component': 'Select',
+                'x-validator': [],
+                'x-component-props': {
+                  placeholder: '请选择性别',
+                  notFoundContent: '暂无数据',
+                },
+                'x-decorator-props': {},
+                name: 'sex',
+                enum: [
+                  {
+                    children: [],
+                    label: '男',
+                    value: '1',
+                  },
+                  {
+                    children: [],
+                    label: '女',
+                    value: '2',
+                  },
+                  {
+                    children: [],
+                    label: '未知',
+                    value: '0',
+                  },
+                ],
+                default: '1',
+                'x-designable-id': '3ysho2y1qkg',
+                'x-index': 0,
+              },
+            },
+            'x-index': 6,
+          },
+          '0ifii339cjw': {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-validator': [],
+            'x-component-props': {},
+            'x-designable-id': '0ifii339cjw',
+            properties: {
+              status: {
+                type: 'string | number',
+                title: '状态',
+                'x-decorator': 'FormItem',
+                'x-component': 'Radio.Group',
+                enum: [
+                  {
+                    children: [],
+                    label: '正常',
+                    value: '1',
+                  },
+                  {
+                    children: [],
+                    label: '停用',
+                    value: '0',
+                  },
+                ],
+                'x-validator': [],
+                'x-component-props': {},
+                'x-decorator-props': {},
+                name: 'status',
+                default: '1',
+                'x-designable-id': 'nt2sv8twe8v',
+                'x-index': 0,
+              },
+            },
+            'x-index': 7,
+          },
+          jjyrvmvsh3p: {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-validator': [],
+            'x-component-props': {},
+            'x-designable-id': 'jjyrvmvsh3p',
+            properties: {
+              roleId: {
+                title: '角色',
+                'x-decorator': 'FormItem',
+                'x-component': 'Select',
+                'x-validator': [],
+                'x-component-props': {
+                  placeholder: '请选择角色',
+                  notFoundContent: '暂无数据',
+                  fieldNames: {
+                    label: 'roleName',
+                    value: 'roleId',
+                  }
+                },
+                'x-decorator-props': {},
+                name: 'roleId',
+                required: true,
+                'x-designable-id': 'ok88fm1z35t',
+                'x-index': 0,
+                'x-reactions': ['{{useAsyncDataSource(loadDataGroup.roleId)}}'],
+              },
+            },
+            'x-index': 8,
+          },
+          '1vuanwwv82t': {
+            type: 'void',
+            'x-component': 'FormGrid.GridColumn',
+            'x-designable-id': '1vuanwwv82t',
+            properties: {
+              remark: {
+                type: 'string',
+                title: '备注',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input.TextArea',
+                'x-validator': [],
+                'x-component-props': {
+                  showCount: true,
+                  maxLength: 255,
+                  placeholder: '请输入备注内容',
+                },
+                'x-decorator-props': {},
+                name: 'remark',
+                'x-designable-id': 'fkfb2dhbffg',
+                'x-index': 0,
+              },
+            },
+            'x-index': 9,
+          },
+        },
+        'x-index': 0,
+      },
+    },
+    'x-designable-id': 'tils69zec7f',
+  },
+}
