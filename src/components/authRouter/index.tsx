@@ -9,12 +9,14 @@ import { replaceRoutes, router } from '@/router/baseRouter'
 import NotFound from '@/views/errors/404'
 import { getRoutersApi } from '@/api/system/menu'
 import { LoadView } from '@/router'
-import MengLayout from '@/layouts'
+//import MengLayout from '@/layouts'
+import MengLayout from '@/layout'
 import { setPermissionRouters } from '@/store/permission'
 import { RedirectView } from '@/views/redirect'
 import { setDefaultTag } from '@/store/tagsView'
-import { NoLayout } from '@/layouts/noLayout'
+//import { NoLayout } from '@/layouts/noLayout'
 import { RouterVo } from '@/types/model/routerVo'
+import { NoLayout } from '@/layout/page'
 const whiteList = ['/login', '/register']
 
 const handleElement = (data: RouterVo[]) => {
@@ -69,7 +71,6 @@ export default function AuthRouter(props: { children: JSX.Element }) {
   //console.log('matchRoute:', matchRoute)
 
   useEffect(() => {
-    debugger
     if (!Session.get(TOKEN)) {
       if (whiteList.indexOf(pathname) === -1) {
         // 没有用户信息并且不在白名单中，重定向到登录页面
@@ -158,14 +159,12 @@ export default function AuthRouter(props: { children: JSX.Element }) {
                 //     },
                 //   },
                 // ])
-
-                //debugger
                 console.log('当前路由表: ', router.routes)
                 const path = `${location.pathname}${location.search}`
-                console.log(path)
+                //console.log(path)
 
                 const repath = path.replace(import.meta.env.VITE_BASE_URL, '/')
-                console.log(repath)
+                //console.log(repath)
 
                 //const p2 = pp.replace(BASE_ROUTE,"/")
                 //console.log(pp,p2)

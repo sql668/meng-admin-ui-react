@@ -76,7 +76,6 @@ export default function MengLayout() {
 
   const menuItemClick = useCallback(
     (e: any) => {
-      debugger
       const menu = getMenu(menuData, e.key)
       if (menu?.viewType === '2') {
         if (ishttp(menu.linkUrl || '')) {

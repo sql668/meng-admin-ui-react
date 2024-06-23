@@ -66,7 +66,6 @@ export function useTabs() {
 
   const refreshTab = useCallback(
     (routePath?: string) => {
-      debugger
       if (!routePath) {
         routePath = activeTabRoutePath
       }

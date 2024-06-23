@@ -5,8 +5,9 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './baseRouter'
 import KeepAlive from 'react-activation'
 import LazyLoad from '@/components/lazy'
-import { IframeLayout } from '@/layouts/iframe'
+//import { IframeLayout } from '@/layouts/iframe'
 import { RouterVo } from '@/types/model/routerVo'
+import { IframeLayout } from '@/layout/iframe'
 
 const Router = () => {
   const { notification, message, modal } = App.useApp()

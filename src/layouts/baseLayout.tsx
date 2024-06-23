@@ -15,11 +15,6 @@ export type BaseLayoutType = {
 const BaseLayout: React.FC<BaseLayoutType> = () => {
   //const { message, notification, modal } = App.useApp()
   const LayoutMode = useThemeStore((state) => state.layout)
-  // useEffect(() => {
-  //   antdUtils.setModalInstance(modal)
-  //   antdUtils.setMessageInstance(message)
-  //   antdUtils.setNotificationInstance(notification)
-  // },[])
   switch (LayoutMode) {
     case 'mix':
       return LazyLoad(lazy(() => import('./main/mixLayout')))

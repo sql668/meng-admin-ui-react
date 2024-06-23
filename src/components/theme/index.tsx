@@ -1,3 +1,4 @@
+import { setMenuConfig, useAppConfigStore } from '@/store/app'
 import { useThemeStore } from '@/store/theme'
 import { FireOutlined, SettingOutlined, SkinOutlined } from '@ant-design/icons'
 import { Divider, Drawer, Switch } from 'antd'
@@ -40,10 +41,9 @@ const useStyles = createStyles(({ token, css }) => {
 const ThemeConfig = () => {
   const { styles, cx } = useStyles()
   const [visible, setVisible] = useState<boolean>(false)
-  const { splitMenus } = useThemeStore(
+  const { splitMenus } = useAppConfigStore(
     useShallow((state) => ({
-      layoutMode: state.layout,
-      splitMenus: state.splitMenus,
+      splitMenus: state.menuSetting.splitMenu,
     })),
   )
 
@@ -80,9 +80,10 @@ const ThemeConfig = () => {
           <Switch
             checked={splitMenus}
             onChange={(e) => {
-              useThemeStore.setState((state) => {
-                state.splitMenus = e
-              })
+              // useThemeStore.setState((state) => {
+              //   state.splitMenus = e
+              // })
+              setMenuConfig({splitMenu:e})
             }}
           />
         </div>

@@ -103,7 +103,7 @@ const Tree = forwardRef((props: TreeProps, ref) => {
   
 
   const { keyEntities } = useDataEntities(filterTreeData, mergedFieldNames);
-  console.log('keyEntities: ', keyEntities)
+  //console.log('keyEntities: ', keyEntities)
   
 
   // 合并selectedKeys,selectedKeys优先级高于defaultSelectedKeys
@@ -161,7 +161,6 @@ const Tree = forwardRef((props: TreeProps, ref) => {
   //const [expandedKeys, setExpandedKeys] = useState<Key[] | undefined>(treeDefaultExpandedKeys);
   const [expandedKeys, setExpandedKeys] = useState<Key[] | undefined>(treeExpandedKeys);
   useLayoutUpdateEffect(() => {
-    debugger
     if (autoExpand && !expandAll) { 
       let checkedKeys: SafeKey[] = rawLabeledValues.map(({ key }) => key);
       let sk = getExpandKeysFromCheck(checkedKeys, keyEntities);
@@ -172,16 +171,14 @@ const Tree = forwardRef((props: TreeProps, ref) => {
 
   // 一键展开/收缩所有
   useEffect(() => {
-    debugger
     if (keyEntities && Object.keys(keyEntities).length > 0 && expandAll !== undefined) {
-      console.log(Object.keys(keyEntities))
+      //console.log(Object.keys(keyEntities))
       
       setExpandedKeys(expandAll ? Object.keys(keyEntities).map((key) => key) : []);
     }
   }, [expandAll, keyEntities]);
 
   const mergedExpandedKeys = useMemo(() => {
-    debugger
     let keys = undefined;
     if (searchValue) {
       keys = searchExpandedKeys;
@@ -190,8 +187,8 @@ const Tree = forwardRef((props: TreeProps, ref) => {
     }
     return keys;
   }, [expandedKeys, searchExpandedKeys, searchValue]);
-  debugger
-  console.log('mergedExpandedKeys:', mergedExpandedKeys)
+  //debugger
+  //console.log('mergedExpandedKeys:', mergedExpandedKeys)
   
   useEffect(() => {
     if (searchValue) {
@@ -378,8 +375,8 @@ const Tree = forwardRef((props: TreeProps, ref) => {
     getHalfCheckedNodes: () => getTreeNodeByKeys(rawHalfCheckedKeys),
   }));
 
-   console.log('restProps: ', restProps)
-  console.log('treeProps: ', treeProps)
+  //  console.log('restProps: ', restProps)
+  // console.log('treeProps: ', treeProps)
   
 
   if (!filterTreeData || filterTreeData?.length === 0) {

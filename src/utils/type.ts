@@ -13,6 +13,11 @@ export type GetOptional<T> = {
   [K in keyof T as T[K] extends Required<T>[K] ? never : K]: T[K]
 }
 
+/** 深度遍历，将属性为可选 */
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>
+}
+
 export type AnyObject = {
   [key: string]: any
   [key: number]: any

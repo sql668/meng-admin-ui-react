@@ -1,5 +1,6 @@
 
-import MengLayout from '@/layouts'
+//import MengLayout from '@/layouts'
+import MengLayout from '@/layout'
 //import { CustomRouteConfig } from '@/types/route'
 import NotAuth from '@/views/403'
 import NotFound from '@/views/errors/404'
@@ -8,6 +9,7 @@ import NotNotWork from '@/views/500'
 import Login from '@/views/login'
 import Register from '@/views/register'
 import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom'
+import RouterErrorElement from '@/views/router-error-element'
 
 export const StaticRoute: RouteObject[] = [
   // {
@@ -79,6 +81,7 @@ export const routerData: RouteObject[] = [
     path: '*',
     //element: <NotFound></NotFound>,
     element: <MengLayout></MengLayout>,
+    errorElement: <RouterErrorElement></RouterErrorElement>,
   },
 ]
 
