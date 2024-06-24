@@ -4,15 +4,16 @@ import { useShallow } from "zustand/react/shallow";
 import { useMenuSetting } from "./useMenuSetting";
 
 export function useHeaderSetting() { 
-  const { isHeaderFixed, isShowHeader } = useAppConfigStore(
+  const { isHeaderFixed, isShowHeader, getHeaderTheme } = useAppConfigStore(
     useShallow((state) => ({
       isHeaderFixed: state.headerSeting.fixed,
       isShowHeader: state.headerSeting.show,
+      getHeaderTheme: state.headerSeting.theme,
     })),
   )
 
-  const { getIsSidebarType,getIsTopMenu,getIsMixSidebar } = useMenuSetting()
-
+  const { getIsSidebarType, getIsTopMenu, getIsMixSidebar } = useMenuSetting()
+  
   const getShowMixHeaderRef = useMemo(() => { 
     return !getIsSidebarType && isShowHeader
   },[])
@@ -23,5 +24,6 @@ export function useHeaderSetting() {
   return {
     isHeaderFixed,
     getShowFullHeaderRef,
+    getHeaderTheme,
   }
 }

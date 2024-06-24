@@ -1,9 +1,15 @@
-import { MenuModeEnum, MenuTypeEnum, SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "@/core/enums/menuEnum"
-import { getMenuConfig, useAppConfigStore } from "@/store/app"
-import { split } from "lodash-es"
-import { useMemo, useState } from "react"
-import { useShallow } from "zustand/react/shallow"
-import { useDeepMemo } from "../useMemo"
+import {
+  MenuModeEnum,
+  MenuTypeEnum,
+  SIDE_BAR_MINI_WIDTH,
+  SIDE_BAR_SHOW_TIT_MINI_WIDTH,
+} from '@/core/enums/menuEnum'
+import { getMenuConfig, setMenuConfig, setMenuSetting, useAppConfigStore } from '@/store/app'
+import { split } from 'lodash-es'
+import { useMemo, useState } from 'react'
+import { useShallow } from 'zustand/react/shallow'
+import { useDeepMemo } from '../useMemo'
+import { useMemoizedFn } from 'ahooks'
 export function useMenuSetting() {
   const {
     menuType,
@@ -33,10 +39,10 @@ export function useMenuSetting() {
     })),
   )
 
-  const [mixSideHasChildren,setMixSideHasChildren] = useState(false);
+  const [mixSideHasChildren, setMixSideHasChildren] = useState(false)
 
   // 是否是左侧菜单模式
-  const getIsSidebarType = useMemo(() => menuType === MenuTypeEnum.SIDEBAR, [menuType]) 
+  const getIsSidebarType = useMemo(() => menuType === MenuTypeEnum.SIDEBAR, [menuType])
   /**是否是顶部菜单模式*/
   const getIsTopMenu = useMemo(() => menuType === MenuTypeEnum.TOP_MENU, [menuType])
 
@@ -58,15 +64,11 @@ export function useMenuSetting() {
   const getShowTopMenu = useMemo(
     () => getIsTopMenu || isMixSplitMenu,
     [getIsTopMenu, isMixSplitMenu],
-  ) 
+  )
 
-  const getMiniWidthNumber = useDeepMemo(() => { 
-    return siderHidden
-      ? 0
-      : collapsedShowTitle
-        ? SIDE_BAR_SHOW_TIT_MINI_WIDTH
-        : SIDE_BAR_MINI_WIDTH;
-  },[siderHidden,collapsedShowTitle])
+  const getMiniWidthNumber = useDeepMemo(() => {
+    return siderHidden ? 0 : collapsedShowTitle ? SIDE_BAR_SHOW_TIT_MINI_WIDTH : SIDE_BAR_MINI_WIDTH
+  }, [siderHidden, collapsedShowTitle])
 
   const getRealWidth = useDeepMemo(() => {
     if (getIsMixSidebar) {
@@ -78,7 +80,7 @@ export function useMenuSetting() {
   const getCalcContentWidth = useDeepMemo(() => {
     // debugger
     // console.log("=========");
-    
+
     // console.log('getIsTopMenu:', getIsTopMenu)
     // console.log('showSideBar:', showSideBar)
     // console.log('splitMenu:', splitMenu)
@@ -88,7 +90,7 @@ export function useMenuSetting() {
     // console.log('mixSideFixed:', mixSideFixed)
     // console.log('mixSideHasChildren:', mixSideHasChildren)
     // console.log('getRealWidth:', getRealWidth)
-    
+
     const width =
       getIsTopMenu || !showSideBar || (splitMenu && hiddenSideBar)
         ? 0
@@ -109,9 +111,15 @@ export function useMenuSetting() {
     getRealWidth,
   ])
 
-
+  const toggleCollapsed = useMemoizedFn(() => { 
+    setMenuSetting({
+      collapsed: !collapsed,
+    })
+  })
 
   return {
+    isCollapsed:collapsed,
+    toggleCollapsed,
     menuWidth,
     menuFixed,
     getIsSidebarType,

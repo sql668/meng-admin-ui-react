@@ -5,7 +5,7 @@ import { useDeepMemo } from "@/hooks/useMemo";
 import TagsView from "@/layout/components/tagsView";
 import { useAppConfigStore } from "@/store/app";
 import classNames from "classnames";
-import { CSSProperties } from "react";
+import { CSSProperties, useMemo } from "react";
 
 const HEADER_HEIGHT = 48
 
@@ -13,14 +13,21 @@ const TABS_HEIGHT = 32
 
 function MultipleHeader() { 
   const { prefixCls } = useDesign('layout-multiple-header')
-  const { isHeaderFixed, getShowFullHeaderRef } = useHeaderSetting()
+  const { isHeaderFixed, getShowFullHeaderRef, getHeaderTheme } = useHeaderSetting()
   const { getCalcContentWidth } = useMenuSetting()
   const isMobile = useAppConfigStore.use.isMobile()
+
+  const getIsFixed = useMemo(() => {
+    return isHeaderFixed || getShowFullHeaderRef
+  }, [isHeaderFixed, getShowFullHeaderRef])
+  
+
    const getClass = useDeepMemo(() => {
      return classNames([
        prefixCls,
+       `${prefixCls}--${getHeaderTheme}`,
        {
-         [`${prefixCls}--fixed`]: true,
+         [`${prefixCls}--fixed`]: getIsFixed,
        },
      ])
    }, [prefixCls])

@@ -1,4 +1,4 @@
-import { setMenuConfig, useAppConfigStore } from '@/store/app'
+import { setMenuSetting, useAppConfigStore } from '@/store/app'
 import { useThemeStore } from '@/store/theme'
 import { FireOutlined, SettingOutlined, SkinOutlined } from '@ant-design/icons'
 import { Divider, Drawer, Switch } from 'antd'
@@ -14,7 +14,7 @@ const useStyles = createStyles(({ token, css }) => {
       font-size: 16px;
       display: flex;
       align-items: center;
-      color: ${token.colorTextTertiary};
+      //color: ${token.colorTextTertiary};
       cursor: pointer;
 
       &:hover {
@@ -37,8 +37,10 @@ const useStyles = createStyles(({ token, css }) => {
     },
   }
 })
-
-const ThemeConfig = () => {
+interface ThemeConfigProps {
+  className?:string
+}
+const ThemeConfig = (props: ThemeConfigProps) => {
   const { styles, cx } = useStyles()
   const [visible, setVisible] = useState<boolean>(false)
   const { splitMenus } = useAppConfigStore(
@@ -50,7 +52,7 @@ const ThemeConfig = () => {
   return (
     <>
       <div
-        className={cx(styles.iconContainer)}
+        className={props.className}
         onClick={() => {
           setVisible(true)
         }}>
@@ -83,7 +85,7 @@ const ThemeConfig = () => {
               // useThemeStore.setState((state) => {
               //   state.splitMenus = e
               // })
-              setMenuConfig({splitMenu:e})
+              setMenuSetting({ splitMenu: e })
             }}
           />
         </div>

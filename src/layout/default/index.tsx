@@ -26,7 +26,6 @@ function BaseLayout() {
       },
     ])
   }, [prefixCls])
-  const ref = useRef(null)
   return (
     <>
       <Layout className={prefixCls}>
@@ -38,7 +37,7 @@ function BaseLayout() {
             <LayoutContent></LayoutContent>
             <LayoutFooter></LayoutFooter>
           </div> */}
-          <Layout>
+          <Layout className={`${prefixCls}-main`}>
             <MultipleHeader></MultipleHeader>
             <LayoutContent></LayoutContent>
             <LayoutFooter></LayoutFooter>

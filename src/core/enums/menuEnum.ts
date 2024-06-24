@@ -1,5 +1,5 @@
 // 左侧菜单栏收起时的宽度
-export const SIDE_BAR_MINI_WIDTH = 48
+export const SIDE_BAR_MINI_WIDTH = 64
 export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80
 /** 导航栏模式 */
 export enum MenuTypeEnum {

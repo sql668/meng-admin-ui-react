@@ -49,13 +49,13 @@ export const useAppConfigStore = createSelectors(
   ),
 )
 
-export const setHeaderConfig = (config: DeepPartial<HeaderSetting>) => {
+export const setHeaderSetting = (config: DeepPartial<HeaderSetting>) => {
   useAppConfigStore.setState((state) => {
     state.headerSeting = deepMerge(state.headerSeting || {}, config)
   })
 }
 
-export const setMenuConfig = (config: DeepPartial<MenuSetting>) => {
+export const setMenuSetting = (config: DeepPartial<MenuSetting>) => {
   useAppConfigStore.setState((state) => {
     state.menuSetting = deepMerge(state.menuSetting || {}, config)
   })

@@ -14,8 +14,10 @@ import { useDesign } from '@/hooks/useDesign'
 import classNames from 'classnames'
 
 import { useDeepCompareEffect, useSize } from 'ahooks'
-import { setMenuConfig } from '@/store/app'
+import { setMenuSetting } from '@/store/app'
 import { ScollBar } from '@/components/scollBar'
+import LayoutTrigger from '@/layout/default/trigger'
+import { SIDE_BAR_MINI_WIDTH } from '@/core/enums/menuEnum'
 //import { CollapsedIcon } from './collapwedIcon'
 
 const useStyles = createStyles(({ css }) => {
@@ -50,10 +52,10 @@ const LayoutSideBar = () => {
 
   const {
     location,
-    onCollapse,
+    //onCollapse,
     isMobile,
-    siderMenuWidth,
-    collapsed: originCollapsed,
+    //siderMenuWidth,
+    //collapsed: originCollapsed,
     matchMenuKeys,
     menuItemClick,
     menuData: originMenuData,
@@ -62,11 +64,14 @@ const LayoutSideBar = () => {
   const {
     isMixSplitMenu,
     isSplitMenu,
+    isCollapsed: originCollapsed,
+    toggleCollapsed,
     setMixSideHasChildren,
     menuFixed,
     getRealWidth,
     hiddenSideBar,
     getIsMixMode,
+    menuWidth,
   } = useMenuSetting()
   const collapsed = isMobile ? false : originCollapsed
 
@@ -97,7 +102,7 @@ const LayoutSideBar = () => {
   }, [isMixSplitMenu, originMenuData, isMobile, matchMenuKeys])
   const showClassSideBarRef = useMemo(() => {
     return isSplitMenu ? !hiddenSideBar : true
-  }, [])
+  }, [isSplitMenu, hiddenSideBar])
   //console.log('side menu:', menuData)
 
   const clearMenuData = clearMenuItem(menuData || [])
@@ -106,10 +111,10 @@ const LayoutSideBar = () => {
   useDeepCompareEffect(() => {
     if (clearMenuData && clearMenuData?.length < 1 ) {
       setMixSideHasChildren(false)
-      setMenuConfig({ hidden:true })
+      setMenuSetting({ hidden: true })
     } else {
       setMixSideHasChildren(true)
-      setMenuConfig({ hidden: false })
+      setMenuSetting({ hidden: false })
     }
   }, [clearMenuData])
 
@@ -143,6 +148,10 @@ const LayoutSideBar = () => {
     return style
   }, [getRealWidth, showClassSideBarRef])
 
+  const renderTrigger = useMemo(() => {
+    return <LayoutTrigger sider></LayoutTrigger>
+   },[])
+
   
 
 
@@ -157,14 +166,14 @@ const LayoutSideBar = () => {
         className={getSideBarClass}
         //style={{ backgroundColor: 'transparent' }}
         collapsible
-        trigger={null}
+        trigger={renderTrigger}
         collapsed={collapsed}
-        onCollapse={(collapse) => {
+        onCollapse={() => {
           if (isMobile) return
-          onCollapse?.(collapse)
+          toggleCollapsed?.()
         }}
-        collapsedWidth={collapsedWidth}
-        width={siderMenuWidth}>
+        collapsedWidth={SIDE_BAR_MINI_WIDTH}
+        width={menuWidth}>
         {/* <div
           style={{
             flex: 1,
@@ -198,7 +207,6 @@ const LayoutSideBar = () => {
               width: '100%',
             }}></BaseMenu>
         </ScollBar>
-        dddd
       </Layout.Sider>
     </>
   )

@@ -41,6 +41,7 @@
     "dexie-react-hooks": "^1.1.7",
     "immer": "^10.0.3",
     "js-cookie": "^3.0.5",
+    "lib": "link:@ant-design/compatible/lib",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.0.6",
     "nprogress": "^0.2.0",

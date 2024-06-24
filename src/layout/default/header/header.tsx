@@ -119,6 +119,7 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
 
         <div className={`${prefixCls}-action`}>
           <Dropdown
+            className={`${prefixCls}-action__item`}
             placement='top'
             menu={{
               items: darkLightItems,
@@ -130,7 +131,7 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
             }}>
             <span>{currentMode}</span>
           </Dropdown>
-          <ThemeSetting></ThemeSetting>
+          <ThemeSetting className={`${prefixCls}-action__item theme-item`}></ThemeSetting>
         </div>
       </Layout.Header>
     </>

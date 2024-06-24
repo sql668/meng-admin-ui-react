@@ -83,10 +83,10 @@ function MengLayout() {
     },
   )
 
-  const siderMenuWidth = useMemo(() => {
-    if (menuType === MenuTypeEnum.MIX) return 215
-    return 256
-  }, [menuType])
+  // const siderMenuWidth = useMemo(() => {
+  //   if (menuType === MenuTypeEnum.MIX) return 215
+  //   return 256
+  // }, [menuType])
   
  
   const matchMenus = useMemo(() => {
@@ -143,9 +143,9 @@ function MengLayout() {
       matchMenuKeys: matchMenuKeys,
       collapsed,
       onCollapse,
-      siderMenuWidth,
+      //siderMenuWidth,
     }
-  }, [isMobile, menuItemClick, menuData, matchMenuKeys, collapsed, onCollapse, siderMenuWidth])
+  }, [isMobile, menuItemClick, menuData, matchMenuKeys, collapsed, onCollapse])
 
   return (
     <AuthRouter>
