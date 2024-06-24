@@ -40,8 +40,8 @@ const ScrollBar = forwardRef<BarRefExpose, BarProps>((props: BarProps, ref) => {
 
     const originalHeight = offsetHeight ** 2 / wrap.scrollHeight
     const originalWidth = offsetWidth ** 2 / wrap.scrollWidth
-    const height = Math.max(originalHeight, props.minSize)
-    const width = Math.max(originalWidth, props.minSize)
+    const height = Math.max(originalHeight, minSize)
+    const width = Math.max(originalWidth, minSize)
 
     setRatioY(originalHeight / (offsetHeight - originalHeight) / (height / (offsetHeight - height)))
     setRatioX(originalWidth / (offsetWidth - originalWidth) / (width / (offsetWidth - width)))
@@ -56,7 +56,7 @@ const ScrollBar = forwardRef<BarRefExpose, BarProps>((props: BarProps, ref) => {
   }))
   return (
     <>
-      <Thumb always={always} ratio={ratioX}></Thumb>
+      <Thumb always={always} ratio={ratioX} move={moveX} size={ sizeWidth}></Thumb>
       <Thumb vertical ratio={ratioY} always={always} move={moveY} size={sizeHeight}></Thumb>
     </>
   )

@@ -112,3 +112,5 @@ export const isStringNumber = (val: string): boolean => {
 export function isArray(val:any): val is Array<any> {
   return Array.isArray(val)
 }
+
+export const isClient = typeof window !== 'undefined' && typeof document !== 'undefined'

@@ -65,7 +65,8 @@ export default defineConfig((config) => {
       port: 5174,
       proxy: {
         '/api': {
-          target: 'http://127.0.0.1:8090', // 目标服务器的地址
+          //target: 'http://127.0.0.1:8090', // 目标服务器的地址
+          target: 'http://122.152.198.22:8091', // 目标服务器的地址
           //changeOrigin: true, // 是否改变源地址
           //rewrite: (path) => path.replace(/^\/api/, ''), // 重写路径
         },

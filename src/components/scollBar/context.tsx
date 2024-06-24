@@ -1,8 +1,8 @@
-import { MutableRefObject, createContext, useContext } from "react"
+import { createContext, useContext } from "react"
 
 interface ScrollbarContextValueProps {
-  scrollbarElement?: React.MutableRefObject<HTMLElement>
-  wrapElement?: React.MutableRefObject<HTMLElement>
+  scrollbarElement?: React.MutableRefObject<HTMLDivElement>
+  wrapElement?: React.MutableRefObject<HTMLDivElement>
 }
 export const ScrollbarContext: React.Context<ScrollbarContextValueProps> = createContext({})
 

@@ -1,10 +1,12 @@
 import { CaptchaApi, LoginApi } from '@/api/login'
+import { TOKEN, TOKEN_EXPIRES_TIME } from '@/config/config'
 import { restRoutes, router } from '@/router/baseRouter'
 import { setPermissionRouters } from '@/store/permission'
 import { resetTagsTab } from '@/store/tagsView'
 import { setPermissions } from '@/store/user'
 //import { addRoutes, asyncRouter } from '@/router'
 import { CaptchaResp } from '@/types/model/base'
+import { Session } from '@/utils/storage'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Checkbox, Form, Input, Row, message } from 'antd'
 import { createStyles } from 'antd-style'
@@ -43,8 +45,10 @@ export default function Login() {
       })
       if (res.code === 0) {
         // 后端会直接把token存到cookie
-        //Session.set(TOKEN, res.data?.token || '')
-        //Session.set(TOKEN_EXPIRES_TIME, res.data?.expiresAt + "")
+        if (process.env.NODE_ENV === 'development') {
+          Session.set(TOKEN, res.data?.token || '')
+          Session.set(TOKEN_EXPIRES_TIME, res.data?.expiresAt + '')
+        } 
         //setUser(res.data?.userInfo)
         // nav(HOME_PATHNAME, {
         //   replace: true,

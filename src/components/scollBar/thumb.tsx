@@ -1,9 +1,9 @@
 import { useDeepMemo } from '@/hooks/useMemo'
 import classNames from 'classnames'
-import { CSSProperties, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { CSSProperties, memo, useEffect, useMemo, useRef, useState } from 'react'
 import { useScrollBarContext } from './context'
 import { isClient } from './util'
-import { useEventListener } from 'ahooks'
+import { useEventListener, useReactive } from 'ahooks'
 
 interface ThumbProps {
   // 是否是垂直方向的滚动条
@@ -62,29 +62,28 @@ const restoreOnselectstart = () => {
 
 function ScrollThumb(props: ThumbProps) {
   const { vertical = false, always = false, size, move, ratio } = props
-
   const scrollbar = useScrollBarContext()
-  console.log(scrollbar)
-
   // const [cursorDown, setCursorDown] = useState(false)
   // const [cursorLeave, setCursorLeave] = useState(false)
 
-  const [thumbState, setThumbState] = useState<Partial<Record<'X' | 'Y', number>>>({})
+  //const [thumbState, setThumbState] = useState<Partial<Record<'X' | 'Y', number>>>({})
+  // useReactive 产生可操作的代理对象一直都是同一个引用，useEffect , useMemo ,useCallback , 子组件属性传递 等如果依赖的是这个代理对象是不会引起重新执行
+  const thumbState = useReactive<Partial<Record<'X' | 'Y', number>>>({})
 
   const [visible, setVisible] = useState(false)
   const instance = useRef<HTMLDivElement>(null)
-  const thumb = useRef(null)
+  const thumb = useRef<HTMLDivElement>(null)
   const getClass = useMemo(() => {
     return classNames([
       'scrollbar__bar',
       {
         ['is-horizontal']: !vertical,
         ['is-vertical']: vertical,
-        //['scrollbar__bar--show']: always || visible,
+        ['scrollbar__bar--show']: always || visible,
         //['scrollbar__bar--hidden']: !(always || visible)
       },
     ])
-  }, [vertical])
+  }, [vertical, always, visible])
   const bar = useMemo(() => BAR_MAP[vertical ? 'vertical' : 'horizontal'], [vertical])
 
   const thumbStyle = useDeepMemo(() => {
@@ -95,35 +94,31 @@ function ScrollThumb(props: ThumbProps) {
     })
   }, [size, move, bar])
 
-  const offsetRatio = useDeepMemo(() => {
-    if (!instance.current) {
-      return null
+  const [offsetRatio, setOffsetRatio] = useState(1)
+  useEffect(() => {
+    if (instance.current && thumb.current && scrollbar.wrapElement?.current) {
+      const newRatio =
+        instance.current![bar.offset] ** 2 /
+        scrollbar.wrapElement!.current![bar.scrollSize] /
+        ratio /
+        thumb.current![bar.offset]
+      setOffsetRatio(newRatio)
     }
-    // offsetRatioX = original width of thumb / current width of thumb / ratioX
-    // offsetRatioY = original height of thumb / current height of thumb / ratioY
-    // instance height = wrap height - GAP
-    return (
-      instance.current![bar.offset] ** 2 /
-      scrollbar.wrapElement!.current![bar.scrollSize] /
-      ratio /
-      thumb.current![bar.offset]
-    )
-  }, [instance.current, scrollbar.wrapElement, ratio, thumb.current])
+  }, [ratio, thumbStyle])
 
   const mouseMoveDocumentHandler = (e: MouseEvent) => {
     if (!instance.current || !thumb.current) return
     if (cursorDown === false) return
-
     const prevPage = thumbState[bar.axis]
     if (!prevPage) return
-
     const offset = (instance.current.getBoundingClientRect()[bar.direction] - e[bar.client]) * -1
     const thumbClickPosition = thumb.current[bar.offset] - prevPage
     const thumbPositionPercentage =
       ((offset - thumbClickPosition) * 100 * offsetRatio) / instance.current[bar.offset]
 
-    scrollbar.wrapElement[bar.scroll] =
-      (thumbPositionPercentage * scrollbar.wrapElement[bar.scrollSize]) / 100
+    scrollbar.wrapElement!.current![bar.scroll] =
+      (thumbPositionPercentage * scrollbar.wrapElement!.current![bar.scrollSize]) / 100
+
   }
 
   const mouseUpDocumentHandler = () => {
@@ -132,7 +127,6 @@ function ScrollThumb(props: ThumbProps) {
     document.removeEventListener('mousemove', mouseMoveDocumentHandler)
     document.removeEventListener('mouseup', mouseUpDocumentHandler)
     restoreOnselectstart()
-    //document.onselectstart = null
     if (cursorLeave) {
       setVisible(false)
     }
@@ -181,7 +175,7 @@ function ScrollThumb(props: ThumbProps) {
   }
 
   useEffect(() => {
-    return () => { 
+    return () => {
       restoreOnselectstart()
       document.removeEventListener('mouseup', mouseUpDocumentHandler)
     }

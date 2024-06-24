@@ -7,10 +7,12 @@ import { isNumber, isObject, merge } from "lodash-es"
 import Bar from "./bar"
 import { ScrollbarContext } from "./context"
 import { warning } from "@fdesign/util"
-import { useSize } from "ahooks"
+import { useMemoizedFn, useSize } from "ahooks"
+import useResizeObserver from "@/hooks/useResizeObserver"
+import useEventListener from "@/hooks/useEventListener"
 
-let stopResizeObserver: (() => void) | undefined = undefined
-let stopResizeListener: (() => void) | undefined = undefined
+let stopResizeObserver: () => void
+let stopResizeListener:() => void
 
 function ScollBar(props: ScollBarProps) {
   const {
@@ -56,6 +58,7 @@ function ScollBar(props: ScollBarProps) {
   const barRef = useRef<BarRefExpose>(null)
   const scrollbarRef = useRef(null)
   const wrapRef = useRef<HTMLDivElement>(null)
+  const resizeRef = useRef<HTMLElement>(null)
 
   // const barContextValue = useMemo(() => {
   //   return {
@@ -75,7 +78,7 @@ function ScollBar(props: ScollBarProps) {
     })
   }, [])
 
-  const handleScroll = () => {
+  const handleScroll = useMemoizedFn(() => {
     if (wrapRef.current) {
       barRef.current?.handleScroll(wrapRef.current)
       if (ScrollEmit) {
@@ -85,7 +88,9 @@ function ScollBar(props: ScollBarProps) {
         })
       }
     }
-  }
+  })
+
+  
 
   // TODO: refactor method overrides, due to script setup dts
   // @ts-nocheck
@@ -100,7 +105,7 @@ function ScollBar(props: ScollBarProps) {
   }
   const setScrollTop = (value: number) => {
     if (!isNumber(value)) {
-      warning(true,'scrollBar value must be a number')
+      warning(true, 'scrollBar value must be a number')
       return
     }
     wrapRef.current!.scrollTop = value
@@ -118,23 +123,38 @@ function ScollBar(props: ScollBarProps) {
     barRef.current?.update()
   }
 
+  const { stop: stopResizeObserver } = useResizeObserver(resizeRef, update)
+  const { stop: stopResizeListener } = useEventListener('resize', update)
+
   useEffect(() => {
     if (noresize) {
       stopResizeObserver?.()
       stopResizeListener?.()
-    } else {
-      // ({ stop: stopResizeObserver } = useResizeObserver(resizeRef, update))
-      // stopResizeListener = useEventListener('resize', update)
-      useSize()
     }
-   },[noresize])
+  }, [noresize])
+
+  useEffect(() => {
+    if (!native) {
+      setTimeout(() => {
+        update()
+        if (wrapRef.current) {
+          barRef.current?.handleScroll(wrapRef.current)
+        }
+      }, 0)
+    }
+  }, [native, maxHeight, height])
 
   const renderSlot = useCallback(() => {
-    return React.createElement(tag, { children, className: resizeKls, style: viewStyle })
+    return React.createElement(tag, {
+      children,
+      className: resizeKls,
+      style: viewStyle,
+      ref: resizeRef,
+    })
   }, [children, resizeKls, viewStyle])
   return (
     <div className={containerClass} ref={scrollbarRef}>
-      <div className={wrapKls} style={wrapStyle} ref={wrapRef}>
+      <div className={wrapKls} style={wrapStyle} ref={wrapRef} onScroll={handleScroll}>
         {renderSlot()}
       </div>
       {!native && (
