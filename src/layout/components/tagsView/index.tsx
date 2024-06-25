@@ -8,6 +8,8 @@ import { useTabs } from '@/hooks/useTabs'
 import { TagsTabProps } from '@/types/tags'
 import { Icon } from '@/components/icon'
 import { useTagsTabStore } from '@/store/tagsView'
+import { useDesign } from '@/hooks/useDesign'
+import classNames from 'classnames'
 
 
 enum OperationType {
@@ -18,7 +20,9 @@ enum OperationType {
 
 
 const TagsView = () => {
-  const { tabs, activeTabRoutePath,closeTab,refreshTab,closeOtherTab } = useTabs()
+  
+  const { tabs, activeTabRoutePath, closeTab, refreshTab, closeOtherTab } = useTabs()
+  const { prefixCls } = useDesign('multiple-tabs')
   const navigate = useNavigate()
   const homePath = useTagsTabStore.use.defaultTag()
 
@@ -111,18 +115,30 @@ const TagsView = () => {
     [closeOtherTab, closeTab, refreshTab],
   )
 
+  const getWrapClass = useMemo(() => {
+    return classNames([
+      prefixCls,
+      {
+        // [`${prefixCls}--fixed`]: fixed,
+        // [`${prefixCls}--${themeMode}`]: themeMode,
+      },
+    ])
+  }, [prefixCls])
+
   return (
     <>
       {enableTagsView && (
-        <Tabs
-          animated
-          type='editable-card'
-          hideAdd
-          size='small'
-          activeKey={activeTabRoutePath}
-          onChange={clickTabs}
-          onEdit={editTabs}
-          items={tabItems}></Tabs>
+        <div className={getWrapClass}>
+          <Tabs
+            animated
+            type='editable-card'
+            hideAdd
+            size='small'
+            activeKey={activeTabRoutePath}
+            onChange={clickTabs}
+            onEdit={editTabs}
+            items={tabItems}></Tabs>
+        </div>
       )}
     </>
   )

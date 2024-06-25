@@ -106,7 +106,7 @@ const LayoutSideBar = () => {
   //console.log('side menu:', menuData)
 
   const clearMenuData = clearMenuItem(menuData || [])
-  console.log('clearMenuData: ',clearMenuData)
+  //console.log('clearMenuData: ',clearMenuData)
   
   useDeepCompareEffect(() => {
     if (clearMenuData && clearMenuData?.length < 1 ) {
@@ -119,7 +119,7 @@ const LayoutSideBar = () => {
   }, [clearMenuData])
 
   // 收起的宽度
-  const collapsedWidth = 64
+  //const collapsedWidth = 64
 
   const { prefixCls } = useDesign('layout-sideBar')
   const getSideBarClass = useDeepMemo(() => {

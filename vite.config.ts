@@ -1,3 +1,5 @@
+//const fs = require('fs')
+import fs from 'fs'
 import path, { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -5,22 +7,38 @@ import UnoCSS from 'unocss/vite'
 import gzipPlugin from 'rollup-plugin-gzip'
 import legacy from '@vitejs/plugin-legacy'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons' // 封装svg图标
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+//import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+import requireTransform from 'vite-plugin-require-transform'
 import PurgeIcons from 'vite-plugin-purge-icons'
 //const { theme } = require('antd/lib')
 //const { convertLegacyToken, defaultTheme } = require('@ant-design/compatible/lib')
 import { theme } from 'antd/lib'
 //import convertLegacyToken from 'antd/lib/theme'
 import { convertLegacyToken, defaultTheme } from '@ant-design/compatible/lib'
-
-const { defaultAlgorithm, defaultSeed } = theme
+//import convertLegacyToken from 'antd/lib/theme'
+const { defaultAlgorithm,darkAlgorithm,compactAlgorithm, defaultSeed, } = theme
 
 const mapV5Token = defaultAlgorithm(defaultSeed)
 const v5Vars = convertLegacyToken(mapV5Token)
-const mapV4Token = theme.getDesignToken(defaultTheme)
-const v4Vars = convertLegacyToken(mapV4Token)
+//const mapV4Token = theme.getDesignToken(defaultTheme)
+//const v4Vars = convertLegacyToken(mapV4Token)
 const BASE = '/meng-react-admin-preview/'
-console.log('v5 vars:', v5Vars)
+//console.log('v5 vars:', v5Vars) 
+const json = JSON.stringify(v5Vars, null, 2)
+// 写入文件
+fs.writeFile('antdV5Vars.json', json, (err) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+})
+const tokenJson = JSON.stringify(mapV5Token, null, 2)
+fs.writeFile('antdV5Tokens.json', tokenJson, (err) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+})
 //console.log('v5 token:', mapV5Token)
 
 //const BASE = import.meta.env.VITE_API_URL
@@ -57,7 +75,7 @@ export default defineConfig((config) => {
     // css: {
     //   preprocessorOptions: {
     //     less: {
-    //       modifyVars: v5Vars(),
+    //       modifyVars: v5Vars,
     //       javascriptEnabled: true,
     //     },
     //   },
@@ -79,7 +97,8 @@ export default defineConfig((config) => {
         symbolId: 'icon-[dir]-[name]',
       }),
       PurgeIcons(),
-      viteCommonjs(), //支持require语法
+      requireTransform({ fileRegex: /.ts$|.tsx$|.js$|.jsx/ }),
+      //viteCommonjs(), //支持require语法
     ],
     define: {
       __PACKAGE_NAME__: JSON.stringify(process.env.npm_package_name),

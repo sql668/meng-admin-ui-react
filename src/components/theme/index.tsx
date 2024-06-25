@@ -1,5 +1,5 @@
 import { setMenuSetting, useAppConfigStore } from '@/store/app'
-import { useThemeStore } from '@/store/theme'
+//import { useThemeStore } from '@/store/theme'
 import { FireOutlined, SettingOutlined, SkinOutlined } from '@ant-design/icons'
 import { Divider, Drawer, Switch } from 'antd'
 import { createStyles } from 'antd-style'
@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
 const useStyles = createStyles(({ token, css }) => {
+
   return {
     iconContainer: css`
       height: 100%;
@@ -18,7 +19,7 @@ const useStyles = createStyles(({ token, css }) => {
       cursor: pointer;
 
       &:hover {
-        background-color: ${token.colorBgTextHover};
+        //background-color: ${token.colorBgTextHover};
         .icon {
           animation: logoAnimation 0.3s ease-in-out;
         }
@@ -37,11 +38,14 @@ const useStyles = createStyles(({ token, css }) => {
     },
   }
 })
+
 interface ThemeConfigProps {
   className?:string
 }
 const ThemeConfig = (props: ThemeConfigProps) => {
   const { styles, cx } = useStyles()
+  //console.log(styles)
+  
   const [visible, setVisible] = useState<boolean>(false)
   const { splitMenus } = useAppConfigStore(
     useShallow((state) => ({
@@ -82,9 +86,6 @@ const ThemeConfig = (props: ThemeConfigProps) => {
           <Switch
             checked={splitMenus}
             onChange={(e) => {
-              // useThemeStore.setState((state) => {
-              //   state.splitMenus = e
-              // })
               setMenuSetting({ splitMenu: e })
             }}
           />

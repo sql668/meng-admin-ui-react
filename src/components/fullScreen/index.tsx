@@ -36,7 +36,7 @@ const useStyles = createStyles(({ token, css }) => {
   }
 })
 
-const FullScreen = () => {
+const FullScreen = ({ className }: {className?:string}) => {
   const { styles, cx } = useStyles()
   const [fullScreen, setFullScreen] = useState<boolean>(screenfull.isFullscreen)
 
@@ -53,7 +53,7 @@ const FullScreen = () => {
     screenfull.toggle()
   }
   return (
-    <div className={cx(styles.iconContainer)} onClick={handleFullScreen}>
+    <div className={className} onClick={handleFullScreen}>
       {fullScreen ? (
         <FullscreenExitOutlined className='icon' title='退出全屏' />
       ) : (

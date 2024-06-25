@@ -41,15 +41,15 @@ export default function App() {
   const themeMode = useAppConfigStore.use.theme()
   return (
     <MxAppConfigProvider>
-      <ConfigProvider locale={locale} theme={antdThemeConfig}>
-        <ThemeProvider<MengThemeToken> themeMode={themeMode}>
+      {/* <ConfigProvider locale={locale} theme={antdThemeConfig}> */}
+        <ThemeProvider<MengThemeToken> themeMode={themeMode} theme={antdThemeConfig}>
           <AntdApp className='h-full overflow-hidden'>
             <ErrorBoundary fallback={<ErrorPage></ErrorPage>}>
               <Router></Router>
             </ErrorBoundary>
           </AntdApp>
         </ThemeProvider>
-      </ConfigProvider>
+      {/* </ConfigProvider> */}
     </MxAppConfigProvider>
   )
 }

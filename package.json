@@ -110,6 +110,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.10",
     "vite-plugin-purge-icons": "^0.10.0",
+    "vite-plugin-require-transform": "^1.0.21",
     "vite-plugin-svg-icons": "^2.0.1"
   },
   "config": {
