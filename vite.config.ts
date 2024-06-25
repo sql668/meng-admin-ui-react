@@ -7,7 +7,22 @@ import legacy from '@vitejs/plugin-legacy'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons' // 封装svg图标
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import PurgeIcons from 'vite-plugin-purge-icons'
+//const { theme } = require('antd/lib')
+//const { convertLegacyToken, defaultTheme } = require('@ant-design/compatible/lib')
+import { theme } from 'antd/lib'
+//import convertLegacyToken from 'antd/lib/theme'
+import { convertLegacyToken, defaultTheme } from '@ant-design/compatible/lib'
+
+const { defaultAlgorithm, defaultSeed } = theme
+
+const mapV5Token = defaultAlgorithm(defaultSeed)
+const v5Vars = convertLegacyToken(mapV5Token)
+const mapV4Token = theme.getDesignToken(defaultTheme)
+const v4Vars = convertLegacyToken(mapV4Token)
 const BASE = '/meng-react-admin-preview/'
+console.log('v5 vars:', v5Vars)
+//console.log('v5 token:', mapV5Token)
+
 //const BASE = import.meta.env.VITE_API_URL
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
@@ -39,6 +54,14 @@ export default defineConfig((config) => {
         },
       },
     },
+    // css: {
+    //   preprocessorOptions: {
+    //     less: {
+    //       modifyVars: v5Vars(),
+    //       javascriptEnabled: true,
+    //     },
+    //   },
+    // },
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
