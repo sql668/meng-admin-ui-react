@@ -222,7 +222,7 @@ export default function Role() {
   }
 
   return (
-    <div className='app-container overflow-auto'>
+    <div className='app-container'>
       <BaseForm
         schema={searchFormSchema.schema}
         {...searchFormSchema.form}

@@ -47,11 +47,11 @@ const items: MenuProps['items'] = [
 ]
 
 const darkLightItems: MenuProps['items'] = [
-  {
-    key: 'auto',
-    label: <a>跟随系统</a>,
-    icon: <SvgIcon icon='auto_theme'></SvgIcon>,
-  },
+  // {
+  //   key: 'auto',
+  //   label: <a>跟随系统</a>,
+  //   icon: <SvgIcon icon='auto_theme'></SvgIcon>,
+  // },
   {
     key: 'light',
     label: <a>亮色模式</a>,

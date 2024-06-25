@@ -408,7 +408,7 @@ export default function Menu() {
   ]
 
   return (
-    <div className='app-container overflow-auto'>
+    <div className='app-container'>
       <Form form={form} layout='inline' className='mg-search-form-inline' onFinish={queryOk}>
         <Form.Item<SearchFormField> label='菜单名称' name='menuName'>
           <Input placeholder='请输入菜单名称' />

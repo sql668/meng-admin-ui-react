@@ -1,6 +1,6 @@
 import { useTabs } from '@/hooks/useTabs'
-import { Layout } from 'antd'
-import { useMemo } from 'react'
+import { BackTop, FloatButton, Layout } from 'antd'
+import { useMemo, useRef } from 'react'
 import { useOutlet } from 'react-router-dom'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { TagsTabContext } from '../tagsView/tags-context'
@@ -29,6 +29,8 @@ const LayoutContent = () => {
       },
     ])
   }, [prefixCls])
+
+  const contentRef = useRef<HTMLDivElement>(null)
   return (
     // <TagsTabContext.Provider value={tagsContextValue}>
     //   <Layout.Content className='mx-layout-content'>
@@ -44,8 +46,11 @@ const LayoutContent = () => {
     <div className={getWrapClass}>
       <SwitchTransition mode='out-in'>
         <CSSTransition key={location.pathname} timeout={500} classNames='ra-fade' unmountOnExit>
-          <div className='h-full w-full overflow-auto' key={activeTab?.key}>
+          <div className='h-full w-full overflow-auto' key={activeTab?.key} ref={contentRef}>
             {currentOutlet}
+            <FloatButton.BackTop
+              target={() => contentRef.current!}
+              visibilityHeight={100}></FloatButton.BackTop>
           </div>
         </CSSTransition>
       </SwitchTransition>

@@ -160,7 +160,7 @@ export default function Dept() {
   ]
 
   return (
-    <div className='app-container overflow-auto'>
+    <div className='app-container'>
       <QueryForm onQuery={queryOk} onReset={resetQuery}></QueryForm>
       <Row>
         <Col span={1.5}>

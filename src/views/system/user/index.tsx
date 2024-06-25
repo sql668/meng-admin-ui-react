@@ -279,7 +279,7 @@ export default function User() {
   
 
   return (
-    <div className='app-container overflow-auto'>
+    <div className='app-container'>
       <Row gutter={20}>
         <Col span={4}>
           <div className='head-container'>
