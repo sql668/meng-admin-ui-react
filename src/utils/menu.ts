@@ -44,6 +44,7 @@ export const getMatchMenu = (
   if (!fullKeys) {
     menuPathKeys = [menuPathKeys[menuPathKeys.length - 1]]
   }
+  
   return menuPathKeys
     .map((menuPathKey) => {
       const menuItem = flatMenus[menuPathKey] || {

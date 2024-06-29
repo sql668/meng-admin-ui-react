@@ -17,6 +17,7 @@ import { setDefaultTag } from '@/store/tagsView'
 //import { NoLayout } from '@/layouts/noLayout'
 import { RouterVo } from '@/types/model/routerVo'
 import { NoLayout } from '@/layout/page'
+import { setRouters } from '@/store/router'
 const whiteList = ['/login', '/register']
 
 const handleElement = (data: RouterVo[]) => {
@@ -63,13 +64,8 @@ const handleNoLayoutElement = (data: RouterVo[]) => {
  * @returns
  */
 export default function AuthRouter(props: { children: JSX.Element }) {
-  //const userInfo = useUserStore((state) => state.user)
   const nav = useNavigate()
   const { pathname } = useLocation()
-
-  //const matchRoute = useMatchRoute()
-  //console.log('matchRoute:', matchRoute)
-
   useEffect(() => {
     if (!Session.get(TOKEN)) {
       if (whiteList.indexOf(pathname) === -1) {
@@ -96,9 +92,10 @@ export default function AuthRouter(props: { children: JSX.Element }) {
             getRoutersApi().then((res) => {
               if (res.code === 0) {
                 setPermissionRouters(res.data || [])
+                setRouters(res.data || [])
                 const routers = handleElement(res.data || [])
                 const nolayout = handleNoLayoutElement(res.data || [])
-                //console.log('routers: ', routers)
+                console.log('nolayout: ', nolayout)
 
                 replaceRoutes('*', [
                   {
@@ -111,7 +108,6 @@ export default function AuthRouter(props: { children: JSX.Element }) {
                     id: '/',
                     path: '/',
                     element: <MengLayout></MengLayout>,
-                    //meta: {},
                     children: [
                       {
                         id: '/redirect',
@@ -137,39 +133,8 @@ export default function AuthRouter(props: { children: JSX.Element }) {
                     },
                   },
                 ])
-                //const flatenRoutes = treeToArray(res.data)
-
-                // replaceRoutes('*', [
-                //   ...flatenRoutes.map((menu: any) => {
-                //     return {
-                //       path: `${menu.path}`,
-                //       element: LoadView(menu),
-                //       id: `${menu.path}`,
-                //       handle: menu.handle,
-                //     }
-                //   }),
-                //   {
-                //     id: '*',
-                //     path: '*',
-                //     element: <NotFound></NotFound>,
-                //     handle: {
-                //       path: '404',
-                //       name: '404',
-                //       title: '404',
-                //     },
-                //   },
-                // ])
-                console.log('当前路由表: ', router.routes)
                 const path = `${location.pathname}${location.search}`
-                //console.log(path)
-
-                const repath = path.replace(import.meta.env.VITE_BASE_URL, '/')
-                //console.log(repath)
-
-                //const p2 = pp.replace(BASE_ROUTE,"/")
-                //console.log(pp,p2)
-
-                //router.routes[router.routes.length - 1].children = rr as any
+                //const repath = path.replace(import.meta.env.VITE_BASE_URL, '/')
                 // replace一下当前路由，为了触发路由匹配
                 router.navigate(path.replace(import.meta.env.VITE_BASE_URL, '/'), { replace: true })
               }
@@ -178,24 +143,6 @@ export default function AuthRouter(props: { children: JSX.Element }) {
         })
       }
     }
-
-    // if (pathname === LOGIN_PATHNAME) {
-    //   // 登录页面放行
-    // } else if (whiteList.indexOf(pathname) !== -1) {
-    //   // 白名单放行
-    // }
-    // if (pathname == '/') {
-    //   nav(HOME_PATHNAME)
-    // }
-    // if (matchRoute?.handle?.redirect) {
-    //   nav(matchRoute.handle.redirect)
-    // }
-    // document.title = matchRoute?.title || 'Meng React Admin'
-    // if (!Session.get('token')) {
-    //   // 没有用户信息，跳转到登录页面
-    //   nav(LOGIN_PATHNAME)
-    // }
-    // isRelogin.show = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
   return props.children

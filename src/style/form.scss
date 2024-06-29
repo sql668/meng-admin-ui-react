@@ -1,7 +1,12 @@
 .meng-admin-schema-form {
+  color: var(--ant-color-text-base);
   &.search{
     .form-action{
       text-align: right;
     }
   }
+}
+
+.ant-formily-item .ant-formily-item-label {
+  color: var(--ant-color-text-base);
 }

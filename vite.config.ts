@@ -46,7 +46,7 @@ fs.writeFile('antdV5Vars.json', json, (err) => {
 
 function generateModifyVars() {
 
-  console.log(`true; @import (reference) "${resolve('src/style/var.scss')}";`)
+  //console.log(`true; @import (reference) "${resolve('src/style/var.scss')}";`)
   
 
   const mapV5Token = defaultAlgorithm(defaultSeed)
@@ -62,10 +62,8 @@ function generateModifyVars() {
 //const BASE = import.meta.env.VITE_API_URL
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
-  console.log(config)
   const root = process.cwd()
   const env = loadEnv(config.mode, root)
-  console.log(env)
 
   return {
     base: env.VITE_BASE_URL,
@@ -115,7 +113,8 @@ export default defineConfig((config) => {
         symbolId: 'icon-[dir]-[name]',
       }),
       PurgeIcons(),
-      requireTransform({ fileRegex: /.ts$|.tsx$|.js$|.jsx/ }),
+      //requireTransform({ fileRegex: /.ts$|.tsx$|.js$|.jsx/ }),
+      requireTransform({ fileRegex: /^(?!.*node_modules).*\.(js|jsx|ts|tsx)$/ }),
       //viteCommonjs(), //支持require语法
     ],
     define: {

@@ -1,0 +1,102 @@
+.mx-layout-base-menu-vertical {
+  &.mx-layout-base-menu-vertical-collapsed {
+    .ant-menu-item {
+      padding-inline: 0 !important;
+      margin-block: 4px !important;
+    }
+
+    .ant-menu-submenu {
+      & > .ant-menu-submenu-title {
+        padding-inline: 0 !important;
+        margin-block: 4px !important;
+      }
+    }
+  }
+
+  .mx-layout-base-menu-vertical-menu-item {
+    transition: none !important;
+  }
+
+  .mx-layout-base-menu-vertical-item-icon {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.mx-layout-base-menu-vertical-item-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .mx-layout-base-menu-vertical-item-text {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap;
+  }
+}
+
+.mx-layout-base-menu-vertical-item-title-collapsed {
+  min-width: 40px;
+  height: 40px;
+
+  .mx-layout-base-menu-vertical-item-icon {
+    height: 16px;
+    width: 16px;
+    line-height: 16px !important;
+  }
+
+  .mx-layout-base-menu-vertical-item-text-has-icon {
+    display: none !important;
+  }
+}
+
+.mx-layout-base-menu-vertical-item-title-collapsed-level-0 {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mx-layout-base-menu-inline-item-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  .mx-layout-base-menu-inline-item-text {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap;
+  }
+}
+
+.mx-layout-base-menu-inline {
+  .mx-layout-base-menu-inline-item-icon {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.mx-layout-base-menu-horizontal {
+  .mx-layout-base-menu-horizontal-item-icon {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.mx-layout-base-menu-horizontal-item-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  .mx-layout-base-menu-horizontal-item-text {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap;
+  }
+}

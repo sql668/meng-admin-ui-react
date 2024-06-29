@@ -8,7 +8,7 @@ import { setPermissions } from '@/store/user'
 import { CaptchaResp } from '@/types/model/base'
 import { Session } from '@/utils/storage'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Form, Input, Row, message } from 'antd'
+import { Button, Form, Input, Row, message } from 'antd'
 import { createStyles } from 'antd-style'
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -90,7 +90,7 @@ export default function Login() {
           <Form.Item<FieldType>
             name='userName'
             rules={[{ required: true, message: '请输入用户名' }]}>
-            <Input prefix={<UserOutlined />} placeholder='账号:admin/user1' />
+            <Input prefix={<UserOutlined />} placeholder='账号:admin/user1' autoComplete="off" />
           </Form.Item>
           <Form.Item<FieldType> name='password' rules={[{ required: true, message: '请输入密码' }]}>
             <Input
@@ -118,11 +118,11 @@ export default function Login() {
           <Form.Item name='captchaId' hidden>
             <Input />
           </Form.Item>
-          <Form.Item>
+          {/* <Form.Item>
             <Form.Item<FieldType> name='remember' valuePropName='checked' noStyle>
               <Checkbox className='float-left'>记住我</Checkbox>
             </Form.Item>
-          </Form.Item>
+          </Form.Item> */}
           <Row justify='space-around'>
             <Button
               type='primary'

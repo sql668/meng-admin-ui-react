@@ -1,3 +1,4 @@
+import { MenuTypeEnum } from '@/core/enums/menuEnum'
 import { MenuDataItem } from './menu'
 
 export type WithFalse<T> = T | false
@@ -11,7 +12,7 @@ export type PureSettings = {
    * @example 侧边菜单 layout="side"
    * @example 混合布局 既有顶部也有侧边 layout="mix"
    */
-  layout?: 'side' | 'top' | 'mix'
+  layout: MenuTypeEnum //'side' | 'top' | 'mix'
 
   /** 固定顶部栏 */
   fixedHeader?: boolean

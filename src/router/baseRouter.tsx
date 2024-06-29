@@ -10,16 +10,8 @@ import Login from '@/views/login'
 import Register from '@/views/register'
 import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom'
 import RouterErrorElement from '@/views/router-error-element'
-
+import { RouterVo } from '@/types/model'
 export const StaticRoute: RouteObject[] = [
-  // {
-  //   path: '/home',
-  //   element: <Home></Home>,
-  //   handle: {
-  //     title: '首页',
-  //   },
-  // },
-
   {
     index: false,
     path: '/login',
@@ -37,14 +29,6 @@ export const StaticRoute: RouteObject[] = [
       fullPath: '/register',
     },
   },
-  // {
-  //   path: '/redirect',
-  //   element: <RedirectView></RedirectView>,
-  //   handle: {
-  //     title: '重定向',
-  //     fullPath: '/redirect',
-  //   },
-  // },
   {
     path: '/403',
     element: <NotAuth></NotAuth>,
@@ -131,3 +115,10 @@ export const replaceRoutes = (parentPath: string, routes: RouteObject[]) => {
 export const restRoutes = (routes: RouteObject[]) => {
   router.routes.splice(0, router.routes.length, ...(routes as any))
 }
+
+export const staticRouteData: RouterVo[] = StaticRoute.map((item) => {
+  return {
+    path: item.path!,
+    handle: item.handle
+  }
+})

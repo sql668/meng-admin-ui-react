@@ -1,5 +1,5 @@
 import Loading from "@/components/loading";
-import { useSearchParam } from "@/hooks/useSearchParam";
+import useSearchParam  from "@/hooks/useSearchParam";
 import { useTagsTabStore } from "@/store/tagsView";
 import { useEffect } from "react";
 import {  useNavigate, useParams} from "react-router-dom";

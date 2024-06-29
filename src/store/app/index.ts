@@ -1,6 +1,6 @@
 import { ThemeEnum } from '@/core/enums/appEnum'
-import { HeaderSettingDefault, MenuSettingDefault } from '@/core/settings/appSetting'
-import { HeaderSetting, MenuSetting } from '@/types/app'
+import { HeaderSettingDefault, MenuSettingDefault, MultiTabsSettingDefault, RootSettingDEfault } from '@/core/settings/appSetting'
+import { HeaderSetting, MenuSetting, MultiTabsSetting, RootSetting } from '@/types/app'
 import { createSelectors } from '@/utils/createSelector'
 import { DeepPartial } from '@/utils/type'
 import { deepMerge } from '@/utils/util'
@@ -9,11 +9,13 @@ import { devtools, persist, subscribeWithSelector } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 
 interface AppStoreState {
-  isMobile: boolean
-  theme: ThemeEnum
+  //isMobile: boolean
+  // theme: ThemeEnum
   // 菜单相关
   menuSetting: MenuSetting
-  headerSeting: HeaderSetting
+  headerSetting: HeaderSetting
+  multiTabsSetting: MultiTabsSetting
+  rootSetting: RootSetting
 }
 
 const createAppSlice: StateCreator<
@@ -28,7 +30,9 @@ const createAppSlice: StateCreator<
   isMobile: false,
   theme: ThemeEnum.DARK,
   menuSetting: MenuSettingDefault,
-  headerSeting: HeaderSettingDefault,
+  headerSetting: HeaderSettingDefault,
+  multiTabsSetting: MultiTabsSettingDefault,
+  rootSetting:RootSettingDEfault,
 })
 
 export const useAppConfigStore = createSelectors(
@@ -51,7 +55,7 @@ export const useAppConfigStore = createSelectors(
 
 export const setHeaderSetting = (config: DeepPartial<HeaderSetting>) => {
   useAppConfigStore.setState((state) => {
-    state.headerSeting = deepMerge(state.headerSeting || {}, config)
+    state.headerSetting = deepMerge(state.headerSetting || {}, config)
   })
 }
 
@@ -60,23 +64,34 @@ export const setMenuSetting = (config: DeepPartial<MenuSetting>) => {
     state.menuSetting = deepMerge(state.menuSetting || {}, config)
   })
 }
-
-//export const setGlobalTheme = (mode: ThemeEnum) => { useAppConfigStore.setState((state) => state.theme = mode) }
-export const setGlobalTheme = (mode: ThemeEnum) => {
+export const setMultipleTabsSetting = (config: DeepPartial<MultiTabsSetting>) => {
   useAppConfigStore.setState((state) => {
-    state.theme = mode
+    state.multiTabsSetting = deepMerge(state.multiTabsSetting || {}, config)
   })
 }
 
-export const setMobile = (isMobile:boolean) => { 
-useAppConfigStore.setState((state) => {
-  state.isMobile = isMobile
-})
+export const setRootSetting = (config:DeepPartial<RootSetting>) => { 
+  useAppConfigStore.setState(state => { 
+    state.rootSetting = deepMerge(state.rootSetting,config)
+  })
 }
 
-export const getHeaderConfig = () => useAppConfigStore.getState().headerSeting
+//export const setGlobalTheme = (mode: ThemeEnum) => { useAppConfigStore.setState((state) => state.theme = mode) }
+// export const setGlobalTheme = (mode: ThemeEnum) => {
+//   useAppConfigStore.setState((state) => {
+//     state.theme = mode
+//   })
+// }
 
-export const getMenuConfig = () => useAppConfigStore.getState().menuSetting
+// export const setMobile = (isMobile:boolean) => { 
+// useAppConfigStore.setState((state) => {
+//   state.isMobile = isMobile
+// })
+// }
+
+//export const getHeaderConfig = () => useAppConfigStore.getState().headerSeting
+
+//export const getMenuConfig = () => useAppConfigStore.getState().menuSetting
 
 // 注意： 这种写法 当state更新时，外部组件无法监听到
-export const getGlobalTheme = () => useAppConfigStore.getState().theme
+//export const getGlobalTheme = () => useAppConfigStore.getState().theme

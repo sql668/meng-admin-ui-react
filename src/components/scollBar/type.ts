@@ -1,3 +1,5 @@
+import { RefObject } from "react"
+
 export interface ScollBarProps {
   // 组件内部样式class前缀
   //prefixCls?:string
@@ -31,4 +33,17 @@ export interface ScollBarProps {
 export interface BarRefExpose {
   handleScroll: (wrap: HTMLDivElement) => void
   update: () => void
+}
+
+
+export interface ScrollBarExpose {
+  wrapRef: RefObject<HTMLDivElement>
+  update: () => void
+  scrollTo: {
+    (xCord: number, yCord?: number): void
+    (options: ScrollToOptions): void
+  }
+  setScrollTop: (value: number) => void
+  setScrollLeft: (value: number) => void
+  handleScroll: () => void
 }

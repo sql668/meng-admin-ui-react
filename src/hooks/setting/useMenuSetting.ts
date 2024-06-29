@@ -3,26 +3,33 @@ import {
   MenuTypeEnum,
   SIDE_BAR_MINI_WIDTH,
   SIDE_BAR_SHOW_TIT_MINI_WIDTH,
+  TriggerEnum,
 } from '@/core/enums/menuEnum'
-import { getMenuConfig, setMenuConfig, setMenuSetting, useAppConfigStore } from '@/store/app'
-import { split } from 'lodash-es'
+import {  setMenuSetting, useAppConfigStore } from '@/store/app'
 import { useMemo, useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { useDeepMemo } from '../useMemo'
 import { useMemoizedFn } from 'ahooks'
+import useFullContent from '../useFullContent'
 export function useMenuSetting() {
   const {
     menuType,
     splitMenu,
     menuMode,
     showSideBar,
-    collapsed,
+    getCollapsed,
     hiddenSideBar,
     mixSideFixed,
     collapsedShowTitle,
     siderHidden,
-    menuWidth,
+    getMenuWidth,
     menuFixed,
+    getTrigger,
+    getShowMenu,
+    getHiddenMenu,
+    getCollapsedShowTitle,
+    getMenuTheme,
+    getMenuBgColor,
   } = useAppConfigStore(
     useShallow((state) => ({
       menuFixed: state.menuSetting.fixed,
@@ -30,16 +37,33 @@ export function useMenuSetting() {
       menuMode: state.menuSetting.mode,
       splitMenu: state.menuSetting.splitMenu,
       showSideBar: state.menuSetting.show,
-      collapsed: state.menuSetting.collapsed,
+      getShowMenu: state.menuSetting.show,
+      getCollapsed: state.menuSetting.collapsed,
       hiddenSideBar: state.menuSetting.hidden,
+      getHiddenMenu: state.menuSetting.hidden,
       mixSideFixed: state.menuSetting.mixSideFixed,
       collapsedShowTitle: state.menuSetting.collapsedShowTitle,
       siderHidden: state.menuSetting.siderHidden,
-      menuWidth: state.menuSetting.menuWidth,
+      getMenuWidth: state.menuSetting.menuWidth,
+      getTrigger: state.menuSetting.trigger,
+      getCollapsedShowTitle: state.menuSetting.collapsedShowTitle,
+      getMenuTheme: state.menuSetting.theme,
+      getMenuBgColor: state.menuSetting.bgColor,
     })),
-  )
+    )
+  
+  const { getFullContent} = useFullContent()
 
   const [mixSideHasChildren, setMixSideHasChildren] = useState(false)
+
+
+  const getIsHorizontal = useMemo(() => {
+    return menuMode === MenuModeEnum.HORIZONTAL
+  }, [menuMode])
+  
+  const getShowSidebar = useMemo(() => {
+    return splitMenu || (getShowMenu && menuMode !== MenuModeEnum.HORIZONTAL && !getFullContent)
+  }, [splitMenu, getShowMenu, menuMode, getFullContent])
 
   // 是否是左侧菜单模式
   const getIsSidebarType = useMemo(() => menuType === MenuTypeEnum.SIDEBAR, [menuType])
@@ -72,30 +96,17 @@ export function useMenuSetting() {
 
   const getRealWidth = useDeepMemo(() => {
     if (getIsMixSidebar) {
-      return collapsed && !mixSideFixed ? getMiniWidthNumber : menuWidth
+      return getCollapsed && !mixSideFixed ? getMiniWidthNumber : getMenuWidth
     }
-    return collapsed ? getMiniWidthNumber : menuWidth
-  }, [getIsMixSidebar, collapsed, mixSideFixed, getMiniWidthNumber, menuWidth])
+    return getCollapsed ? getMiniWidthNumber : getMenuWidth
+  }, [getIsMixSidebar, getCollapsed, mixSideFixed, getMiniWidthNumber, getMenuWidth])
 
   const getCalcContentWidth = useDeepMemo(() => {
-    // debugger
-    // console.log("=========");
-
-    // console.log('getIsTopMenu:', getIsTopMenu)
-    // console.log('showSideBar:', showSideBar)
-    // console.log('splitMenu:', splitMenu)
-    // console.log('hiddenSideBar:', hiddenSideBar)
-    // console.log('getIsMixSidebar:', getIsMixSidebar)
-    // console.log('collapsed:', collapsed)
-    // console.log('mixSideFixed:', mixSideFixed)
-    // console.log('mixSideHasChildren:', mixSideHasChildren)
-    // console.log('getRealWidth:', getRealWidth)
-
     const width =
       getIsTopMenu || !showSideBar || (splitMenu && hiddenSideBar)
         ? 0
         : getIsMixSidebar
-          ? (collapsed ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH) +
+          ? (getCollapsed ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH) +
             (mixSideFixed && mixSideHasChildren ? getRealWidth : 0)
           : getRealWidth
     return `calc(100% - ${width}px)`
@@ -105,7 +116,7 @@ export function useMenuSetting() {
     splitMenu,
     hiddenSideBar,
     getIsMixSidebar,
-    collapsed,
+    getCollapsed,
     mixSideFixed,
     mixSideHasChildren,
     getRealWidth,
@@ -113,25 +124,48 @@ export function useMenuSetting() {
 
   const toggleCollapsed = useMemoizedFn(() => { 
     setMenuSetting({
-      collapsed: !collapsed,
+      collapsed: !getCollapsed,
     })
   })
 
+  const getShowHeaderTrigger = useMemo(() => {
+    if (
+      menuType === MenuTypeEnum.TOP_MENU ||
+      !showSideBar ||
+      hiddenSideBar
+    ) {
+      return false
+    }
+
+    return getTrigger === TriggerEnum.HEADER
+  },[menuType,showSideBar,hiddenSideBar,getTrigger])
+
   return {
-    isCollapsed:collapsed,
+    getCollapsed,
     toggleCollapsed,
-    menuWidth,
+    getMenuWidth,
     menuFixed,
+    getShowMenu,
+    getHiddenMenu,
+    getMenuType: menuType,
+    getMenuMode: menuMode,
     getIsSidebarType,
     getIsTopMenu,
     getIsMixSidebar,
     getIsMixMode,
+    getIsHorizontal,
     isMixSplitMenu,
-    isSplitMenu: splitMenu,
+    getSplitMenu: splitMenu,
     getCalcContentWidth,
     setMixSideHasChildren,
     getShowTopMenu,
     getRealWidth,
     hiddenSideBar,
+    getShowHeaderTrigger,
+    getTrigger,
+    getCollapsedShowTitle,
+    getMenuTheme,
+    getMenuBgColor,
+    getShowSidebar,
   }
 }

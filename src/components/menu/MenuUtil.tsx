@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { Tooltip } from 'antd'
 //import { IconFont } from '@/components/iconFont'
 import { Icon } from '@/components/icon'
+import { MenuTypeEnum } from '@/core/enums/menuEnum'
 
 const getMenuTitleSymbol = (title: React.ReactNode) => {
   if (title && typeof title === 'string') {
@@ -49,13 +50,12 @@ export default class MenuUtil {
       .map((item) => this.getSubMenuOrItem(item, level, noGroupLevel))
       .filter((item) => item)
       .flat(1)
-
     return data
   }
 
   getSubMenuOrItem = (item: MenuDataItem, level: number, noGroupLevel: number): any => {
     const { collapsed, layout, menu, baseClassName } = this.props
-    const isGroup = menu?.type === 'group' && layout !== 'top'
+    const isGroup = menu?.type === 'group' && layout !== MenuTypeEnum.TOP_MENU
     const menuType = isGroup && level === 0 ? ('group' as const) : undefined
     if (Array.isArray(item.children) && item.children.length > 0) {
       /** Menu 第一级可以有icon，或者 isGroup 时第二级别也要有 */
@@ -116,6 +116,7 @@ export default class MenuUtil {
 
       return [
         {
+          theme:"light",
           type: menuType,
           key: item.key! || item.path!,
           label: title,
@@ -151,6 +152,7 @@ export default class MenuUtil {
       key: item.key! || item.path!,
       onClick: item.onTitleClick,
       label: this.getMenuItemPath(item, level, noGroupLevel),
+      theme:"light"
     }
   }
 

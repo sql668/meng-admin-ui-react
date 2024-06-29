@@ -10,6 +10,7 @@ import { Icon } from '@/components/icon'
 import { useTagsTabStore } from '@/store/tagsView'
 import { useDesign } from '@/hooks/useDesign'
 import classNames from 'classnames'
+import "./style/tabs.style.scss"
 
 
 enum OperationType {
@@ -22,6 +23,8 @@ enum OperationType {
 const TagsView = () => {
   
   const { tabs, activeTabRoutePath, closeTab, refreshTab, closeOtherTab } = useTabs()
+  console.log('activeTabRoutePath: ', activeTabRoutePath)
+  
   const { prefixCls } = useDesign('multiple-tabs')
   const navigate = useNavigate()
   const homePath = useTagsTabStore.use.defaultTag()

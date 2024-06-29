@@ -7,7 +7,7 @@ interface LayoutTriggerProps{
   theme?: MenuThemeEnum
 }
 function LayoutTrigger(props: LayoutTriggerProps) {
-  const { sider,theme} = props
+  const { sider} = props
   return <>{sider && <SiderTrigger></SiderTrigger>} { !sider && <HeaderTrigger></HeaderTrigger>}</>
 }
 

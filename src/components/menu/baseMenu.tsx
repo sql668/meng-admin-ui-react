@@ -16,7 +16,8 @@ const getOpenKeysProps = (
   { layout, collapsed }: BaseMenuProps,
 ): {
   openKeys?: undefined | string[]
-} => {
+  } => {
+  debugger
   let openKeysProps = {} as Record<string, any>
 
   if (openKeys && !collapsed && ['side', 'mix'].includes(layout || 'mix')) {
@@ -30,6 +31,7 @@ const getOpenKeysProps = (
 const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
   const {
     mode,
+    theme,
     className,
     menuData,
     style,
@@ -44,7 +46,7 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
     handleOpenChange,
   } = props
 
-  const baseClassName = `meng-layout-base-menu-${mode}`
+  const baseClassName = `mx-layout-base-menu-${mode}`
 
   const menuUtils = useMemo(() => {
     return new MenuUtil({
@@ -63,6 +65,7 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
 
   const [openKeys, setOpenKeys] = useMergedState<(string | number)[] | false>(
     () => {
+      debugger
       if (menu?.defaultOpenAll) {
         return getOpenKeysFromMenuData(menuData) || []
       }
@@ -140,6 +143,10 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
     defaultOpenKeysRef.current = matchMenuKeys
   }
 
+  console.log('openKeysProps: ', openKeysProps)
+  console.log('defaultOpenKeysRef.current: ', defaultOpenKeysRef.current)
+  
+
   const finallyData = menuData
 
   if (finallyData && finallyData?.length < 1) {
@@ -155,6 +162,7 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
       selectedKeys={selectedKeys}
       items={menuUtils.getNavMenuItems(finallyData, 0, 0)}
       mode={mode}
+      theme={theme}
       style={{
         backgroundColor: 'transparent',
         border: 'none',

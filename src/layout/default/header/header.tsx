@@ -1,20 +1,12 @@
 import { LogoutApi } from '@/api/login'
 import Avatar from '@/assets/img/avatar.webp'
 import FullScreen from '@/components/fullScreen'
-import { SvgIcon } from '@/components/icon'
-import { BaseMenu } from '@/components/menu'
-import { default as ThemeSetting } from '@/components/theme'
 import { LOGIN_PATHNAME } from '@/config/config'
-import { useMenuContext } from '@/context/menu'
 import { ThemeEnum } from '@/core/enums/appEnum'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import { useDesign } from '@/hooks/useDesign'
-import { useDeepMemo } from '@/hooks/useMemo'
-import LayoutBreadcrumb from '@/layout/components/breadcrumb'
-import AppLogo from '@/layout/components/logo'
 import { restRoutes, router } from '@/router/baseRouter'
-import { getGlobalTheme, setGlobalTheme, useAppConfigStore } from '@/store/app'
 import { setPermissionRouters } from '@/store/permission'
 import { resetTagsTab } from '@/store/tagsView'
 import { setPermissions, useUserStore } from '@/store/user'
@@ -27,6 +19,13 @@ import classNames from 'classnames'
 import { memo, useMemo, useState } from 'react'
 import { useAliveController } from 'react-activation'
 import { useNavigate } from 'react-router-dom'
+import LayoutTrigger from '../trigger'
+import useRootSetting from '@/hooks/setting/useRootSetting'
+import { SettingDrawer } from '../setting'
+import { AppLogo, ThemeToggle } from '@/components/application'
+import "./style/_style.scss"
+import LayoutMenu from '../menu'
+import { MenuModeEnum, MenuSplitTyeEnum } from '@/core/enums/menuEnum'
 
 interface LayoutHeaderProps {
   fixed?: boolean
@@ -46,23 +45,6 @@ const items: MenuProps['items'] = [
   },
 ]
 
-const darkLightItems: MenuProps['items'] = [
-  // {
-  //   key: 'auto',
-  //   label: <a>跟随系统</a>,
-  //   icon: <SvgIcon icon='auto_theme'></SvgIcon>,
-  // },
-  {
-    key: 'light',
-    label: <a>亮色模式</a>,
-    icon: <SvgIcon icon='light_theme'></SvgIcon>,
-  },
-  {
-    key: 'dark',
-    label: <a>暗色模式</a>,
-    icon: <SvgIcon icon='dark_theme'></SvgIcon>,
-  },
-]
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -78,46 +60,21 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
   const { fixed = false } = props
   const nav = useNavigate()
   const { styles, cx } = useStyles()
-  const themeMode = useAppConfigStore.use.theme()
-  const menuContext = useMenuContext()
   const { prefixCls } = useDesign('layout-header')
-  const { isMixSplitMenu, getShowTopMenu } = useMenuSetting()
-  //const { headerTheme } = useHeaderSetting()
+  const { getShowTopMenu,getShowHeaderTrigger,getSplitMenu,getIsMixSidebar,getIsMixMode,getMenuWidth } = useMenuSetting()
+  const { getShowContent,getHeaderTheme,getShowHeaderLogo} = useHeaderSetting()
+  
+  const {getIsMobile } = useRootSetting()
   const getHeaderClass = useMemo(() => {
     return classNames([
       prefixCls,
       {
         [`${prefixCls}--fixed`]: fixed,
-        [`${prefixCls}--${themeMode}`]: themeMode,
+        [`${prefixCls}--${getHeaderTheme}`]: getHeaderTheme,
       },
     ])
-  }, [prefixCls, themeMode])
+  }, [prefixCls, getHeaderTheme])
 
-  const currentMode = useMemo(() => {
-    if (themeMode === 'dark') {
-      return <SvgIcon icon='dark_theme' className='anticon'></SvgIcon>
-    } else if (themeMode === 'light') {
-      return <SvgIcon icon='light_theme' className='anticon'></SvgIcon>
-    } else {
-      return <SvgIcon icon='auto_theme' className='anticon'></SvgIcon>
-    }
-  }, [themeMode])
-
-  const menuData = useDeepMemo(() => {
-    //console.log(menuContext, isMixSplitMenu)
-
-    if (isMixSplitMenu) {
-      const noChildrenMenuData = (menuContext.menuData || []).map((item) => ({
-        ...item,
-        children: undefined,
-        routes: undefined,
-      }))
-      return noChildrenMenuData
-    }
-    return []
-  }, [isMixSplitMenu, menuContext.menuData])
-
-  //console.log(menuData)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { clear } = useAliveController()
   const userInfo = useUserStore.use.user()
@@ -150,47 +107,48 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
    const handleCancel = () => {
      setIsModalOpen(false)
    }
+  
+   const getLogoWidth = useMemo(() => {
+     if (!getIsMixMode || getIsMobile) {
+       return undefined
+     }
+     const width = getMenuWidth < 180 ? 180 : getMenuWidth
+     return { width: `${width}px` }
+   }, [getIsMixMode, getIsMobile, getMenuWidth])
+  
+  const getSplitType = getSplitMenu ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE
+
+   const getMenuMode = getSplitMenu ? MenuModeEnum.HORIZONTAL : null
+  
 
   return (
     <>
       <Layout.Header className={cx(getHeaderClass, styles.container)}>
         <div className={`${prefixCls}-left`}>
-          <AppLogo></AppLogo>
-          {/* <LayoutBreadcrumb></LayoutBreadcrumb> */}
+          {(getShowHeaderLogo || getIsMobile) && (
+              <AppLogo
+                wrapStyle={getLogoWidth}
+                theme={getHeaderTheme}
+                className={`${prefixCls}-logo`}></AppLogo>
+            )}
+
+          {((getShowContent && getShowHeaderTrigger && !getSplitMenu && !getIsMixSidebar) ||
+            getIsMobile) && <LayoutTrigger></LayoutTrigger>}
         </div>
         {getShowTopMenu && (
           <div className={`${prefixCls}-menu`}>
-            <BaseMenu
-              mode='horizontal'
-              menuRenderType='header'
-              className='meng-layout-top-nav-header-base-menu'
-              hashId='999'
-              collapsed={false}
-              location={menuContext.location!}
-              style={{
-                height: '100%',
-              }}
-              matchMenuKeys={menuContext.matchMenuKeys || []}
-              menuItemClick={menuContext.menuItemClick}
-              menuData={menuData}></BaseMenu>
+            <LayoutMenu
+              isHorizontal
+              type='top'
+              theme={ThemeEnum.LIGHT}
+              splitType={getSplitType}
+              menuMode={getMenuMode}></LayoutMenu>
           </div>
         )}
 
         <div className={`${prefixCls}-action`}>
-          <Dropdown
-            className={`${prefixCls}-action__item`}
-            placement='top'
-            menu={{
-              items: darkLightItems,
-              onClick: (e) => {
-                setGlobalTheme(e.key as ThemeEnum)
-              },
-              selectable: true,
-              defaultSelectedKeys: [themeMode],
-            }}>
-            <span>{currentMode}</span>
-          </Dropdown>
-          <ThemeSetting className={`${prefixCls}-action__item theme-item`}></ThemeSetting>
+          <ThemeToggle className={`${prefixCls}-action__item`}></ThemeToggle>
+          <SettingDrawer className={`${prefixCls}-action__item theme-item`}></SettingDrawer>
           <FullScreen className={`${prefixCls}-action__item`}></FullScreen>
           <Dropdown menu={{ items, onClick }} className={`${prefixCls}-action__item`}>
             <span className='h-full flex flex-items-center'>

@@ -7,11 +7,10 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { getMatchMenu, getMenuData as getMenuDataTrans, ishttp } from '@/utils/menu'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDeepMemo } from '@/hooks/useMemo'
-import { useMergedState } from '@fdesign/util'
-import { useAppConfigStore } from '@/store/app'
-import { useShallow } from 'zustand/react/shallow'
-import { MenuTypeEnum } from '@/core/enums/menuEnum'
+import { setRootSetting } from '@/store/app'
 import { MenuContext } from '@/context/menu'
+import useRootSetting from '@/hooks/setting/useRootSetting'
+import useRouter from '@/hooks/useRouter'
 
 // 禁止切换到移动端
 const disableMobile = false
@@ -38,80 +37,52 @@ const getChildMenu = (menu: MenuDataItem): MenuDataItem => {
 
 function MengLayout() {
   const { pathname } = useLocation()
+
+  useRouter()
+
+
   useEffect(() => {
     setLocation({ pathname: pathname })
   }, [pathname])
   const nav = useNavigate()
-  // const ur = useMatches()
-  // console.log(ur);
-  
    const colSize = useBreakpoint()
   const allRouters = usePermissionStore.use.routes()
-  const { menuType } = useAppConfigStore(
-    useShallow((state) => ({
-      menuType: state.menuSetting.type,
-      //splitMenus: state.splitMenus,
-    })),
-  )
 
-  const [menuInfoData, setMenuInfoData] = useState<{
-    breadcrumb?: Record<string, MenuDataItem>
-    breadcrumbMap?: Map<string, MenuDataItem>
-    menuData: MenuDataItem[]
-  }>({
-    // breadcrumb: {},
-    // breadcrumbMap: new Map(),
-    menuData: [],
-  })
-  const { menuData = [] } = menuInfoData || {}
-
-  const isMobile = useDeepMemo(() => {
-    return (colSize === 'sm' || colSize === 'xs') && !disableMobile
-  }, [colSize])
+  const { getIsDisableMobile } = useRootSetting()
+  
+  useEffect(() => {
+    if ((colSize === 'sm' || colSize === 'xs') && !disableMobile) {
+      setRootSetting({ isMobile: true })
+    } else {
+      setRootSetting({ isMobile: false })
+    }
+  }, [getIsDisableMobile, colSize])
 
   const [location, setLocation] = useState<{ pathname: string }>({ pathname: '/' })
-  const [collapsed, onCollapse] = useMergedState<boolean>(
-    () => {
-      if (process.env.NODE_ENV === 'TEST') return false
-      if (isMobile) return true
-      if (colSize === 'md') return true
-      return false
-    },
-    {
-      value: undefined,
-      onChange: undefined, // 触发自定义事件
-    },
-  )
-
-  // const siderMenuWidth = useMemo(() => {
-  //   if (menuType === MenuTypeEnum.MIX) return 215
-  //   return 256
-  // }, [menuType])
-  
- 
-  const matchMenus = useMemo(() => {
-    return getMatchMenu(location.pathname, menuData || [], true)
-  }, [location.pathname, menuData])
-  // 匹配选中的菜单以及父菜单 key
-
-  const matchMenuKeys = useDeepMemo(
-    () => Array.from(new Set(matchMenus.map((item) => item.key || item.path || ''))) || [],
-    [matchMenus],
-  )
   
 
-  useEffect(() => {
-    console.log(allRouters)
-    
-    const data = getMenuDataTrans(allRouters)
-    console.log(data);
-    
-    setMenuInfoData(data)
+  const menuInfoData = useMemo<{
+    breadcrumb?: Record<string, MenuDataItem>
+    breadcrumbMap?: Map<string, MenuDataItem>
+    menuData?: MenuDataItem[]
+  }>(() => {
+    return getMenuDataTrans(allRouters)
   }, [allRouters])
+  const { menuData = [] } = menuInfoData || {}
+
+  const matchMenus = useMemo(() => {
+    const matchMenus = getMatchMenu(location.pathname, menuData || [], true)
+    return matchMenus
+  }, [location.pathname, menuData])
+  const matchMenuKeys = useDeepMemo(() => {
+    const keys = Array.from(new Set(matchMenus.map((item) => item.key || item.path || ''))) || []
+    //setMatchMenuKeys(keys)
+    return keys
+  }, [matchMenus])
 
   const menuItemClick = useCallback(
     (e: any) => {
-      const menu = getMenu(menuInfoData.menuData, e.key)
+      const menu = getMenu(menuInfoData.menuData!, e.key)
       if (menu?.viewType === '2') {
         if (ishttp(menu.linkUrl || '')) {
           window.open(menu.linkUrl, '_blank')
@@ -137,20 +108,16 @@ function MengLayout() {
 
   const menuContextValue = useDeepMemo(() => {
     return {
-      isMobile,
       menuItemClick,
       menuData: menuData,
       matchMenuKeys: matchMenuKeys,
-      collapsed,
-      onCollapse,
-      //siderMenuWidth,
     }
-  }, [isMobile, menuItemClick, menuData, matchMenuKeys, collapsed, onCollapse])
-
+  }, [menuItemClick, menuData, matchMenuKeys])
+  const {matchRoutes} = useRouter()
   return (
     <AuthRouter>
-      <MenuContext.Provider value={ menuContextValue}>
-        <BaseLayout></BaseLayout>
+      <MenuContext.Provider value={menuContextValue}>
+        {matchRoutes.at(-1)?.handle.hasLayout && <BaseLayout></BaseLayout>}
       </MenuContext.Provider>
     </AuthRouter>
   )

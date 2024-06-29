@@ -1,15 +1,12 @@
-import { useMenuContext } from '@/context/menu'
+
+import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons'
-import { useMemoizedFn } from 'ahooks'
 function SiderTrigger() { 
-  const { onCollapse, collapsed } = useMenuContext()
-  const clickHandle = useMemoizedFn(() => { 
-    onCollapse && onCollapse(!collapsed)
-  })
+  const { getCollapsed,toggleCollapsed} = useMenuSetting()
   return (
-    <div onClick={clickHandle}>
-      {collapsed && <DoubleRightOutlined />}
-      {!collapsed && <DoubleLeftOutlined />}
+    <div onClick={toggleCollapsed}>
+      {getCollapsed && <DoubleRightOutlined />}
+      {!getCollapsed && <DoubleLeftOutlined />}
     </div>
   )
 }

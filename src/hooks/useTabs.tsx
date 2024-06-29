@@ -16,16 +16,11 @@ function getKey() {
 
 export function useTabs() {
   // 当前打开的tab页签
-  //const [tabs, setTabs] = useState<TagsTabProps[]>([])
   const tabs = useTagsTabStore.use.tags()
   const homePath = useTagsTabStore.use.defaultTag()
-  //const setTabs = setTags
 
   // 当前激活的tab
   const [activeTabRoutePath, setActiveTabRoutePath] = useState<string>('')
-
-  // 当前激活的tab
-  //const [activeTab, setActiveTab] = useState<TagsTabProps>()
 
   // 当前匹配的路由
   const matchRoute = useMatchRoute()
@@ -33,8 +28,6 @@ export function useTabs() {
   const navigate = useNavigate()
 
   const { getCachingNodes, drop, refresh } = useAliveController()
-  //const cachingNodes = getCachingNodes()
-  //console.log(cachingNodes)
 
   const closeTab = useCallback(
     (routePath?: string) => {
@@ -119,20 +112,6 @@ export function useTabs() {
     removeOtherTag(routePath)
   }
 
-  // const closeOne = (routePath?: string) => {
-  //   if (routePath === homePath) {
-  //     return
-  //   }
-  //   const cachingNodes = getCachingNodes()
-  //   const cache = cachingNodes.find((item) => item.name === routePath)
-  //   if (cache) {
-  //     // 关闭的页面开启了缓存，需要将该页面从缓存中删除
-  //     drop(cache.name!)
-  //   } else {
-
-  //   }
-  // }
-
   const activeTab = tabs.find((item) => item.routePath === activeTabRoutePath)
 
   useEffect(() => {
@@ -142,18 +121,6 @@ export function useTabs() {
     if (matchRoute.handle?.redirect) return
     const existKeepAliveTab = tabs.find((item) => item.routePath === matchRoute.routePath)
     if (!existKeepAliveTab) {
-      // 缓存记录中不包括当前页面，将当前页面加入到缓存记录中
-      // setTabs((prev) => [
-      //   ...prev,
-      //   {
-      //     title: matchRoute.title,
-      //     key: getKey(),
-      //     routePath: matchRoute.routePath,
-      //     pathname: matchRoute.pathname,
-      //     children: matchRoute.children,
-      //     handle: matchRoute.handle,
-      //   },
-      // ])
       setTabs([
         ...tabs,
         {

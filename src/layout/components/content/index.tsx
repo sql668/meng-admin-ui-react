@@ -1,23 +1,15 @@
 import { useTabs } from '@/hooks/useTabs'
-import { BackTop, FloatButton, Layout } from 'antd'
+import {  FloatButton } from 'antd'
 import { useMemo, useRef } from 'react'
 import { useOutlet } from 'react-router-dom'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
-import { TagsTabContext } from '../tagsView/tags-context'
 import { useDesign } from '@/hooks/useDesign'
 import classNames from 'classnames'
+import "./style/content.style.scss"
 
 const LayoutContent = () => {
   const currentOutlet = useOutlet()
-  const { closeTab, refreshTab, closeOtherTab, activeTab } = useTabs()
-  const tagsContextValue = useMemo(
-    () => ({
-      closeTab,
-      closeOtherTab,
-      refreshTab,
-    }),
-    [closeTab, closeOtherTab, refreshTab],
-  )
+  const { activeTab } = useTabs()
   const { prefixCls } = useDesign('layout-content')
   const getWrapClass = useMemo(() => {
     return classNames([
@@ -46,7 +38,7 @@ const LayoutContent = () => {
     <div className={getWrapClass}>
       <SwitchTransition mode='out-in'>
         <CSSTransition key={location.pathname} timeout={500} classNames='ra-fade' unmountOnExit>
-          <div className='h-full w-full overflow-auto' key={activeTab?.key} ref={contentRef}>
+          <div className='mx-page-wrap' key={activeTab?.key} ref={contentRef}>
             {currentOutlet}
             <FloatButton.BackTop
               target={() => contentRef.current!}

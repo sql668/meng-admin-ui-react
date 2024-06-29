@@ -19,8 +19,8 @@ const useStyles = createStyles(({ token, css }, props: { menuWidth:number }) => 
   }
 })
 const AppLogo = () => {
-  const { menuWidth } = useMenuSetting()
-  const { styles, cx } = useStyles({ menuWidth })
+  const { getMenuWidth } = useMenuSetting()
+  const { styles, cx } = useStyles({ menuWidth:getMenuWidth })
   return (
     <div className={cx(styles.container)}>
       <img src={Logo} alt='' />

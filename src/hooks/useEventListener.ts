@@ -74,7 +74,6 @@ function useEventListener(eventName: string, handler: noop, options: Options = {
 
   useEffectWithTarget(
     () => {
-      debugger
       if (!mergeEnable) {
         return
       }

@@ -8,7 +8,7 @@ import Router from './router'
 import ErrorPage from '@/views/errors/error-page'
 import MxAppConfigProvider from '@/components/application/appProvider'
 import { ThemeProvider } from 'antd-style'
-import { getGlobalTheme, useAppConfigStore } from './store/app'
+import useRootSetting from './hooks/setting/useRootSetting'
 
 // const { convertLegacyToken, defaultTheme } = require('@ant-design/compatible/lib')
 
@@ -38,11 +38,11 @@ const antdThemeConfig = {
 
 export default function App() {
   const [locale] = useState<Locale>(zhCN)
-  const themeMode = useAppConfigStore.use.theme()
+  const {getGlobalTheme} = useRootSetting()
   return (
     <MxAppConfigProvider>
       <ConfigProvider locale={locale} theme={antdThemeConfig}>
-        <ThemeProvider<MengThemeToken> themeMode={themeMode} theme={antdThemeConfig}>
+        <ThemeProvider<MengThemeToken> themeMode={getGlobalTheme}>
           <AntdApp className='h-full overflow-hidden'>
             <ErrorBoundary fallback={<ErrorPage></ErrorPage>}>
               <Router></Router>

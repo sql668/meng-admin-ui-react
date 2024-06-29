@@ -2,7 +2,6 @@ import { RouterHandleVo } from '@/api/system/menu'
 import { IRouteMeta } from '@/types/route'
 import { useEffect, useState } from 'react'
 import { useLocation, useMatches, useOutlet } from 'react-router-dom'
-
 interface MatchRouteType {
   // 菜单名称
   title: string
@@ -24,6 +23,7 @@ export default function useMatchRoute() {
   const children = useOutlet()
   // 获取所有路由
   const matches = useMatches()
+  //const { matchRoutes: matches } = useRouter()
   // 获取当前url
   const { pathname } = useLocation()
 
@@ -34,20 +34,20 @@ export default function useMatchRoute() {
   useEffect(() => {
     // 获取当前匹配的路由
     const lastRoute = matches.at(-1)
-
-    //if (!lastRoute?.handle) return
     if (lastRoute?.handle) {
       setMatchRoute({
         title: (lastRoute.handle as RouterHandleVo).title || '',
+        //title: lastRoute.handle.title,
         pathname,
         children,
+        //routePath: lastRoute.path,
         routePath: lastRoute?.pathname || '',
         handle: lastRoute.handle,
       })
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [pathname, matches])
 
 
   return matchRoute

@@ -30,7 +30,6 @@ function useResizeObserver(
 
   useEffectWithTarget(
     () => {
-      debugger
       if (!enable.current) {
         return
       }

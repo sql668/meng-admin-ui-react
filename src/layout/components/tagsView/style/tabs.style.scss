@@ -1,0 +1,15 @@
+.mx-multiple-tabs {
+  height: 32px;
+  line-height: 32px;
+  .ant-tabs-small {
+    height: 30px;
+  }
+}
+
+.mx-multiple-tabs .ant-tabs.ant-tabs-card .ant-tabs-nav {
+  height: 32px;
+  margin: 0;
+  padding-top: 2px;
+  border: 0;
+  box-shadow: none;
+}
