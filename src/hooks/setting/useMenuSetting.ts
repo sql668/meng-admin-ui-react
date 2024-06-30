@@ -91,10 +91,12 @@ export function useMenuSetting() {
   )
 
   const getMiniWidthNumber = useDeepMemo(() => {
+    
     return siderHidden ? 0 : collapsedShowTitle ? SIDE_BAR_SHOW_TIT_MINI_WIDTH : SIDE_BAR_MINI_WIDTH
   }, [siderHidden, collapsedShowTitle])
 
   const getRealWidth = useDeepMemo(() => {
+    
     if (getIsMixSidebar) {
       return getCollapsed && !mixSideFixed ? getMiniWidthNumber : getMenuWidth
     }
@@ -167,5 +169,6 @@ export function useMenuSetting() {
     getMenuTheme,
     getMenuBgColor,
     getShowSidebar,
+    getMiniWidthNumber,
   }
 }

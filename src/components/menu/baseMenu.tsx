@@ -17,7 +17,6 @@ const getOpenKeysProps = (
 ): {
   openKeys?: undefined | string[]
   } => {
-  debugger
   let openKeysProps = {} as Record<string, any>
 
   if (openKeys && !collapsed && ['side', 'mix'].includes(layout || 'mix')) {
@@ -65,7 +64,6 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
 
   const [openKeys, setOpenKeys] = useMergedState<(string | number)[] | false>(
     () => {
-      debugger
       if (menu?.defaultOpenAll) {
         return getOpenKeysFromMenuData(menuData) || []
       }
@@ -143,9 +141,6 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
     defaultOpenKeysRef.current = matchMenuKeys
   }
 
-  console.log('openKeysProps: ', openKeysProps)
-  console.log('defaultOpenKeysRef.current: ', defaultOpenKeysRef.current)
-  
 
   const finallyData = menuData
 

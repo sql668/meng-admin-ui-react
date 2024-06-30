@@ -41,8 +41,6 @@ export const MenuAuth = (props: { record?: RoleEntity; close?: () => void }) => 
     queryFn: () =>
       getMenuListApi({}).then((res) => {
         if (res.code === 0) {
-          //const dd = buildFullPath(buildTreeFromArray(res.data || [], 'menuId'), null)
-          //console.log(dd);
           return buildFullPath(buildTreeFromArray(res.data || [], 'menuId'),null)
         } else {
           new Error(res.msg)

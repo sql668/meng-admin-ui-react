@@ -19,7 +19,6 @@ export function useFilterTreeData(
     filterTreeNode: boolean | ATreeProps["filterTreeNode"];
   },
 ) {
-  // console.log(treeData,searchValue,fieldNames,treeNodeFilterProp,filterTreeNode);
 
   const { children: fieldChildren } = fieldNames || {children:"children"};
   return useMemo(() => {

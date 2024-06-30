@@ -1,6 +1,6 @@
 import { ThemeEnum } from '@/core/enums/appEnum'
 import { HeaderSettingDefault, MenuSettingDefault, MultiTabsSettingDefault, RootSettingDEfault } from '@/core/settings/appSetting'
-import { HeaderSetting, MenuSetting, MultiTabsSetting, RootSetting } from '@/types/app'
+import { BeforeMiniState, HeaderSetting, MenuSetting, MultiTabsSetting, RootSetting } from '@/types/app'
 import { createSelectors } from '@/utils/createSelector'
 import { DeepPartial } from '@/utils/type'
 import { deepMerge } from '@/utils/util'
@@ -16,6 +16,7 @@ interface AppStoreState {
   headerSetting: HeaderSetting
   multiTabsSetting: MultiTabsSetting
   rootSetting: RootSetting
+  beforeMiniInfo: BeforeMiniState
 }
 
 const createAppSlice: StateCreator<
@@ -32,7 +33,8 @@ const createAppSlice: StateCreator<
   menuSetting: MenuSettingDefault,
   headerSetting: HeaderSettingDefault,
   multiTabsSetting: MultiTabsSettingDefault,
-  rootSetting:RootSettingDEfault,
+  rootSetting: RootSettingDEfault,
+  beforeMiniInfo: {}
 })
 
 export const useAppConfigStore = createSelectors(
@@ -76,6 +78,12 @@ export const setRootSetting = (config:DeepPartial<RootSetting>) => {
   })
 }
 
+export const setBeforeMiniInfo = (config: BeforeMiniState) => {
+  useAppConfigStore.setState((state) => {
+    state.beforeMiniInfo = config
+  })
+}
+
 //export const setGlobalTheme = (mode: ThemeEnum) => { useAppConfigStore.setState((state) => state.theme = mode) }
 // export const setGlobalTheme = (mode: ThemeEnum) => {
 //   useAppConfigStore.setState((state) => {
@@ -91,7 +99,8 @@ export const setRootSetting = (config:DeepPartial<RootSetting>) => {
 
 //export const getHeaderConfig = () => useAppConfigStore.getState().headerSeting
 
-//export const getMenuConfig = () => useAppConfigStore.getState().menuSetting
+export const getMenuSetting = () => useAppConfigStore.getState().menuSetting
+export const getBeforeminiInfoSetting = () => useAppConfigStore.getState().beforeMiniInfo
 
 // 注意： 这种写法 当state更新时，外部组件无法监听到
 //export const getGlobalTheme = () => useAppConfigStore.getState().theme

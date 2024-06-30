@@ -17,15 +17,7 @@ export function useUpdateBg() {
  // const { getGlobalTheme } = useRootSetting()
   const { getHeaderBgColor } = useHeaderSetting()
   const { getMenuBgColor } = useMenuSetting()
-
-  // const tt = useLatest(getGlobalTheme)
-  // const darkMode = getGlobalTheme === ThemeEnum.DARK
-
-  //console.log("darkmode: ",darkMode);
-  
-
   const useUpdateHeaderBgColor = useMemoizedFn((theme:ThemeEnum, color?: string) => {
-   // console.log(tt.current);
     
      const darkMode = theme === ThemeEnum.DARK
     if (!color) {

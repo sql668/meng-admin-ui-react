@@ -1,6 +1,6 @@
 
 import { Layout } from 'antd'
-import { CSSProperties,useMemo } from 'react'
+import { CSSProperties,useEffect,useMemo } from 'react'
 import { MenuDataItem } from '@/types/menu'
 import { clearMenuItem } from '@/utils/menu'
 import { useMenuContext } from '@/context/menu'
@@ -12,11 +12,13 @@ import classNames from 'classnames'
 import { useDeepCompareEffect } from 'ahooks'
 import { setMenuSetting } from '@/store/app'
 import LayoutTrigger from '@/layout/default/trigger'
-import { MenuModeEnum, MenuSplitTyeEnum, SIDE_BAR_MINI_WIDTH } from '@/core/enums/menuEnum'
+import { MenuModeEnum, MenuSplitTyeEnum, SIDE_BAR_MINI_WIDTH, TriggerEnum } from '@/core/enums/menuEnum'
 import { useTrigger } from './useLayoutSide'
 import LayoutMenu from '@/layout/default/menu'
 import useRootSetting from '@/hooks/setting/useRootSetting'
 import "./style/_sider.style.scss"
+import { useSiderEvent } from './useLayoutSider'
+import { useBreakpoint } from '@/hooks/useBreakpoint'
 
 // const useStyles = createStyles(({ css }) => {
 //   return {
@@ -65,10 +67,12 @@ const Sider = () => {
     getIsMixMode,
     getMenuWidth,
     getMenuTheme,
+    getTrigger,
   } = useMenuSetting()
-  const { getIsMobile} = useRootSetting()
+  const { getIsMobile,getIsDisableMobile} = useRootSetting()
   const collapsed = getIsMobile ? false : originCollapsed
   const { getShowTrigger } = useTrigger()
+  const {onBreakpointChange} = useSiderEvent()
 
   const menuData = useDeepMemo(() => {
     let menuData: MenuDataItem[] = []
@@ -84,10 +88,7 @@ const Sider = () => {
   const showClassSideBarRef = useMemo(() => {
     return getSplitMenu ? !hiddenSideBar : true
   }, [getSplitMenu, hiddenSideBar])
-  //console.log('side menu:', menuData)
-
   const clearMenuData = clearMenuItem(menuData || [])
-  //console.log('clearMenuData: ',clearMenuData)
 
   useDeepCompareEffect(() => {
     if (clearMenuData && clearMenuData?.length < 1) {
@@ -113,7 +114,7 @@ const Sider = () => {
     ])
   }, [prefixCls, menuFixed, getIsMixMode, getIsMobile])
 
-  const getHiddenDomStyle = useMemo(() => {
+  const getHiddenDomStyle = useMemo(() => { 
     const width = `${getRealWidth}px`
     const style: CSSProperties = {
       width,
@@ -142,6 +143,17 @@ const Sider = () => {
     return <LayoutTrigger sider></LayoutTrigger>
   }, [getShowTrigger])
 
+   const colSize = useBreakpoint()
+  useEffect(() => {
+     
+     if (colSize === 'md' && !getIsDisableMobile) {
+       onBreakpointChange(true)
+     } else {
+       onBreakpointChange(false)
+     }
+   }, [getIsDisableMobile, colSize])
+  
+
   if (clearMenuData && clearMenuData?.length < 1 && getSplitMenu) {
     return null
   }
@@ -153,13 +165,15 @@ const Sider = () => {
         className={getSideBarClass}
         //style={{ backgroundColor: 'transparent' }}
         collapsible
-        theme={ getMenuTheme}
+        breakpoint={getTrigger === TriggerEnum.FOOTER ? 'md' : 'lg'}
+        theme={getMenuTheme}
         trigger={renderTrigger}
         collapsed={collapsed}
         onCollapse={() => {
           if (getIsMobile) return
           toggleCollapsed?.()
         }}
+        onBreakpoint={onBreakpointChange}
         collapsedWidth={SIDE_BAR_MINI_WIDTH}
         width={getMenuWidth}>
         {/* <ScollBar>
@@ -176,7 +190,11 @@ const Sider = () => {
               width: '100%',
             }}></BaseMenu>
         </ScollBar> */}
-        <LayoutMenu type='sider' theme={getMenuTheme} menuMode={ getMode} splitType={getSplitType}></LayoutMenu>
+        <LayoutMenu
+          type='sider'
+          theme={getMenuTheme}
+          menuMode={getMode}
+          splitType={getSplitType}></LayoutMenu>
       </Layout.Sider>
     </>
   )

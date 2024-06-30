@@ -95,7 +95,6 @@ export default function AuthRouter(props: { children: JSX.Element }) {
                 setRouters(res.data || [])
                 const routers = handleElement(res.data || [])
                 const nolayout = handleNoLayoutElement(res.data || [])
-                console.log('nolayout: ', nolayout)
 
                 replaceRoutes('*', [
                   {

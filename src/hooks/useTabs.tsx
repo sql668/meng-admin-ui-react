@@ -69,18 +69,8 @@ export function useTabs() {
         // 关闭的页面开启了缓存，需要将该页面从缓存中删除
         refresh(cache.name!)
       } else {
-        // setTabs((prev) => {
-        //   const index = prev.findIndex((tab) => tab.routePath === routePath)
-        //   if (index >= 0) {
-        //     // 这个是react的特性，key变了，组件会卸载重新渲染
-        //     prev[index].key = getKey()
-        //   }
-        //   return [...prev]
-        // })
-
         const index = tabs.findIndex((tab) => tab.routePath === routePath)
         if (index >= 0) {
-          //console.log(tabs[index])
           // 这个是react的特性，key变了，组件会卸载重新渲染
           //tabs[index].key = getKey()
           updateTag(index, {

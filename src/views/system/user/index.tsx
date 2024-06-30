@@ -78,7 +78,6 @@ export default function User() {
 
   const pageChange = (page: number, pageSize: number) => {
     setQueryKey({ ...queryKey,pageNum: page, pageSize: pageSize })
-    //console.log(page, pageSize)
   }
 
   const addBtnHandle = () => {

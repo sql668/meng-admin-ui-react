@@ -5,7 +5,7 @@ import { useMenuSetting } from "@/hooks/setting/useMenuSetting"
 import useRootSetting from "@/hooks/setting/useRootSetting"
 import { useDesign } from "@/hooks/useDesign"
 import classNames from "classnames"
-import { memo, useMemo } from "react"
+import { CSSProperties, memo, useMemo } from "react"
 import "./style/_style.scss"
 import { BaseMenu } from "@/components/menu"
 import { useDeepMemo } from "@/hooks/useMemo"
@@ -26,7 +26,6 @@ const LayoutMenu = memo((props: LayoutMenuProps) => {
   const { theme,splitType,menuMode,type} = props
 
   const { getShowLogo, getIsMobile } = useRootSetting()
-  console.log('getIsMobile:',getIsMobile)
   
   const {
     getIsSidebarType,
@@ -85,6 +84,7 @@ const LayoutMenu = memo((props: LayoutMenuProps) => {
   //const clearMenuData = clearMenuItem(menuData || [])
   
   const getUseScroll = useMemo(() => {
+    
     return (
       !getIsHorizontal &&
       (getIsSidebarType ||
@@ -92,11 +92,19 @@ const LayoutMenu = memo((props: LayoutMenuProps) => {
         splitType === MenuSplitTyeEnum.NONE)
     )
   }, [getIsHorizontal, getIsSidebarType, splitType])
+
+  
   
   const getComputedMenuMode = useMemo(
     () => (getIsMobile ? MenuModeEnum.INLINE : menuMode || getMenuMode),
     [getIsMobile, menuMode, getMenuMode],
   )
+
+  const getWrapperStyle = useMemo((): CSSProperties => {
+    return {
+      height: `calc(100% - ${getIsShowLogo ? '48px' : '0px'})`,
+    }
+  }, [getIsShowLogo])
 
   function renderHeader() { 
     if (!getIsShowLogo && !getIsMobile) return null
@@ -124,10 +132,12 @@ const LayoutMenu = memo((props: LayoutMenuProps) => {
     )
   }
 
-  return (<>
-    {renderHeader()}
-    {getUseScroll ? <ScollBar>{ renderMenu()}</ScollBar> : renderMenu()}
-  </>)
+  return (
+    <>
+      {renderHeader()}
+      {getUseScroll ? <ScollBar style={getWrapperStyle}>{renderMenu()}</ScollBar> : renderMenu()}
+    </>
+  )
 })
 
 

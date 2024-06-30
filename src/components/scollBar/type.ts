@@ -1,4 +1,4 @@
-import { RefObject } from "react"
+import { CSSProperties, RefObject } from "react"
 
 export interface ScollBarProps {
   // 组件内部样式class前缀
@@ -11,6 +11,8 @@ export interface ScollBarProps {
   maxHeight?: number
   // 容器class
   className?: string
+  // 容器style
+  style?:CSSProperties
 
   // 包裹容器的自定义类名
   wrapClass?: string

@@ -70,10 +70,11 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
       prefixCls,
       {
         [`${prefixCls}--fixed`]: fixed,
+        [`${prefixCls}--mobile`]: getIsMobile,
         [`${prefixCls}--${getHeaderTheme}`]: getHeaderTheme,
       },
     ])
-  }, [prefixCls, getHeaderTheme])
+  }, [prefixCls, getIsMobile,getHeaderTheme])
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { clear } = useAliveController()
@@ -135,7 +136,7 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
           {((getShowContent && getShowHeaderTrigger && !getSplitMenu && !getIsMixSidebar) ||
             getIsMobile) && <LayoutTrigger></LayoutTrigger>}
         </div>
-        {getShowTopMenu && (
+        {(getShowTopMenu && !getIsMobile) && (
           <div className={`${prefixCls}-menu`}>
             <LayoutMenu
               isHorizontal

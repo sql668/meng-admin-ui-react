@@ -9,8 +9,6 @@ function LayoutSider() {
   const { getIsMobile } = useRootSetting()
   const { getMenuWidth, getCollapsed, toggleCollapsed } = useMenuSetting()
   const { prefixCls } = useDesign('layout-sider-wrapper')
-  console.log(getIsMobile)
-  
 
   return (
     <>

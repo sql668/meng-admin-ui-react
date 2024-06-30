@@ -44,7 +44,6 @@ interface ThemeConfigProps {
 }
 const ThemeConfig = (props: ThemeConfigProps) => {
   const { styles, cx } = useStyles()
-  //console.log(styles)
   
   const [visible, setVisible] = useState<boolean>(false)
   const { splitMenus } = useAppConfigStore(

@@ -19,6 +19,7 @@ const ScrollBarComponent = forwardRef<ScrollBarExpose, ScollBarProps>(
   (props: ScollBarProps, ref) => {
     const {
       className,
+      style,
       height,
       maxHeight,
       tag = 'div',
@@ -65,7 +66,6 @@ const ScrollBarComponent = forwardRef<ScrollBarExpose, ScollBarProps>(
     const [barContextValue, setContextValue] = useState({})
 
     useEffect(() => {
-      console.log(scrollbarRef, wrapRef)
 
       setContextValue({
         scrollbarElement: scrollbarRef,
@@ -155,7 +155,7 @@ const ScrollBarComponent = forwardRef<ScrollBarExpose, ScollBarProps>(
       handleScroll,
     }))
     return (
-      <div className={containerClass} ref={scrollbarRef}>
+      <div className={containerClass} style={style} ref={scrollbarRef}>
         <div className={wrapKls} style={wrapStyle} ref={wrapRef} onScroll={handleScroll}>
           {renderSlot()}
         </div>

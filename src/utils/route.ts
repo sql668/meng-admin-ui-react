@@ -26,7 +26,6 @@ export const getMatchRoute = (
 ) => {
   const flatRoutes = getFlatRoute(routes)
   const flatRoutesPath = Object.keys(flatRoutes)
-  console.log(flatRoutesPath)
   
   let routePathKeys = getRouteMatches(flatRoutesPath, pathname || '/', exact)
   if (!routePathKeys || routePathKeys.length < 1) {

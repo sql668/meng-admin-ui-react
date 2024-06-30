@@ -7,27 +7,15 @@ import UnoCSS from 'unocss/vite'
 import gzipPlugin from 'rollup-plugin-gzip'
 import legacy from '@vitejs/plugin-legacy'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons' // 封装svg图标
-//import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import requireTransform from 'vite-plugin-require-transform'
 import PurgeIcons from 'vite-plugin-purge-icons'
-//const { theme } = require('antd/lib')
-//const { convertLegacyToken, defaultTheme } = require('@ant-design/compatible/lib')
 import { theme } from 'antd/lib'
-//import convertLegacyToken from 'antd/lib/theme'
 import { convertLegacyToken, defaultTheme } from '@ant-design/compatible/lib'
-//import convertLegacyToken from 'antd/lib/theme'
 const { defaultAlgorithm,darkAlgorithm,compactAlgorithm, defaultSeed, } = theme
 
 const mapV5Token = defaultAlgorithm(defaultSeed)
 const v5Vars = convertLegacyToken(mapV5Token)
-//const mapV4Token = theme.getDesignToken(defaultTheme)
-//const v4Vars = convertLegacyToken(mapV4Token)
 const BASE = '/meng-react-admin-preview/'
-// const nb = {}
-// Object.keys(v5Vars).forEach(k => { 
-//   nb[`$${k}`] = v5Vars[k]
-// })
-//console.log('v5 vars:', v5Vars) 
 const json = JSON.stringify(v5Vars, null, 2)
 // 写入文件
 fs.writeFile('antdV5Vars.json', json, (err) => {
@@ -36,19 +24,8 @@ fs.writeFile('antdV5Vars.json', json, (err) => {
     return
   }
 })
-// const tokenJson = JSON.stringify(mapV5Token, null, 2)
-// fs.writeFile('antdV5Tokens.json', tokenJson, (err) => {
-//   if (err) {
-//     console.error(err)
-//     return
-//   }
-// })
 
 function generateModifyVars() {
-
-  //console.log(`true; @import (reference) "${resolve('src/style/var.scss')}";`)
-  
-
   const mapV5Token = defaultAlgorithm(defaultSeed)
   const v5Vars = convertLegacyToken(mapV5Token)
   return {
@@ -57,7 +34,6 @@ function generateModifyVars() {
     hack: `true; @import (reference) "${resolve('src/style/var.scss')}";`
   }
 }
-//console.log('v5 token:', mapV5Token)
 
 //const BASE = import.meta.env.VITE_API_URL
 // https://vitejs.dev/config/

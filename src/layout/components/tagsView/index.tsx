@@ -23,8 +23,6 @@ enum OperationType {
 const TagsView = () => {
   
   const { tabs, activeTabRoutePath, closeTab, refreshTab, closeOtherTab } = useTabs()
-  console.log('activeTabRoutePath: ', activeTabRoutePath)
-  
   const { prefixCls } = useDesign('multiple-tabs')
   const navigate = useNavigate()
   const homePath = useTagsTabStore.use.defaultTag()

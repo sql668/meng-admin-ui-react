@@ -81,7 +81,6 @@ export default function Role() {
 
   const pageChange = (page: number, pageSize: number) => {
     setQueryKey({ pageNum: page, pageSize: pageSize })
-    //console.log(page, pageSize);
   }
 
   const columns: TableColumnsType<RoleEntity> = [

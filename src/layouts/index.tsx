@@ -90,7 +90,6 @@ export default function MengLayout() {
       } else {
         if (menu && menu.children && menu.children.length > 0) {
           const kk: string = getChildMenu(menu.children[0]).key!
-          //console.log(kk)
           nav(kk)
         } else {
           nav(menu?.key!)

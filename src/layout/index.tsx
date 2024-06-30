@@ -1,5 +1,4 @@
 import AuthRouter from '@/components/authRouter'
-import { useBreakpoint } from '@/hooks/useBreakpoint'
 import BaseLayout from '@/layout/default'
 import { usePermissionStore } from '@/store/permission'
 import { MenuDataItem } from '@/types/menu'
@@ -7,13 +6,8 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { getMatchMenu, getMenuData as getMenuDataTrans, ishttp } from '@/utils/menu'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDeepMemo } from '@/hooks/useMemo'
-import { setRootSetting } from '@/store/app'
 import { MenuContext } from '@/context/menu'
-import useRootSetting from '@/hooks/setting/useRootSetting'
 import useRouter from '@/hooks/useRouter'
-
-// 禁止切换到移动端
-const disableMobile = false
 
 const getMenu = (menuData: MenuDataItem[], parentkey: string): MenuDataItem | null => {
   for (const item of menuData) {
@@ -45,18 +39,15 @@ function MengLayout() {
     setLocation({ pathname: pathname })
   }, [pathname])
   const nav = useNavigate()
-   const colSize = useBreakpoint()
   const allRouters = usePermissionStore.use.routes()
-
-  const { getIsDisableMobile } = useRootSetting()
   
-  useEffect(() => {
-    if ((colSize === 'sm' || colSize === 'xs') && !disableMobile) {
-      setRootSetting({ isMobile: true })
-    } else {
-      setRootSetting({ isMobile: false })
-    }
-  }, [getIsDisableMobile, colSize])
+  // useEffect(() => {
+  //   if ((colSize === 'sm' || colSize === 'xs') && !getIsDisableMobile) {
+  //     setRootSetting({ isMobile: true })
+  //   } else {
+  //     setRootSetting({ isMobile: false })
+  //   }
+  // }, [getIsDisableMobile, colSize])
 
   const [location, setLocation] = useState<{ pathname: string }>({ pathname: '/' })
   
@@ -96,7 +87,6 @@ function MengLayout() {
       } else {
         if (menu && menu.children && menu.children.length > 0) {
           const kk: string = getChildMenu(menu.children[0]).key!
-          //console.log(kk)
           nav(kk)
         } else {
           nav(menu?.key!)

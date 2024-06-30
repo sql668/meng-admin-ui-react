@@ -31,8 +31,6 @@ function useRouter() {
     () => getMatchRoute(pathname, allRouters, true),
     [pathname, allRouters],
   )
-  console.log(pathname)
-
   return {
     matchRoutes,
   }

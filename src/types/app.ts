@@ -69,3 +69,10 @@ export interface MultiTabsSetting {
   showFold: boolean
   autoCollapse: boolean
 }
+
+export interface BeforeMiniState {
+  menuCollapsed?: boolean
+  menuSplit?: boolean
+  menuMode?: MenuModeEnum
+  menuType?: MenuTypeEnum
+}
