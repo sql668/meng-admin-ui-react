@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - dev
+  # 这个选项可以使你手动在 Action tab 页面触发工作流
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -31,7 +33,7 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm run build
-      - name: deploy
+      - name: deploy to github
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
@@ -46,3 +48,20 @@ jobs:
       # - name: Deploy to GitHub Pages
       #   id: deployment
       #   uses: actions/deploy-pages@v1
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
+          ARGS: "-avz --delete"
+          # 源目录
+          SOURCE: "./dist/"
+          # 部署目标主机
+          REMOTE_HOST: ${{ secrets.HOST }}
+          # 部署目标主机端口
+          REMOTE_PORT: ${{ secrets.PORT }}
+          # 登录用户
+          REMOTE_USER: ${{ secrets.USER }}
+          # 部署目标目录
+          TARGET: ${{ secrets.TARGET }}
