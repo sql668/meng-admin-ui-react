@@ -1,0 +1,1 @@
+import{l as a}from"./index-CPMGXKlS.js";const s=s=>a.get({url:"/sys-api",params:s}),p=s=>a.get({url:"/sys-api/all",params:s}),t=s=>a.post({url:"/sys-api",data:s}),i=s=>a.put({url:"/sys-api/".concat(s.apiId),data:s}),r=s=>a.delete({url:"/sys-api/",data:{ids:s}});export{p as a,r as d,s as g,t as i,i as u};

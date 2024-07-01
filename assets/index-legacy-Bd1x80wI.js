@@ -1,0 +1,1 @@
+System.register(["./index-legacy-Bmz_V8MG.js","./react-legacy-D9fuXtLc.js","./formily-legacy-BTyR3EEZ.js","./antd-legacy-CbKX0P7M.js"],(function(e,t){"use strict";var l;return{setters:[e=>{l=e.j},null,null,null],execute:function(){e("default",(()=>l.jsx("div",{children:"功能页面 editor编辑器"})))}}}));

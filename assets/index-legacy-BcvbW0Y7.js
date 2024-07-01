@@ -1,0 +1,1 @@
+System.register(["./index-legacy-Bmz_V8MG.js","./react-legacy-D9fuXtLc.js","./formily-legacy-BTyR3EEZ.js","./antd-legacy-CbKX0P7M.js"],(function(e,l){"use strict";var t;return{setters:[e=>{t=e.j},null,null,null],execute:function(){e("default",(()=>t.jsx("div",{children:"menu121"})))}}}));
