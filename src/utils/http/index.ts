@@ -37,26 +37,31 @@ const _RequstInterceptors: RequstInterceptors = {
     // if (headers['new-expires-at']) {
     //   Session.set(TOKEN_EXPIRES_TIME, headers['new-expires-at'])
     // }
-    if (data.code === 4) {
-      if (!isRelogin.show) {
-        isRelogin.show = true
-        confirm({
-          title: '系统提示?',
-          content: '登录状态已过期，您可以继续留在该页面，或者重新登录',
-          onOk() {
-            isRelogin.show = false
-            location.href = '/login'
-          },
-          onCancel() {
-            isRelogin.show = false
-          },
-          okText: '重新登录',
-          cancelText: '取消',
-        })
+    if (data.code !== 0) {
+      if (data.code === 4) {
+        if (!isRelogin.show) {
+          isRelogin.show = true
+          confirm({
+            title: '系统提示?',
+            content: '登录状态已过期，您可以继续留在该页面，或者重新登录',
+            onOk() {
+              isRelogin.show = false
+              location.href = '/login'
+            },
+            onCancel() {
+              isRelogin.show = false
+            },
+            okText: '重新登录',
+            cancelText: '取消',
+          })
+        }
+      } else if (data.code === 3) {
+        antdUtils.message?.warning(data.msg)
+      } else {
+        antdUtils.message?.error(data.msg)
       }
-    } else if (data.code === 3) {
-      antdUtils.message?.warning(data.msg)
     }
+    
     return config
   },
   responseInterceptorsCatch(axiosInstance, err: AxiosError) {

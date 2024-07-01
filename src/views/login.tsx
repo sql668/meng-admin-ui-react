@@ -1,5 +1,6 @@
 import { CaptchaApi, LoginApi } from '@/api/login'
 import { TOKEN, TOKEN_EXPIRES_TIME } from '@/config/config'
+import useRootSetting from '@/hooks/setting/useRootSetting'
 import { restRoutes, router } from '@/router/baseRouter'
 import { setPermissionRouters } from '@/store/permission'
 import { resetTagsTab } from '@/store/tagsView'
@@ -34,6 +35,7 @@ export default function Login() {
   const [captch, setCaptcha] = useState<CaptchaResp>()
   const nav = useNavigate()
   const [form] = Form.useForm()
+  const { getAppName} = useRootSetting()
   const onFinsh = useCallback(async (values: any) => {
     setBtnLoad(true)
     try {
@@ -84,13 +86,13 @@ export default function Login() {
   return (
     <div className={cx('bg-white wh-full', 'login-container', styles.container)}>
       <div className=''>
-        <div className='font-size-28 font-800 text-center'>Meng React Admin</div>
+        <div className='font-size-28 font-800 text-center'>{getAppName}</div>
         <div className='mt-20 text-center'>欢迎使用，请先登录</div>
         <Form className='w-300 my-50' onFinish={onFinsh} form={form}>
           <Form.Item<FieldType>
             name='userName'
             rules={[{ required: true, message: '请输入用户名' }]}>
-            <Input prefix={<UserOutlined />} placeholder='账号:admin/user1' autoComplete="off" />
+            <Input prefix={<UserOutlined />} placeholder='账号:admin/user' autoComplete='off' />
           </Form.Item>
           <Form.Item<FieldType> name='password' rules={[{ required: true, message: '请输入密码' }]}>
             <Input

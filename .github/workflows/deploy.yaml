@@ -1,0 +1,47 @@
+name: build and deploy mx admin
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  npm-build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pwd
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm   # 
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9 
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm run build
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        with:
+          branch: gh-pages
+          folder: dist
+      # - name: Setup Pages
+      #   uses: actions/configure-pages@v3
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v1
+      #   with:
+      #     # Upload dist repository
+      #     path: './dist'
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v1
