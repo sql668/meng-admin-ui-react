@@ -1,11 +1,10 @@
-import useRootSetting from "@/hooks/setting/useRootSetting"
-import { Drawer } from "antd"
-import Sider from "./sider"
-import { useMenuSetting } from "@/hooks/setting/useMenuSetting"
-import { useDesign } from "@/hooks/useDesign"
+import useRootSetting from '@/hooks/setting/useRootSetting'
+import { Drawer } from 'antd'
+import Sider from './sider'
+import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
+import { useDesign } from '@/hooks/useDesign'
 
 function LayoutSider() {
-  
   const { getIsMobile } = useRootSetting()
   const { getMenuWidth, getCollapsed, toggleCollapsed } = useMenuSetting()
   const { prefixCls } = useDesign('layout-sider-wrapper')
@@ -19,7 +18,7 @@ function LayoutSider() {
           width={getMenuWidth}
           getContainer={false}
           open={!getCollapsed}
-        onClose={toggleCollapsed}>
+          onClose={toggleCollapsed}>
           <Sider></Sider>
         </Drawer>
       )}
@@ -27,7 +26,6 @@ function LayoutSider() {
       {!getIsMobile && <Sider></Sider>}
     </>
   )
-
 }
 
 export default LayoutSider

@@ -1,22 +1,22 @@
-import { useHeaderSetting } from "@/hooks/setting/useHeaderSetting";
-import { useMenuSetting } from "@/hooks/setting/useMenuSetting";
-import useRootSetting from "@/hooks/setting/useRootSetting";
-import { useDesign } from "@/hooks/useDesign";
-import { useDeepMemo } from "@/hooks/useMemo";
-import TagsView from "@/layout/components/tagsView";
-import classNames from "classnames";
-import { CSSProperties, useMemo } from "react";
-import "./style/multiHeader.style.scss"
-import useFullContent from "@/hooks/useFullContent";
-import useMultipleTabSetting from "@/hooks/setting/useMultipleTabSetting";
-import useContentViewHeight from "@/layout/components/content/useContentViewHeight";
-import { LayoutHeader } from "./header";
+import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
+import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
+import useRootSetting from '@/hooks/setting/useRootSetting'
+import { useDesign } from '@/hooks/useDesign'
+import { useDeepMemo } from '@/hooks/useMemo'
+import TagsView from '@/layout/components/tagsView'
+import classNames from 'classnames'
+import { CSSProperties, useMemo } from 'react'
+import './style/multiHeader.style.scss'
+import useFullContent from '@/hooks/useFullContent'
+import useMultipleTabSetting from '@/hooks/setting/useMultipleTabSetting'
+import useContentViewHeight from '@/layout/components/content/useContentViewHeight'
+import { LayoutHeader } from './header'
 
 const HEADER_HEIGHT = 48
 
 const TABS_HEIGHT = 32
 
-function MultipleHeader() { 
+function MultipleHeader() {
   const { prefixCls } = useDesign('layout-multiple-header')
   const {
     getHeaderFixed,
@@ -25,27 +25,26 @@ function MultipleHeader() {
     getShowHeader,
     getShowInsetHeaderRef,
   } = useHeaderSetting()
-  const { getCalcContentWidth,getShowMenu,getSplitMenu } = useMenuSetting()
+  const { getCalcContentWidth, getShowMenu, getSplitMenu } = useMenuSetting()
   const { getIsMobile } = useRootSetting()
   const { getFullContent } = useFullContent()
   const { getShowMultipleTab } = useMultipleTabSetting()
-  const { setHeaderHeight} = useContentViewHeight()
+  const { setHeaderHeight } = useContentViewHeight()
 
   const getIsFixed = useMemo(() => {
     return getHeaderFixed || getShowFullHeaderRef
   }, [getHeaderFixed, getShowFullHeaderRef])
-  
 
-   const getClass = useDeepMemo(() => {
-     return classNames([
-       prefixCls,
-       `${prefixCls}--${getHeaderTheme}`,
-       {
-         [`${prefixCls}--fixed`]: getIsFixed,
-       },
-     ])
-   }, [prefixCls])
-  
+  const getClass = useDeepMemo(() => {
+    return classNames([
+      prefixCls,
+      `${prefixCls}--${getHeaderTheme}`,
+      {
+        [`${prefixCls}--fixed`]: getIsFixed,
+      },
+    ])
+  }, [prefixCls])
+
   const getWrapStyle = useDeepMemo(() => {
     const style: CSSProperties = {}
     if (getHeaderFixed) {

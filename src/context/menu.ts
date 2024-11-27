@@ -46,6 +46,6 @@ export type MenuContextType = {
 /** 和菜单相关 */
 export const MenuContext: React.Context<MenuContextType> = createContext({})
 
-export const useMenuContext = () => { 
+export const useMenuContext = () => {
   return useContext(MenuContext)
 }

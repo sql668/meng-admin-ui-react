@@ -1,12 +1,12 @@
-import { useAppConfigStore } from "@/store/app";
-import { useMemo } from "react";
-import { useShallow } from "zustand/react/shallow";
-import { useMenuSetting } from "./useMenuSetting";
-import { MenuModeEnum } from "@/core/enums/menuEnum";
-import useRootSetting from "./useRootSetting";
-import useFullContent from "../useFullContent";
+import { useAppConfigStore } from '@/store/app'
+import { useMemo } from 'react'
+import { useShallow } from 'zustand/react/shallow'
+import { useMenuSetting } from './useMenuSetting'
+import { MenuModeEnum } from '@/core/enums/menuEnum'
+import useRootSetting from './useRootSetting'
+import useFullContent from '../useFullContent'
 
-export function useHeaderSetting() { 
+export function useHeaderSetting() {
   const { getHeaderFixed, getShowHeader, getHeaderTheme, getHeaderBgColor } = useAppConfigStore(
     useShallow((state) => ({
       getHeaderFixed: state.headerSetting.fixed,
@@ -16,37 +16,41 @@ export function useHeaderSetting() {
     })),
   )
 
-  const { getFullContent} = useFullContent()
+  const { getFullContent } = useFullContent()
 
-  const { getIsSidebarType, getIsTopMenu, getIsMixSidebar, getMenuMode, getSplitMenu,getShowHeaderTrigger } = useMenuSetting()
-  const {getIsShowBreadCrumb,getShowLogo } = useRootSetting()
-  
-  const getShowMixHeaderRef = useMemo(() => { 
+  const {
+    getIsSidebarType,
+    getIsTopMenu,
+    getIsMixSidebar,
+    getMenuMode,
+    getSplitMenu,
+    getShowHeaderTrigger,
+  } = useMenuSetting()
+  const { getIsShowBreadCrumb, getShowLogo } = useRootSetting()
+
+  const getShowMixHeaderRef = useMemo(() => {
     return !getIsSidebarType && getShowHeader
-  },[])
+  }, [])
 
   const getShowFullHeaderRef = useMemo(() => {
     return getShowMixHeaderRef && getShowHeader && !getIsTopMenu && !getIsMixSidebar
   }, [getShowMixHeaderRef, getShowHeader, getIsTopMenu, getIsMixSidebar])
 
-  
-   const getShowBread = useMemo(() => {
-     return getMenuMode !== MenuModeEnum.HORIZONTAL && getIsShowBreadCrumb && !getSplitMenu
-   }, [getMenuMode, getIsShowBreadCrumb, getSplitMenu])
+  const getShowBread = useMemo(() => {
+    return getMenuMode !== MenuModeEnum.HORIZONTAL && getIsShowBreadCrumb && !getSplitMenu
+  }, [getMenuMode, getIsShowBreadCrumb, getSplitMenu])
 
+  const getShowContent = useMemo(() => {
+    return getShowBread || getShowHeaderTrigger
+  }, [getShowBread, getShowHeaderTrigger])
 
-   const getShowContent = useMemo(() => {
-     return getShowBread || getShowHeaderTrigger
-   }, [getShowBread, getShowHeaderTrigger])
-  
-  
   const getShowInsetHeaderRef = useMemo(() => {
     const need = !getFullContent && getShowHeader
     return (need && !getShowMixHeaderRef) || (need && getIsTopMenu) || (need && getIsMixSidebar)
   }, [getFullContent, getShowHeader, getShowMixHeaderRef, getIsTopMenu, getIsMixSidebar])
 
   const getShowHeaderLogo = getShowLogo && !getIsSidebarType && !getIsMixSidebar
-  
+
   return {
     getHeaderFixed,
     getShowFullHeaderRef,

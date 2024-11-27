@@ -1,6 +1,17 @@
 import { ThemeEnum } from '@/core/enums/appEnum'
-import { HeaderSettingDefault, MenuSettingDefault, MultiTabsSettingDefault, RootSettingDEfault } from '@/core/settings/appSetting'
-import { BeforeMiniState, HeaderSetting, MenuSetting, MultiTabsSetting, RootSetting } from '@/types/app'
+import {
+  HeaderSettingDefault,
+  MenuSettingDefault,
+  MultiTabsSettingDefault,
+  RootSettingDEfault,
+} from '@/core/settings/appSetting'
+import {
+  BeforeMiniState,
+  HeaderSetting,
+  MenuSetting,
+  MultiTabsSetting,
+  RootSetting,
+} from '@/types/app'
 import { createSelectors } from '@/utils/createSelector'
 import { DeepPartial } from '@/utils/type'
 import { deepMerge } from '@/utils/util'
@@ -34,7 +45,7 @@ const createAppSlice: StateCreator<
   headerSetting: HeaderSettingDefault,
   multiTabsSetting: MultiTabsSettingDefault,
   rootSetting: RootSettingDEfault,
-  beforeMiniInfo: {}
+  beforeMiniInfo: {},
 })
 
 export const useAppConfigStore = createSelectors(
@@ -72,9 +83,9 @@ export const setMultipleTabsSetting = (config: DeepPartial<MultiTabsSetting>) =>
   })
 }
 
-export const setRootSetting = (config:DeepPartial<RootSetting>) => { 
-  useAppConfigStore.setState(state => { 
-    state.rootSetting = deepMerge(state.rootSetting,config)
+export const setRootSetting = (config: DeepPartial<RootSetting>) => {
+  useAppConfigStore.setState((state) => {
+    state.rootSetting = deepMerge(state.rootSetting, config)
   })
 }
 
@@ -91,7 +102,7 @@ export const setBeforeMiniInfo = (config: BeforeMiniState) => {
 //   })
 // }
 
-// export const setMobile = (isMobile:boolean) => { 
+// export const setMobile = (isMobile:boolean) => {
 // useAppConfigStore.setState((state) => {
 //   state.isMobile = isMobile
 // })

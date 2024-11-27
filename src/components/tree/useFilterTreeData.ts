@@ -1,10 +1,10 @@
-import type {TreeProps as ATreeProps} from 'antd';
-import { useMemo } from 'react';
-import type { TreeDataProp } from './type';
-import { fillLegacyProps } from './util';
+import type { TreeProps as ATreeProps } from 'antd'
+import { useMemo } from 'react'
+import type { TreeDataProp } from './type'
+import { fillLegacyProps } from './util'
 
-type GetFuncType<T> = T extends boolean ? never : T;
-type FilterFn = GetFuncType<ATreeProps['filterTreeNode']>;
+type GetFuncType<T> = T extends boolean ? never : T
+type FilterFn = GetFuncType<ATreeProps['filterTreeNode']>
 
 export function useFilterTreeData(
   treeData: TreeDataProp,
@@ -14,35 +14,34 @@ export function useFilterTreeData(
     filterTreeNode,
     fieldNames,
   }: {
-    fieldNames: ATreeProps["fieldNames"];
-    treeNodeFilterProp: string;
-    filterTreeNode: boolean | ATreeProps["filterTreeNode"];
+    fieldNames: ATreeProps['fieldNames']
+    treeNodeFilterProp: string
+    filterTreeNode: boolean | ATreeProps['filterTreeNode']
   },
 ) {
-
-  const { children: fieldChildren } = fieldNames || {children:"children"};
+  const { children: fieldChildren } = fieldNames || { children: 'children' }
   return useMemo(() => {
     if (!searchValue || filterTreeNode === false) {
-      return treeData;
+      return treeData
     }
 
-    let filterOptionFunc: FilterFn;
+    let filterOptionFunc: FilterFn
     if (typeof filterTreeNode === 'function') {
-      filterOptionFunc = filterTreeNode;
+      filterOptionFunc = filterTreeNode
     } else {
-      const upperStr = searchValue.toUpperCase();
-      filterOptionFunc = (dataNode:any) => {
-        const value = dataNode[treeNodeFilterProp];
-        return String(value).toUpperCase().includes(upperStr);
-      };
+      const upperStr = searchValue.toUpperCase()
+      filterOptionFunc = (dataNode: any) => {
+        const value = dataNode[treeNodeFilterProp]
+        return String(value).toUpperCase().includes(upperStr)
+      }
     }
 
-    function dig(list:TreeDataProp = [],keepAll: boolean = false) {
+    function dig(list: TreeDataProp = [], keepAll: boolean = false) {
       return list.reduce<TreeDataProp>((total, dataNode: any) => {
-        const children = dataNode[fieldChildren!];
+        const children = dataNode[fieldChildren!]
 
-        const match = keepAll || filterOptionFunc?.(fillLegacyProps(dataNode));
-        const childList = dig(children || [], match);
+        const match = keepAll || filterOptionFunc?.(fillLegacyProps(dataNode))
+        const childList = dig(children || [], match)
 
         if (match || childList?.length) {
           total?.push({
@@ -50,12 +49,12 @@ export function useFilterTreeData(
             expanded: true,
             isLeaf: undefined,
             [fieldChildren!]: childList,
-          });
+          })
         }
-        return total;
-      }, []);
+        return total
+      }, [])
     }
     const td = dig(treeData)
     return td
-  },[treeData,searchValue,fieldChildren,filterTreeNode,treeNodeFilterProp])
+  }, [treeData, searchValue, fieldChildren, filterTreeNode, treeNodeFilterProp])
 }

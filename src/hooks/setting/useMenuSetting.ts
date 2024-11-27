@@ -5,7 +5,7 @@ import {
   SIDE_BAR_SHOW_TIT_MINI_WIDTH,
   TriggerEnum,
 } from '@/core/enums/menuEnum'
-import {  setMenuSetting, useAppConfigStore } from '@/store/app'
+import { setMenuSetting, useAppConfigStore } from '@/store/app'
 import { useMemo, useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { useDeepMemo } from '../useMemo'
@@ -50,17 +50,16 @@ export function useMenuSetting() {
       getMenuTheme: state.menuSetting.theme,
       getMenuBgColor: state.menuSetting.bgColor,
     })),
-    )
-  
-  const { getFullContent} = useFullContent()
+  )
+
+  const { getFullContent } = useFullContent()
 
   const [mixSideHasChildren, setMixSideHasChildren] = useState(false)
-
 
   const getIsHorizontal = useMemo(() => {
     return menuMode === MenuModeEnum.HORIZONTAL
   }, [menuMode])
-  
+
   const getShowSidebar = useMemo(() => {
     return splitMenu || (getShowMenu && menuMode !== MenuModeEnum.HORIZONTAL && !getFullContent)
   }, [splitMenu, getShowMenu, menuMode, getFullContent])
@@ -91,12 +90,10 @@ export function useMenuSetting() {
   )
 
   const getMiniWidthNumber = useDeepMemo(() => {
-    
     return siderHidden ? 0 : collapsedShowTitle ? SIDE_BAR_SHOW_TIT_MINI_WIDTH : SIDE_BAR_MINI_WIDTH
   }, [siderHidden, collapsedShowTitle])
 
   const getRealWidth = useDeepMemo(() => {
-    
     if (getIsMixSidebar) {
       return getCollapsed && !mixSideFixed ? getMiniWidthNumber : getMenuWidth
     }
@@ -124,23 +121,19 @@ export function useMenuSetting() {
     getRealWidth,
   ])
 
-  const toggleCollapsed = useMemoizedFn(() => { 
+  const toggleCollapsed = useMemoizedFn(() => {
     setMenuSetting({
       collapsed: !getCollapsed,
     })
   })
 
   const getShowHeaderTrigger = useMemo(() => {
-    if (
-      menuType === MenuTypeEnum.TOP_MENU ||
-      !showSideBar ||
-      hiddenSideBar
-    ) {
+    if (menuType === MenuTypeEnum.TOP_MENU || !showSideBar || hiddenSideBar) {
       return false
     }
 
     return getTrigger === TriggerEnum.HEADER
-  },[menuType,showSideBar,hiddenSideBar,getTrigger])
+  }, [menuType, showSideBar, hiddenSideBar, getTrigger])
 
   return {
     getCollapsed,

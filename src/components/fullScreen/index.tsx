@@ -36,7 +36,7 @@ import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons'
 //   }
 // })
 
-const FullScreen = ({ className }: {className?:string}) => {
+const FullScreen = ({ className }: { className?: string }) => {
   //const { styles, cx } = useStyles()
   const [fullScreen, setFullScreen] = useState<boolean>(screenfull.isFullscreen)
 

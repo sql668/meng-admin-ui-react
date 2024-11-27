@@ -68,7 +68,7 @@ export default class MenuUtil {
       //   iconPrefixes,
       //   `${baseClassName}-icon ${this.props?.hashId}`,
       // )
-      const iconDom = <Icon icon={ item.icon as string}></Icon>
+      const iconDom = <Icon icon={item.icon as string}></Icon>
 
       /**
        * 如果没有icon在收起的时候用首字母代替
@@ -116,7 +116,7 @@ export default class MenuUtil {
 
       return [
         {
-          theme:"light",
+          theme: 'light',
           type: menuType,
           key: item.key! || item.path!,
           label: title,
@@ -152,7 +152,7 @@ export default class MenuUtil {
       key: item.key! || item.path!,
       onClick: item.onTitleClick,
       label: this.getMenuItemPath(item, level, noGroupLevel),
-      theme:"light"
+      theme: 'light',
     }
   }
 
@@ -169,7 +169,6 @@ export default class MenuUtil {
    * @memberof SiderMenu
    */
   getMenuItemPath = (item: MenuDataItem, level: number, noGroupLevel: number) => {
-
     const itemPath = this.conversionPath(item.path || '/')
     //const { iconPrefixes } = this.props
 
@@ -186,9 +185,7 @@ export default class MenuUtil {
     //   ? null
     //   : getIcon(item.icon, iconPrefixes, `${baseClassName}-icon ${this.props?.hashId}`)
 
-    const icon = !hasIcon
-      ? null
-      : <Icon icon={ item.icon as string}></Icon>
+    const icon = !hasIcon ? null : <Icon icon={item.icon as string}></Icon>
 
     // 如果没有 icon 在收起的时候用首字母代替
     const defaultIcon = collapsed && hasIcon ? getMenuTitleSymbol(menuItemTitle) : null

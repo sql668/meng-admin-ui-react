@@ -1,11 +1,10 @@
-import { useMemoizedFn } from "ahooks"
-import { useRef } from "react"
+import { useMemoizedFn } from 'ahooks'
+import { useRef } from 'react'
 
-
-export default function useContentViewHeight() { 
-const headerHeightRef = useRef(0)
+export default function useContentViewHeight() {
+  const headerHeightRef = useRef(0)
   const footerHeightRef = useRef(0)
-  const setHeaderHeight = useMemoizedFn((val:number) => { 
+  const setHeaderHeight = useMemoizedFn((val: number) => {
     headerHeightRef.current = val
   })
   const setFooterHeight = useMemoizedFn((val: number) => {
@@ -19,4 +18,3 @@ const headerHeightRef = useRef(0)
     setFooterHeight,
   }
 }
-

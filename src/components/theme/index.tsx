@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
 const useStyles = createStyles(({ token, css }) => {
-
   return {
     iconContainer: css`
       height: 100%;
@@ -40,11 +39,11 @@ const useStyles = createStyles(({ token, css }) => {
 })
 
 interface ThemeConfigProps {
-  className?:string
+  className?: string
 }
 const ThemeConfig = (props: ThemeConfigProps) => {
   const { styles, cx } = useStyles()
-  
+
   const [visible, setVisible] = useState<boolean>(false)
   const { splitMenus } = useAppConfigStore(
     useShallow((state) => ({

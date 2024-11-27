@@ -10,8 +10,7 @@ export const ActionsWidget = observer(() => {
   useEffect(() => {
     setTimeout(() => {
       loadInitialSchema(designer)
-    }, 3000);
-    
+    }, 3000)
   }, [])
   const supportLocales = ['zh-cn', 'en-us', 'ko-kr']
   useEffect(() => {
@@ -26,7 +25,7 @@ export const ActionsWidget = observer(() => {
       </Button> */}
       <Radio.Group
         value={GlobalRegistry.getDesignerLanguage()}
-        optionType="button"
+        optionType='button'
         options={[
           { label: 'English', value: 'en-us' },
           { label: '简体中文', value: 'zh-cn' },
@@ -43,8 +42,7 @@ export const ActionsWidget = observer(() => {
       <Button
         onClick={() => {
           saveSchema(designer)
-        }}
-      >
+        }}>
         <TextWidget>Save</TextWidget>
       </Button>
       {/* <Button

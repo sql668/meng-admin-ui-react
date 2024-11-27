@@ -1,14 +1,18 @@
-import { MenuThemeEnum } from "@/core/enums/menuEnum"
-import SiderTrigger from "./sideTrigger"
-import HeaderTrigger from "./headerTrigger"
+import { MenuThemeEnum } from '@/core/enums/menuEnum'
+import SiderTrigger from './sideTrigger'
+import HeaderTrigger from './headerTrigger'
 
-interface LayoutTriggerProps{
+interface LayoutTriggerProps {
   sider?: boolean
   theme?: MenuThemeEnum
 }
 function LayoutTrigger(props: LayoutTriggerProps) {
-  const { sider} = props
-  return <>{sider && <SiderTrigger></SiderTrigger>} { !sider && <HeaderTrigger></HeaderTrigger>}</>
+  const { sider } = props
+  return (
+    <>
+      {sider && <SiderTrigger></SiderTrigger>} {!sider && <HeaderTrigger></HeaderTrigger>}
+    </>
+  )
 }
 
 export default LayoutTrigger

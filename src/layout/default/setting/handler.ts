@@ -27,7 +27,7 @@ export default function useSettingHandle() {
         })
         break
       case HandlerEnum.MENU_SPLIT:
-        setMenuSetting({ splitMenu: value }) 
+        setMenuSetting({ splitMenu: value })
         break
     }
   }
@@ -35,12 +35,10 @@ export default function useSettingHandle() {
   return baseHandler
 }
 
-
 export function handler(event: HandlerEnum, value: any) {
   const menuSetting = useAppConfigStore.use.menuSetting()
   switch (event) {
     case HandlerEnum.CHANGE_LAYOUT:
-
       const { mode, type, split } = value
       const isMixSidebar = type === MenuTypeEnum.MIX
       const mixSideSplitOpt =

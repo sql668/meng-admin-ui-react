@@ -1,1 +1,1 @@
-export { default as SettingDrawer } from "./settingDrawer"
+export { default as SettingDrawer } from './settingDrawer'

@@ -1,5 +1,4 @@
-
-import { AnyObject } from "./type"
+import { AnyObject } from './type'
 
 /**
  * 从Array数据构造Tree结构的数据
@@ -59,8 +58,12 @@ export const buildTreeFromArray = <T extends Record<string, any>>(
  * @param childrenField
  * @returns
  */
-export function getAllExpandKeys<T extends AnyObject>(tree:Array<T>,keyField = 'id',childrenField = 'children') {
-  let keys:Array<React.Key> = []
+export function getAllExpandKeys<T extends AnyObject>(
+  tree: Array<T>,
+  keyField = 'id',
+  childrenField = 'children',
+) {
+  let keys: Array<React.Key> = []
   for (const item of tree) {
     if (item[childrenField] && item[childrenField].length > 0) {
       keys.push(item[keyField])
@@ -77,7 +80,7 @@ export function getAllExpandKeys<T extends AnyObject>(tree:Array<T>,keyField = '
 export function treeFlatten<T extends AnyObject>(data: Array<T>, childrenField = 'children') {
   const dataList = []
   for (let i = 0; i < data.length; i++) {
-    let node = data[i]
+    const node = data[i]
     //const { children, ...rest } = node
     dataList.push(node)
     if (node[childrenField]) {
@@ -101,12 +104,12 @@ export function getParentNode<T extends AnyObject>(
   tree: T[] = [],
   keyField = 'id',
   childrenField = 'children',
-): T|null {
-  let parentNode:T | null = null
+): T | null {
+  let parentNode: T | null = null
   for (let i = 0; i < tree.length; i++) {
     const node = tree[i]
     if (node[childrenField]) {
-      if (node[childrenField].some((item:T) => item[keyField] === key)) {
+      if (node[childrenField].some((item: T) => item[keyField] === key)) {
         parentNode = node
       } else {
         parentNode = getParentNode(key, node[childrenField], keyField, childrenField)

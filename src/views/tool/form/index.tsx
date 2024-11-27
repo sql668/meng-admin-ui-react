@@ -1,19 +1,18 @@
-import { useState } from "react";
-import { QueryForm } from "./component/form";
-import { FormInfoModel, QueryFormModel } from "./type";
-import { Col, Pagination, Row, Space, Table, TableColumnsType, Tag } from "antd";
-import { AuthButton } from "@/components/auth";
-import { EditOutlined, PlusOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router";
-import dayjs from "dayjs";
-import { useQuery } from "@tanstack/react-query";
-import { getFormGeneratePageApi } from "@/api/tools/form-generate";
+import { useState } from 'react'
+import { QueryForm } from './component/form'
+import { FormInfoModel, QueryFormModel } from './type'
+import { Col, Pagination, Row, Space, Table, TableColumnsType, Tag } from 'antd'
+import { AuthButton } from '@/components/auth'
+import { EditOutlined, PlusOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router'
+import dayjs from 'dayjs'
+import { useQuery } from '@tanstack/react-query'
+import { getFormGeneratePageApi } from '@/api/tools/form-generate'
 
-export default function FormCreated() { 
-
+export default function FormCreated() {
   const nav = useNavigate()
   const [queryKey, setQueryKey] = useState<QueryFormModel>()
-  
+
   const queryOk = (values: QueryFormModel) => {
     setQueryKey(values)
   }
@@ -21,7 +20,7 @@ export default function FormCreated() {
   const resetQuery = () => {}
 
   const addBtnHandle = () => {
-    nav("/tool/form/add")
+    nav('/tool/form/add')
   }
 
   const editBtnHandle = (id: number) => {
@@ -41,7 +40,7 @@ export default function FormCreated() {
       }),
   })
   const pageChange = (page: number, pageSize: number) => {
-    setQueryKey({ ...queryKey,pageNum: page, pageSize: pageSize })
+    setQueryKey({ ...queryKey, pageNum: page, pageSize: pageSize })
   }
 
   const columns: TableColumnsType<FormInfoModel> = [
@@ -115,8 +114,8 @@ export default function FormCreated() {
         rowKey='formId'
       />
       <div className='pagination-container'>
-            <Pagination current={data?.pageNum} onChange={pageChange} total={data?.total} />
-          </div>
+        <Pagination current={data?.pageNum} onChange={pageChange} total={data?.total} />
+      </div>
     </div>
   )
 }

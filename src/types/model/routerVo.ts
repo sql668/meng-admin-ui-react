@@ -7,7 +7,7 @@ export interface RouterHandleVo {
   isHide?: boolean
   viewType?: string
   hasLayout?: boolean
-  parentPaths?:Array<string>
+  parentPaths?: Array<string>
 }
 export interface RouterVo {
   path: string

@@ -1,7 +1,7 @@
-import { HeaderSetting, MenuSetting, MultiTabsSetting, RootSetting } from "@/types/app";
-import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from "../enums/menuEnum";
-import { HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from "./designSetting";
-import { ThemeEnum } from "../enums/appEnum";
+import { HeaderSetting, MenuSetting, MultiTabsSetting, RootSetting } from '@/types/app'
+import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from '../enums/menuEnum'
+import { HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from './designSetting'
+import { ThemeEnum } from '../enums/appEnum'
 
 // 菜单配置相关 默认值
 export const MenuSettingDefault: MenuSetting = {
@@ -31,17 +31,17 @@ export const HeaderSettingDefault: HeaderSetting = {
   show: true,
   fixed: true,
   bgColor: HEADER_PRESET_BG_COLOR_LIST[0],
-  theme: ThemeEnum.LIGHT
+  theme: ThemeEnum.LIGHT,
 }
 export const RootSettingDEfault: RootSetting = {
-  theme:ThemeEnum.LIGHT,
+  theme: ThemeEnum.LIGHT,
   isMobile: false,
-  disableMobile:false,
+  disableMobile: false,
   showBreadCrumb: false,
   showBreadCrumbIcon: false,
   showLogo: true,
-  appName: "Mx Admin",
-  fullContent:false,
+  appName: 'Mx Admin',
+  fullContent: false,
 }
 
 export const MultiTabsSettingDefault: MultiTabsSetting = {

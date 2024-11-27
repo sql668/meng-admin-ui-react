@@ -2,10 +2,10 @@
 import { Select } from 'antd'
 import defaultIcon from '../data'
 import { createStyles } from 'antd-style'
-import svgIcons from 'virtual:svg-icons-names';
+import svgIcons from 'virtual:svg-icons-names'
 import { Icon } from '../icon'
-import { useEffect, useState } from 'react';
-import type { SelectProps} from 'antd/es/select';
+import { useEffect, useState } from 'react'
+import type { SelectProps } from 'antd/es/select'
 
 function getIconifyIcons() {
   return defaultIcon.map((item) => {
@@ -17,7 +17,10 @@ function getIconifyIcons() {
         return {
           label: (
             <div className='iconify-select-item'>
-              <Icon icon={`${prefix}:${icon}`} size={ 16} className='iconify-select-item-icon'></Icon>
+              <Icon
+                icon={`${prefix}:${icon}`}
+                size={16}
+                className='iconify-select-item-icon'></Icon>
               <span className='iconify-select-item-label'>{`${prefix}:${icon}`}</span>
             </div>
           ),
@@ -30,18 +33,21 @@ function getIconifyIcons() {
 
 function getSvgIcons() {
   //return svgIcons.map((icon: string) => icon.replace('icon-', ''));
-  return svgIcons.map((icon:string) => {
+  return svgIcons.map((icon: string) => {
     return {
       label: (
         <div className='iconify-select-item'>
-          <Icon icon={`${icon.replace('icon-', '')}|svg`} size={ 16} className='iconify-select-item-icon'></Icon>
-              <span className='iconify-select-item-label'>{icon.replace('icon-', '')}</span>
+          <Icon
+            icon={`${icon.replace('icon-', '')}|svg`}
+            size={16}
+            className='iconify-select-item-icon'></Icon>
+          <span className='iconify-select-item-label'>{icon.replace('icon-', '')}</span>
         </div>
       ),
       value: `${icon.replace('icon-', '')}|svg`,
     }
   })
-  }
+}
 
 const iconData = getIconifyIcons()
 const svgData = getSvgIcons()
@@ -54,21 +60,21 @@ const useStyles = createStyles(({ css }) => {
   }
 })
 
-export interface IconSelectProps extends SelectProps{
+export interface IconSelectProps extends SelectProps {
   iconMode?: 'iconify' | 'svg'
   [key: string]: any
 }
 
 export function IconSelect(props: IconSelectProps) {
   const { styles, cx } = useStyles()
-  const [options,SetOptions] = useState(iconData)
+  const [options, SetOptions] = useState(iconData)
   const { iconMode = 'iconify', ...restProps } = props
   useEffect(() => {
-    if(iconMode === 'svg'){
+    if (iconMode === 'svg') {
       SetOptions(svgData as any)
-    }else{
+    } else {
       SetOptions(iconData)
     }
-  },[iconMode])
+  }, [iconMode])
   return <Select options={options as any} className={cx(styles.container)} {...restProps}></Select>
 }

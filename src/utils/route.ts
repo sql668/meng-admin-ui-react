@@ -26,7 +26,7 @@ export const getMatchRoute = (
 ) => {
   const flatRoutes = getFlatRoute(routes)
   const flatRoutesPath = Object.keys(flatRoutes)
-  
+
   let routePathKeys = getRouteMatches(flatRoutesPath, pathname || '/', exact)
   if (!routePathKeys || routePathKeys.length < 1) {
     return []
@@ -39,9 +39,9 @@ export const getMatchRoute = (
     .map((routePath) => {
       const routeItem = flatRoutes[routePath] || {
         key: '',
-        path:"",
+        path: '',
         handle: {
-          title: "",
+          title: '',
           parentPaths: [],
         },
       }

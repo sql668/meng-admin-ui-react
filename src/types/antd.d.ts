@@ -1,4 +1,4 @@
-import { MenuProps } from 'antd';
+import { MenuProps } from 'antd'
 export type MenuItemType = Required<MenuProps>['items'][number] & {
-    children?: MenuItemType[];
-};
+  children?: MenuItemType[]
+}

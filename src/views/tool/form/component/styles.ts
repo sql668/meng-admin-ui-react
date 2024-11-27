@@ -1,5 +1,5 @@
-import { CSSInterpolation, Keyframes } from '@ant-design/cssinjs';
-import { GlobalToken } from 'antd';
+import { CSSInterpolation, Keyframes } from '@ant-design/cssinjs'
+import { GlobalToken } from 'antd'
 
 const fadeIn = new Keyframes('fadeIn', {
   '0%': {
@@ -8,7 +8,7 @@ const fadeIn = new Keyframes('fadeIn', {
   '100%': {
     opacity: 1,
   },
-});
+})
 
 const slideInRight = new Keyframes('slideInRight', {
   '0%': {
@@ -17,7 +17,7 @@ const slideInRight = new Keyframes('slideInRight', {
   '100%': {
     transform: 'translateX(0)',
   },
-});
+})
 
 const slideOutRight = new Keyframes('slideOutRight', {
   '0%': {
@@ -26,12 +26,9 @@ const slideOutRight = new Keyframes('slideOutRight', {
   '100%': {
     transform: 'translateX(100%)',
   },
-});
+})
 
-export const genSettingsFormStyle = (
-  prefixCls: string,
-  token: GlobalToken,
-): CSSInterpolation => [
+export const genSettingsFormStyle = (prefixCls: string, token: GlobalToken): CSSInterpolation => [
   {
     [`.${prefixCls}`]: {
       padding: '0 20px',
@@ -112,4 +109,4 @@ export const genSettingsFormStyle = (
   fadeIn,
   slideInRight,
   slideOutRight,
-];
+]

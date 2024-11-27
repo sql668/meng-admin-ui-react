@@ -1,4 +1,3 @@
-
 import { useThemeStore } from '@/store/theme'
 import { Dropdown, Tabs } from 'antd'
 import { useCallback, useMemo } from 'react'
@@ -10,8 +9,7 @@ import { Icon } from '@/components/icon'
 import { useTagsTabStore } from '@/store/tagsView'
 import { useDesign } from '@/hooks/useDesign'
 import classNames from 'classnames'
-import "./style/tabs.style.scss"
-
+import './style/tabs.style.scss'
 
 enum OperationType {
   REFRESH = 'refresh',
@@ -19,9 +17,7 @@ enum OperationType {
   CLOSEOTHER = 'close-other',
 }
 
-
 const TagsView = () => {
-  
   const { tabs, activeTabRoutePath, closeTab, refreshTab, closeOtherTab } = useTabs()
   const { prefixCls } = useDesign('multiple-tabs')
   const navigate = useNavigate()

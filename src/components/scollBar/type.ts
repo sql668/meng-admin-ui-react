@@ -1,4 +1,4 @@
-import { CSSProperties, RefObject } from "react"
+import { CSSProperties, RefObject } from 'react'
 
 export interface ScollBarProps {
   // 组件内部样式class前缀
@@ -12,7 +12,7 @@ export interface ScollBarProps {
   // 容器class
   className?: string
   // 容器style
-  style?:CSSProperties
+  style?: CSSProperties
 
   // 包裹容器的自定义类名
   wrapClass?: string
@@ -27,7 +27,7 @@ export interface ScollBarProps {
   // 滚动条最小尺寸 默认 20
   minSize?: number
   // 容器size change 事件不在响应
-  noresize?:boolean
+  noresize?: boolean
   children?: React.ReactNode
   scroll?: ({ scrollLeft, scrollTop }: { scrollLeft: number; scrollTop: number }) => void
 }
@@ -36,7 +36,6 @@ export interface BarRefExpose {
   handleScroll: (wrap: HTMLDivElement) => void
   update: () => void
 }
-
 
 export interface ScrollBarExpose {
   wrapRef: RefObject<HTMLDivElement>

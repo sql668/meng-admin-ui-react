@@ -1,7 +1,7 @@
-import { Button, Space } from "antd"
+import { Button, Space } from 'antd'
 import { RetweetOutlined, SearchOutlined } from '@ant-design/icons'
-import { Form} from '@formily/core'
-import { cloneDeep } from "lodash-es"
+import { Form } from '@formily/core'
+import { cloneDeep } from 'lodash-es'
 
 export interface FormActionProps {
   form: Form
@@ -9,9 +9,8 @@ export interface FormActionProps {
   onReset?: () => void
 }
 
-
 export function FormAction(props: FormActionProps) {
-  const { onReset,onSubmit,form} = props
+  const { onReset, onSubmit, form } = props
   return (
     <Space>
       <Button

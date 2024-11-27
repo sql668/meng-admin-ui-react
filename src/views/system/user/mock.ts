@@ -1,7 +1,7 @@
 export interface TreeDemoProp {
-  menuId: string;
-  menuName: string;
-  children?: TreeDemoProp[];
+  menuId: string
+  menuName: string
+  children?: TreeDemoProp[]
 }
 
 export const TreeDemoData = [
@@ -93,4 +93,4 @@ export const TreeDemoData = [
       },
     ],
   },
-];
+]

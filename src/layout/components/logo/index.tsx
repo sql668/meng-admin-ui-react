@@ -1,7 +1,7 @@
 import Logo from '@/assets/react.svg'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import { createStyles } from 'antd-style'
-const useStyles = createStyles(({ token, css }, props: { menuWidth:number }) => {
+const useStyles = createStyles(({ token, css }, props: { menuWidth: number }) => {
   return {
     container: css`
       width: ${props.menuWidth}px;
@@ -20,7 +20,7 @@ const useStyles = createStyles(({ token, css }, props: { menuWidth:number }) => 
 })
 const AppLogo = () => {
   const { getMenuWidth } = useMenuSetting()
-  const { styles, cx } = useStyles({ menuWidth:getMenuWidth })
+  const { styles, cx } = useStyles({ menuWidth: getMenuWidth })
   return (
     <div className={cx(styles.container)}>
       <img src={Logo} alt='' />

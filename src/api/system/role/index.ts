@@ -1,7 +1,13 @@
 import { PageResultData, ResultData } from '@/types/api'
 import { DeptTreeVo } from '@/types/common'
 import useRequest from '@/utils/http'
-import { CasbinRuleEntity, EditRoleModel, QueryRoleModel, RoleApiDto, RoleEntity } from '@/views/system/role/type'
+import {
+  CasbinRuleEntity,
+  EditRoleModel,
+  QueryRoleModel,
+  RoleApiDto,
+  RoleEntity,
+} from '@/views/system/role/type'
 
 export const getRolePageApi = (data?: QueryRoleModel) => {
   return useRequest.get<PageResultData<RoleEntity[]>>({
@@ -9,7 +15,6 @@ export const getRolePageApi = (data?: QueryRoleModel) => {
     params: data,
   })
 }
-
 
 export const getRoleByIdApi = (id: number) => {
   return useRequest.get<ResultData<RoleEntity>>({
@@ -53,7 +58,7 @@ export const updateRoleApiAuthApi = (data: RoleApiDto) => {
   })
 }
 
-export const getRoleDetailApi = (roleId:number) => {
+export const getRoleDetailApi = (roleId: number) => {
   return useRequest.get<ResultData<RoleEntity>>({
     url: `/role/${roleId}`,
   })
@@ -73,13 +78,17 @@ export const getRoleCheckedByRoleCodeApi = (roleCode: string) => {
 }
 
 export const getRoleDeptTreeApi = (roleId: number) => {
-  return useRequest.get<ResultData<{ depts: DeptTreeVo[]; checkedKeys: number[]}>>({
+  return useRequest.get<ResultData<{ depts: DeptTreeVo[]; checkedKeys: number[] }>>({
     url: `/role/roleDeptTree/${roleId}`,
   })
 }
 
 /** 更新角色的数据权限 */
-export const updateRoleDataScopeApi = (data: { roleId: number; deptIds:number[],dataScope:string}) => {
+export const updateRoleDataScopeApi = (data: {
+  roleId: number
+  deptIds: number[]
+  dataScope: string
+}) => {
   return useRequest.put<ResultData>({
     url: `/role/roledatascope`,
     data,

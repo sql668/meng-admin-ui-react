@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+import { createContext, useContext } from 'react'
 import { MxAppConfigConsumerProps } from './type'
 
 const defaultGetPrefixCls = (suffixCls?: string) => {
@@ -10,8 +10,8 @@ export const MxAppConfigContext = createContext<MxAppConfigConsumerProps>({
 })
 //console.log(MxAppConfigContext)
 
-export const useAppConfigContext = () => { 
-   return useContext(MxAppConfigContext)
+export const useAppConfigContext = () => {
+  return useContext(MxAppConfigContext)
 }
 
 export const { Consumer: MxAppConfigConsumer } = MxAppConfigContext

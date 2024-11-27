@@ -1,19 +1,28 @@
-import classNames from "classnames"
-import { CSSProperties, forwardRef, memo, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
-import { BarRefExpose, ScollBarProps, ScrollBarExpose } from "./type"
-import React from "react"
-import { addUnit } from "@/utils/style"
-import { isNumber, isObject, merge } from "lodash-es"
-import Bar from "./bar"
-import { ScrollbarContext } from "./context"
-import { warning } from "@fdesign/util"
-import { useMemoizedFn } from "ahooks"
-import useResizeObserver from "@/hooks/useResizeObserver"
-import useEventListener from "@/hooks/useEventListener"
+import classNames from 'classnames'
+import {
+  CSSProperties,
+  forwardRef,
+  memo,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import { BarRefExpose, ScollBarProps, ScrollBarExpose } from './type'
+import React from 'react'
+import { addUnit } from '@/utils/style'
+import { isNumber, isObject, merge } from 'lodash-es'
+import Bar from './bar'
+import { ScrollbarContext } from './context'
+import { warning } from '@fdesign/util'
+import { useMemoizedFn } from 'ahooks'
+import useResizeObserver from '@/hooks/useResizeObserver'
+import useEventListener from '@/hooks/useEventListener'
 
 // let stopResizeObserver: () => void
 // let stopResizeListener:() => void
-
 
 const ScrollBarComponent = forwardRef<ScrollBarExpose, ScollBarProps>(
   (props: ScollBarProps, ref) => {
@@ -66,7 +75,6 @@ const ScrollBarComponent = forwardRef<ScrollBarExpose, ScollBarProps>(
     const [barContextValue, setContextValue] = useState({})
 
     useEffect(() => {
-
       setContextValue({
         scrollbarElement: scrollbarRef,
         wrapElement: wrapRef,

@@ -35,7 +35,7 @@ export default function Login() {
   const [captch, setCaptcha] = useState<CaptchaResp>()
   const nav = useNavigate()
   const [form] = Form.useForm()
-  const { getAppName} = useRootSetting()
+  const { getAppName } = useRootSetting()
   const onFinsh = useCallback(async (values: any) => {
     setBtnLoad(true)
     try {
@@ -50,7 +50,7 @@ export default function Login() {
         if (process.env.NODE_ENV === 'development') {
           Session.set(TOKEN, res.data?.token || '')
           Session.set(TOKEN_EXPIRES_TIME, res.data?.expiresAt + '')
-        } 
+        }
         //setUser(res.data?.userInfo)
         // nav(HOME_PATHNAME, {
         //   replace: true,

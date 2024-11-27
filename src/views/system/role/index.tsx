@@ -1,15 +1,6 @@
 import { BaseForm, DialogForm } from '@/components/form'
 import { editFormSchema, searchFormSchema } from './data'
-import {
-  Drawer,
-  Modal,
-  Pagination,
-  Space,
-  Table,
-  TableColumnsType,
-  Tabs,
-  TabsProps,
-} from 'antd'
+import { Drawer, Modal, Pagination, Space, Table, TableColumnsType, Tabs, TabsProps } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { Form } from '@formily/core'

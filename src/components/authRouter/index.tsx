@@ -1,5 +1,5 @@
 import { RouteObject, useLocation, useNavigate } from 'react-router-dom'
-import {  LOGIN_PATHNAME, TOKEN } from '@/config/config'
+import { LOGIN_PATHNAME, TOKEN } from '@/config/config'
 import { useEffect } from 'react'
 //import { getActivedRoute } from '@/utils/route'
 import { Session } from '@/utils/storage'

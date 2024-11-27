@@ -1,4 +1,4 @@
 export interface CaptchaResp {
-    captchaBase64: string;
-    captchaId: string;
+  captchaBase64: string
+  captchaId: string
 }

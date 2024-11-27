@@ -2,7 +2,6 @@ import { PageResultData, ResultData } from '@/types/api'
 import useRequest from '@/utils/http'
 import { EditUserModel, QueryUserModel, UserEntity } from '@/views/system/user/type'
 
-
 export const getUserPageApi = (data?: QueryUserModel) => {
   return useRequest.get<PageResultData<UserEntity[]>>({
     url: '/sys-user',
@@ -31,7 +30,7 @@ export const updateUserStatusApi = (data: EditUserModel) => {
   })
 }
 
-export const resetPwdApi = (data: {userId:number,password:string}) => {
+export const resetPwdApi = (data: { userId: number; password: string }) => {
   return useRequest.put<ResultData>({
     url: `/user/pwd/reset`,
     data,

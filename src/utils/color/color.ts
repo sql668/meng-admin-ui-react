@@ -1,8 +1,7 @@
-import { hex } from "../hex"
-import { isStr } from "../is"
-import { clamp } from "../number"
-import { hslToRgb, rgbToHsl } from "./util"
-
+import { hex } from '../hex'
+import { isStr } from '../is'
+import { clamp } from '../number'
+import { hslToRgb, rgbToHsl } from './util'
 
 const regHexAbbr = /^#([a-fA-F0-9]{3})$/
 const regHex = /^#([a-fA-F0-9]{6})$/
@@ -12,8 +11,6 @@ const regRgbaPer =
   /^rgba?\(\s*([+-]?[\d.]+)%\s*,\s*([+-]?[\d.]+)%\s*,\s*([+-]?[\d.]+)%\s*(?:,\s*([+-]?[\d.]+)\s*)?\)$/
 const regHsla =
   /^hsla?\(\s*([+-]?\d*[.]?\d+)(?:deg)?\s*,\s*([+-]?[\d.]+)%\s*,\s*([+-]?[\d.]+)%\s*(?:,\s*([+-]?[\d.]+)\s*)?\)$/
-
-
 
 interface IColor {
   val: number[]
@@ -45,7 +42,7 @@ export class Color {
   toHex() {
     let val = this.val
     if (this.model === 'hsl') val = hslToRgb(val)
-    var ret = hex.encode(val.slice(0, 3))
+    let ret = hex.encode(val.slice(0, 3))
     if (ret[0] === ret[1] && ret[2] === ret[3] && ret[4] === ret[5]) {
       ret = ret[0] + ret[2] + ret[5]
     }
@@ -75,8 +72,8 @@ export class Color {
    * @returns
    */
   static parse(colorStr: string) {
-    var i, match
-    var val = [0, 0, 0, 1],
+    let i, match
+    let val = [0, 0, 0, 1],
       model = 'rgb'
 
     /* eslint-disable no-cond-assign */
@@ -88,7 +85,7 @@ export class Color {
     } else if ((match = colorStr.match(regHex))) {
       match = match[1]
       for (i = 0; i < 3; i++) {
-        var i2 = i * 2
+        const i2 = i * 2
         val[i] = parseInt(match.slice(i2, i2 + 2), 16)
       }
     } else if ((match = colorStr.match(regRgba))) {

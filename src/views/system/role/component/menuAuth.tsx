@@ -1,12 +1,12 @@
-import { Key, useEffect, useState } from "react";
-import { RoleEntity } from "../type";
-import { Button, Input, Tree, TreeProps } from "antd";
-import { DeptModel } from "../../dept/type";
-import { useQuery } from "@tanstack/react-query";
-import { getMenuListApi } from "@/api/system/menu";
-import { buildTreeFromArray, getAllExpandKeys } from "@/utils/tree";
-import { updateRoleDefaultRouterApi, updateRoleMenuApi } from "@/api/system/role";
-import { antdUtils } from "@/utils/antdUtil";
+import { Key, useEffect, useState } from 'react'
+import { RoleEntity } from '../type'
+import { Button, Input, Tree, TreeProps } from 'antd'
+import { DeptModel } from '../../dept/type'
+import { useQuery } from '@tanstack/react-query'
+import { getMenuListApi } from '@/api/system/menu'
+import { buildTreeFromArray, getAllExpandKeys } from '@/utils/tree'
+import { updateRoleDefaultRouterApi, updateRoleMenuApi } from '@/api/system/role'
+import { antdUtils } from '@/utils/antdUtil'
 
 export const MenuAuth = (props: { record?: RoleEntity; close?: () => void }) => {
   const { record } = props
@@ -41,14 +41,14 @@ export const MenuAuth = (props: { record?: RoleEntity; close?: () => void }) => 
     queryFn: () =>
       getMenuListApi({}).then((res) => {
         if (res.code === 0) {
-          return buildFullPath(buildTreeFromArray(res.data || [], 'menuId'),null)
+          return buildFullPath(buildTreeFromArray(res.data || [], 'menuId'), null)
         } else {
           new Error(res.msg)
         }
       }),
   })
-  const buildFullPath = (data:Array<any>,parent:any) => {
-    for (let item of data) {
+  const buildFullPath = (data: Array<any>, parent: any) => {
+    for (const item of data) {
       if (!parent) {
         if (!item.path.startsWith('/')) {
           item.fullPath = '/' + item.path
@@ -64,7 +64,7 @@ export const MenuAuth = (props: { record?: RoleEntity; close?: () => void }) => 
     }
     return data
   }
-  const treeTitleRender = (node:any) => {
+  const treeTitleRender = (node: any) => {
     return (
       <div>
         <span>{node.menuName}</span>
@@ -141,7 +141,7 @@ export const MenuAuth = (props: { record?: RoleEntity; close?: () => void }) => 
             //title: 'menuName',
             key: 'menuId',
           }}
-          titleRender={ treeTitleRender}></Tree>
+          titleRender={treeTitleRender}></Tree>
       </div>
     </div>
   )

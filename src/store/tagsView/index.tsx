@@ -1,13 +1,13 @@
-import { HOME_PATHNAME } from "@/config/config"
-import { TagsTabProps } from "@/types/tags"
-import { createSelectors } from "@/utils/createSelector"
-import { StateCreator, create } from "zustand"
-import { devtools, persist, subscribeWithSelector } from "zustand/middleware"
-import { immer } from "zustand/middleware/immer"
+import { HOME_PATHNAME } from '@/config/config'
+import { TagsTabProps } from '@/types/tags'
+import { createSelectors } from '@/utils/createSelector'
+import { StateCreator, create } from 'zustand'
+import { devtools, persist, subscribeWithSelector } from 'zustand/middleware'
+import { immer } from 'zustand/middleware/immer'
 
 export type TagsTabStoreState = {
-  tags: TagsTabProps[],
-  defaultTag:string, //默认首页tagtab
+  tags: TagsTabProps[]
+  defaultTag: string //默认首页tagtab
 }
 
 const createTagsTabSlice: StateCreator<
@@ -20,9 +20,8 @@ const createTagsTabSlice: StateCreator<
   ]
 > = () => ({
   tags: [],
-  defaultTag:HOME_PATHNAME,
+  defaultTag: HOME_PATHNAME,
 })
-
 
 export const useTagsTabStore = createSelectors(
   create<TagsTabStoreState>()(
@@ -50,7 +49,7 @@ export const resetTagsTab = () => {
   })
 }
 
-export const setDefaultTag = (path:string) => {
+export const setDefaultTag = (path: string) => {
   useTagsTabStore.setState((state) => {
     state.defaultTag = path
   })
@@ -62,7 +61,7 @@ export const setTags = (v: TagsTabProps[]) => {
   })
 }
 
-export const removeTag = (index:number) => {
+export const removeTag = (index: number) => {
   useTagsTabStore.setState((state) => {
     state.tags.splice(index, 1)
   })

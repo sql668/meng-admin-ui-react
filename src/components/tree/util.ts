@@ -1,57 +1,45 @@
-;
-
 //import type { Key } from 'react';
-import { warning } from '@fdesign/util';
-import type { TreeProps as ATreeProps } from 'antd';
+import { warning } from '@fdesign/util'
+import type { TreeProps as ATreeProps } from 'antd'
 
-
-
-import type { BasicDataNode, DataEntity, DataNode, ExternalGetKey, FieldNames, GetKey, KeyEntities, KeyTitleType, MergeFieldNamesProp, SafeKey, TraverseDataNodesConfig, TreeDataProp, Wrapper } from './type';
-
-
-;
-
-
-
-
-
-
-
-
-
-
-;
-
-
-
-
-
-
-
-
+import type {
+  BasicDataNode,
+  DataEntity,
+  DataNode,
+  ExternalGetKey,
+  FieldNames,
+  GetKey,
+  KeyEntities,
+  KeyTitleType,
+  MergeFieldNamesProp,
+  SafeKey,
+  TraverseDataNodesConfig,
+  TreeDataProp,
+  Wrapper,
+} from './type'
 
 export function toArray<T>(value: T | T[]): T[] {
   if (Array.isArray(value)) {
-    return value;
+    return value
   }
-  return value !== undefined ? [value] : [];
+  return value !== undefined ? [value] : []
 }
 
-export function fillFieldNames(fieldNames?: ATreeProps["fieldNames"]) {
-  const { title, key, children } = fieldNames || {};
+export function fillFieldNames(fieldNames?: ATreeProps['fieldNames']) {
+  const { title, key, children } = fieldNames || {}
   return {
-    title: title || "title",
-    key: key || "key",
+    title: title || 'title',
+    key: key || 'key',
     children: children || 'children',
-  };
+  }
 }
 
 export function fillLegacyProps(dataNode: DataNode): any {
   if (!dataNode) {
-    return dataNode;
+    return dataNode
   }
 
-  const cloneNode = { ...dataNode };
+  const cloneNode = { ...dataNode }
 
   if (!('props' in cloneNode)) {
     Object.defineProperty(cloneNode, 'props', {
@@ -59,48 +47,44 @@ export function fillLegacyProps(dataNode: DataNode): any {
         warning(
           false,
           'New `fdesign tree` not support return node instance as argument anymore. Please consider to remove `props` access.',
-        );
-        return cloneNode;
+        )
+        return cloneNode
       },
-    });
+    })
   }
 
-  return cloneNode;
+  return cloneNode
 }
-
-
 
 /** Loop fetch all the keys exist in the tree */
 export function getAllKeys(treeData: TreeDataProp, fieldNames: MergeFieldNamesProp) {
-  const keys: SafeKey[] = [];
+  const keys: SafeKey[] = []
 
   function dig(list: TreeDataProp = []) {
-    list.forEach((item:any) => {
-      const children = item[fieldNames.children];
+    list.forEach((item: any) => {
+      const children = item[fieldNames.children]
       if (children) {
-        keys.push(item[fieldNames.key]);
-        dig(children);
+        keys.push(item[fieldNames.key])
+        dig(children)
       }
-    });
+    })
   }
 
-  dig(treeData);
+  dig(treeData)
 
-  return keys;
+  return keys
 }
-
 
 export function isSimpleKeyMode(value: SafeKey | KeyTitleType): value is SafeKey {
-  return !value || typeof value !== 'object';
+  return !value || typeof value !== 'object'
 }
 
-
 export function isNil(val: any) {
-  return val === null || val === undefined;
+  return val === null || val === undefined
 }
 
 export function isCheckDisabled(node: DataNode) {
-  return !node || node.disabled || node.disableCheckbox || node.checkable === false;
+  return !node || node.disabled || node.disableCheckbox || node.checkable === false
 }
 
 // // checkedkeys都没有设置halfChecked属性
@@ -134,66 +118,63 @@ export function isCheckDisabled(node: DataNode) {
 //   return true
 // }
 
-
-export default function getEntity<T extends BasicDataNode = any>(keyEntities: KeyEntities<T>, key: SafeKey) {
-  return keyEntities[key as SafeKey];
+export default function getEntity<T extends BasicDataNode = any>(
+  keyEntities: KeyEntities<T>,
+  key: SafeKey,
+) {
+  return keyEntities[key as SafeKey]
 }
 
 export function getKey(key: SafeKey, pos: string) {
   if (key !== null && key !== undefined) {
-    return key;
+    return key
   }
-  return pos;
+  return pos
 }
-
-
-
-
 
 export function getPosition(level: string | number, index: number) {
-  return `${level}-${index}`;
+  return `${level}-${index}`
 }
-
 
 export function traverseDataNodes(
   dataNodes: DataNode[],
   callback: (data: {
-    node: DataNode;
-    index: number;
-    pos: string;
-    key: SafeKey;
-    parentPos: string | number;
-    level: number;
-    nodes: DataNode[];
+    node: DataNode
+    index: number
+    pos: string
+    key: SafeKey
+    parentPos: string | number
+    level: number
+    nodes: DataNode[]
   }) => void,
   // To avoid too many params, let use config instead of origin param
   config?: TraverseDataNodesConfig | string,
 ) {
-  let mergedConfig: TraverseDataNodesConfig = {};
+  let mergedConfig: TraverseDataNodesConfig = {}
   if (typeof config === 'object') {
-    mergedConfig = config;
+    mergedConfig = config
   } else {
-    mergedConfig = { externalGetKey: config };
+    mergedConfig = { externalGetKey: config }
   }
-  mergedConfig = mergedConfig || {};
+  mergedConfig = mergedConfig || {}
 
   // Init config
-  const { childrenPropName, externalGetKey, fieldNames } = mergedConfig;
+  const { childrenPropName, externalGetKey, fieldNames } = mergedConfig
 
-  const { key: fieldKey, children: fieldChildren } = fillFieldNames(fieldNames);
+  const { key: fieldKey, children: fieldChildren } = fillFieldNames(fieldNames)
 
-  const mergeChildrenPropName:string = childrenPropName || fieldChildren;
+  const mergeChildrenPropName: string = childrenPropName || fieldChildren
 
   // Get keys
-  let syntheticGetKey: (node: DataNode, pos?: string) => SafeKey;
+  let syntheticGetKey: (node: DataNode, pos?: string) => SafeKey
   if (externalGetKey) {
     if (typeof externalGetKey === 'string') {
-      syntheticGetKey = (node: DataNode) => (node as any)[externalGetKey as string];
+      syntheticGetKey = (node: DataNode) => (node as any)[externalGetKey as string]
     } else if (typeof externalGetKey === 'function') {
-      syntheticGetKey = (node: DataNode) => (externalGetKey as GetKey<DataNode>)(node);
+      syntheticGetKey = (node: DataNode) => (externalGetKey as GetKey<DataNode>)(node)
     }
   } else {
-    syntheticGetKey = (node:any, pos) => getKey(node[fieldKey], pos || "-");
+    syntheticGetKey = (node: any, pos) => getKey(node[fieldKey], pos || '-')
   }
 
   // Process
@@ -203,13 +184,13 @@ export function traverseDataNodes(
     parent?: { node: DataNode; pos: string; level: number },
     pathNodes?: DataNode[],
   ) {
-    const children = node ? (node as any)[mergeChildrenPropName] : dataNodes;
-    const pos = node ? getPosition(parent?.pos || '0', index || 0) : '0';
-    const connectNodes = node ? [...pathNodes || [], node] : [];
+    const children = node ? (node as any)[mergeChildrenPropName] : dataNodes
+    const pos = node ? getPosition(parent?.pos || '0', index || 0) : '0'
+    const connectNodes = node ? [...(pathNodes || []), node] : []
 
     // Process node if is not root
     if (node) {
-      const key: SafeKey = syntheticGetKey(node, pos);
+      const key: SafeKey = syntheticGetKey(node, pos)
       const data = {
         node,
         index,
@@ -218,14 +199,14 @@ export function traverseDataNodes(
         parentPos: parent?.node ? parent.pos : null,
         level: (parent?.level || 0) + 1,
         nodes: connectNodes,
-      };
+      }
 
-      callback(data as any);
+      callback(data as any)
     }
 
     // Process children node
     if (children) {
-      children.forEach((subNode:any, subIndex:any) => {
+      children.forEach((subNode: any, subIndex: any) => {
         processNode(
           subNode,
           subIndex,
@@ -235,14 +216,13 @@ export function traverseDataNodes(
             level: parent ? parent.level + 1 : -1,
           },
           connectNodes,
-        );
-      });
+        )
+      })
     }
   }
 
-  processNode(null as any);
+  processNode(null as any)
 }
-
 
 /**
  * Convert `treeData` into entity records.
@@ -257,58 +237,58 @@ export function convertDataToEntities(
     childrenPropName,
     fieldNames,
   }: {
-    initWrapper?: (wrapper: Wrapper) => Wrapper;
-    processEntity?: (entity: DataEntity, wrapper: Wrapper) => void;
-    onProcessFinished?: (wrapper: Wrapper) => void;
-    externalGetKey?: ExternalGetKey;
-    childrenPropName?: string;
-    fieldNames?: FieldNames;
+    initWrapper?: (wrapper: Wrapper) => Wrapper
+    processEntity?: (entity: DataEntity, wrapper: Wrapper) => void
+    onProcessFinished?: (wrapper: Wrapper) => void
+    externalGetKey?: ExternalGetKey
+    childrenPropName?: string
+    fieldNames?: FieldNames
   } = {},
   /** @deprecated Use `config.externalGetKey` instead */
   legacyExternalGetKey?: ExternalGetKey,
 ) {
   // Init config
-  const mergedExternalGetKey = externalGetKey || legacyExternalGetKey;
+  const mergedExternalGetKey = externalGetKey || legacyExternalGetKey
 
-  const posEntities = {};
-  const keyEntities = {};
+  const posEntities = {}
+  const keyEntities = {}
   let wrapper: Wrapper = {
     posEntities,
     keyEntities,
-  };
+  }
 
   if (initWrapper) {
-    wrapper = initWrapper(wrapper) || wrapper;
+    wrapper = initWrapper(wrapper) || wrapper
   }
 
   traverseDataNodes(
     dataNodes,
-    item => {
-      const { node, index, pos, key, parentPos, level, nodes } = item;
-      const entity: DataEntity = { node, nodes, index, key, pos, level };
+    (item) => {
+      const { node, index, pos, key, parentPos, level, nodes } = item
+      const entity: DataEntity = { node, nodes, index, key, pos, level }
 
-      const mergedKey = getKey(key, pos);
+      const mergedKey = getKey(key, pos)
 
-      (posEntities as any)[pos] = entity;
-      (keyEntities as any)[mergedKey] = entity;
+      ;(posEntities as any)[pos] = entity
+      ;(keyEntities as any)[mergedKey] = entity
 
       // Fill children
-      entity.parent = (posEntities as any)[parentPos];
+      entity.parent = (posEntities as any)[parentPos]
       if (entity.parent) {
-        entity.parent.children = entity.parent.children || [];
-        entity.parent.children.push(entity);
+        entity.parent.children = entity.parent.children || []
+        entity.parent.children.push(entity)
       }
 
       if (processEntity) {
-        processEntity(entity, wrapper);
+        processEntity(entity, wrapper)
       }
     },
     { externalGetKey: mergedExternalGetKey, childrenPropName, fieldNames },
-  );
+  )
 
   if (onProcessFinished) {
-    onProcessFinished(wrapper);
+    onProcessFinished(wrapper)
   }
 
-  return wrapper;
+  return wrapper
 }

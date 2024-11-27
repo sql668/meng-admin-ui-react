@@ -5,7 +5,7 @@ export const usePrefixCls = (
   tag?: string,
   props?: {
     prefixCls?: string
-  }
+  },
 ) => {
   if ('ConfigContext' in ConfigProvider) {
     const { getPrefixCls } = useContext(ConfigProvider.ConfigContext)

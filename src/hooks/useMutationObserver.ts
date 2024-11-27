@@ -1,7 +1,6 @@
-import useDeepCompareEffectWithTarget from "@/utils/hooks/useDeepCompareEffectWithTarget"
-import { useLatest } from "ahooks"
-import { BasicTarget, getTargetElement } from "ahooks/lib/utils/domTarget"
-import { useState } from "react"
+import useDeepCompareEffectWithTarget from '@/utils/hooks/useDeepCompareEffectWithTarget'
+import { useLatest } from 'ahooks'
+import { BasicTarget, getTargetElement } from 'ahooks/lib/utils/domTarget'
 
 const useMutationObserver = (
   callback: MutationCallback,
@@ -9,8 +8,6 @@ const useMutationObserver = (
   options: MutationObserverInit = {},
 ): void => {
   const callbackRef = useLatest(callback)
-
-  const [] = useState(null)
 
   useDeepCompareEffectWithTarget(
     () => {

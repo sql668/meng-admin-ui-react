@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { createForm } from '@formily/core';
-import { Form } from '@formily/antd-v5';
-import { observer } from '@formily/react';
-import { requestIdle, cancelIdle } from '@form-created/shared';
+import React, { useMemo } from 'react'
+import { createForm } from '@formily/core'
+import { Form } from '@formily/antd-v5'
+import { observer } from '@formily/react'
+import { requestIdle, cancelIdle } from '@form-created/shared'
 import {
   usePrefix,
   useSelected,
@@ -12,67 +12,61 @@ import {
   //IconWidget,
   NodePathWidget,
   useCssInJs,
-} from '@form-created/react';
-import { Empty } from 'antd';
-import cls from 'classnames';
+} from '@form-created/react'
+import { Empty } from 'antd'
+import cls from 'classnames'
 
-import { genSettingsFormStyle } from './styles';
-import { ISettingFormProps } from '@form-created/react-settings-form/dist/types';
-import { effectLocales, effectSnapshot, SchemaField, SettingsFormContext } from '@form-created/react-settings-form';
+import { genSettingsFormStyle } from './styles'
+import { ISettingFormProps } from '@form-created/react-settings-form/dist/types'
+import {
+  effectLocales,
+  effectSnapshot,
+  SchemaField,
+  SettingsFormContext,
+} from '@form-created/react-settings-form'
 // import './styles.less'
 
 const GlobalState = {
   idleRequest: null,
-};
+}
 
 export const SettingsForm: React.FC<ISettingFormProps> = observer(
   (props) => {
-    console.log("SettingsForm render")
-    const workbench = useWorkbench();
-    const currentWorkspace =
-      workbench?.activeWorkspace || workbench?.currentWorkspace;
-    const currentWorkspaceId = currentWorkspace?.id;
-    const operation = useOperation(currentWorkspaceId);
-    const node = useSelectedNode(currentWorkspaceId);
-    const selected = useSelected(currentWorkspaceId);
-    const prefix = usePrefix('settings-form');
-    const schema = node?.designerProps?.propsSchema;
-    const isEmpty = !(
-      node &&
-      node.designerProps?.propsSchema &&
-      selected.length === 1
-    );
+    console.log('SettingsForm render')
+    const workbench = useWorkbench()
+    const currentWorkspace = workbench?.activeWorkspace || workbench?.currentWorkspace
+    const currentWorkspaceId = currentWorkspace?.id
+    const operation = useOperation(currentWorkspaceId)
+    const node = useSelectedNode(currentWorkspaceId)
+    const selected = useSelected(currentWorkspaceId)
+    const prefix = usePrefix('settings-form')
+    const schema = node?.designerProps?.propsSchema
+    const isEmpty = !(node && node.designerProps?.propsSchema && selected.length === 1)
     const form = useMemo(() => {
-      debugger
       return createForm({
         initialValues: node?.designerProps?.defaultProps,
         values: node?.props,
         effects(form) {
-          effectLocales(node);
-          effectSnapshot(operation);
-          props.effects?.(form);
+          effectLocales(node)
+          effectSnapshot(operation)
+          props.effects?.(form)
         },
-      });
-    }, [node, node?.props, schema, operation, isEmpty]);
+      })
+    }, [node, node?.props, schema, operation, isEmpty])
 
     const render = () => {
       if (!isEmpty) {
         return (
-          <div
-            className={cls(prefix, props.className, hashId)}
-            style={props.style}
-            key={node.id}
-          >
+          <div className={cls(prefix, props.className, hashId)} style={props.style} key={node.id}>
             <SettingsFormContext.Provider value={props}>
               <Form
                 form={form}
                 colon={false}
                 labelWidth={120}
-                labelAlign="left"
-                wrapperAlign="right"
-                feedbackLayout="none"
-                tooltipLayout="text"
-              >
+                labelAlign='left'
+                wrapperAlign='right'
+                feedbackLayout='none'
+                tooltipLayout='text'>
                 <SchemaField
                   schema={schema}
                   components={props.components}
@@ -81,19 +75,19 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
               </Form>
             </SettingsFormContext.Provider>
           </div>
-        );
+        )
       }
       return (
         <div className={prefix + '-empty'}>
           <Empty />
         </div>
-      );
-    };
+      )
+    }
 
     const { hashId, wrapSSR } = useCssInJs({
       prefix,
       styleFun: genSettingsFormStyle,
-    });
+    })
 
     return wrapSSR(
       <div>
@@ -102,14 +96,14 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
           <div className={cls(prefix + '-content', hashId)}>{render()}</div>
         </div>
       </div>,
-    );
+    )
   },
   {
     scheduler: (update) => {
-      cancelIdle(GlobalState.idleRequest as any);
+      cancelIdle(GlobalState.idleRequest as any)
       GlobalState.idleRequest = requestIdle(update, {
         timeout: 500,
-      }) as any;
+      }) as any
     },
   },
-);
+)

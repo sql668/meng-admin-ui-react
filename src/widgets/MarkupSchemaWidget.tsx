@@ -50,12 +50,10 @@ const transformToMarkupSchemaCode = (tree: TreeNode) => {
     if (node.props?.type === 'void') return 'SchemaField.Void'
     return 'SchemaField.Markup'
   }
-  const printNode:any = (node: TreeNode) => {
+  const printNode: any = (node: TreeNode) => {
     if (!node) return ''
     return `<${printTag(node)} ${printAttribute(node)} ${
-      node.children.length
-        ? `>${printChildren(node)}</${printTag(node)}>`
-        : '/>'
+      node.children.length ? `>${printChildren(node)}</${printTag(node)}>` : '/>'
     }`
   }
   const root = tree.find((child) => {
@@ -151,15 +149,13 @@ export default ()=>{
 `
 }
 
-export const MarkupSchemaWidget: React.FC<IMarkupSchemaWidgetProps> = (
-  props
-) => {
+export const MarkupSchemaWidget: React.FC<IMarkupSchemaWidgetProps> = (props) => {
   return (
     <MonacoInput
       {...props}
       options={{ readOnly: true }}
       value={transformToMarkupSchemaCode(props.tree)}
-      language="typescript"
+      language='typescript'
     />
   )
 }

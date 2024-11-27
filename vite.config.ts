@@ -11,7 +11,7 @@ import requireTransform from 'vite-plugin-require-transform'
 import PurgeIcons from 'vite-plugin-purge-icons'
 import { theme } from 'antd/lib'
 import { convertLegacyToken } from '@ant-design/compatible/lib'
-const { defaultAlgorithm, defaultSeed, } = theme
+const { defaultAlgorithm, defaultSeed } = theme
 
 const mapV5Token = defaultAlgorithm(defaultSeed)
 const v5Vars = convertLegacyToken(mapV5Token)

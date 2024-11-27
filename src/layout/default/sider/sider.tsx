@@ -1,6 +1,5 @@
-
 import { Layout } from 'antd'
-import { CSSProperties,useEffect,useMemo } from 'react'
+import { CSSProperties, useEffect, useMemo } from 'react'
 import { MenuDataItem } from '@/types/menu'
 import { clearMenuItem } from '@/utils/menu'
 import { useMenuContext } from '@/context/menu'
@@ -12,11 +11,16 @@ import classNames from 'classnames'
 import { useDeepCompareEffect } from 'ahooks'
 import { setMenuSetting } from '@/store/app'
 import LayoutTrigger from '@/layout/default/trigger'
-import { MenuModeEnum, MenuSplitTyeEnum, SIDE_BAR_MINI_WIDTH, TriggerEnum } from '@/core/enums/menuEnum'
+import {
+  MenuModeEnum,
+  MenuSplitTyeEnum,
+  SIDE_BAR_MINI_WIDTH,
+  TriggerEnum,
+} from '@/core/enums/menuEnum'
 import { useTrigger } from './useLayoutSide'
 import LayoutMenu from '@/layout/default/menu'
 import useRootSetting from '@/hooks/setting/useRootSetting'
-import "./style/_sider.style.scss"
+import './style/_sider.style.scss'
 import { useSiderEvent } from './useLayoutSider'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
 
@@ -50,10 +54,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint'
 const Sider = () => {
   //const { styles, cx } = useStyles()
 
-  const {
-    matchMenuKeys,
-    menuData: originMenuData,
-  } = useMenuContext()
+  const { matchMenuKeys, menuData: originMenuData } = useMenuContext()
 
   const {
     isMixSplitMenu,
@@ -69,10 +70,10 @@ const Sider = () => {
     getMenuTheme,
     getTrigger,
   } = useMenuSetting()
-  const { getIsMobile,getIsDisableMobile} = useRootSetting()
+  const { getIsMobile, getIsDisableMobile } = useRootSetting()
   const collapsed = getIsMobile ? false : originCollapsed
   const { getShowTrigger } = useTrigger()
-  const {onBreakpointChange} = useSiderEvent()
+  const { onBreakpointChange } = useSiderEvent()
 
   const menuData = useDeepMemo(() => {
     let menuData: MenuDataItem[] = []
@@ -115,7 +116,7 @@ const Sider = () => {
     ])
   }, [prefixCls, menuFixed, getIsMixMode, getIsMobile])
 
-  const getHiddenDomStyle = useMemo(() => { 
+  const getHiddenDomStyle = useMemo(() => {
     const width = `${getRealWidth}px`
     const style: CSSProperties = {
       width,
@@ -131,10 +132,10 @@ const Sider = () => {
     return style
   }, [getRealWidth, showClassSideBarRef])
 
-   const getMode = useMemo(() => {
-     return getSplitMenu ? MenuModeEnum.INLINE : null
-   }, [getSplitMenu])
-  
+  const getMode = useMemo(() => {
+    return getSplitMenu ? MenuModeEnum.INLINE : null
+  }, [getSplitMenu])
+
   const getSplitType = useMemo(() => {
     return getSplitMenu ? MenuSplitTyeEnum.LEFT : MenuSplitTyeEnum.NONE
   }, [getSplitMenu])
@@ -144,16 +145,14 @@ const Sider = () => {
     return <LayoutTrigger sider></LayoutTrigger>
   }, [getShowTrigger])
 
-   const colSize = useBreakpoint()
+  const colSize = useBreakpoint()
   useEffect(() => {
-     
-     if (colSize === 'md' && !getIsDisableMobile) {
-       onBreakpointChange(true)
-     } else {
-       onBreakpointChange(false)
-     }
-   }, [getIsDisableMobile, colSize])
-  
+    if (colSize === 'md' && !getIsDisableMobile) {
+      onBreakpointChange(true)
+    } else {
+      onBreakpointChange(false)
+    }
+  }, [getIsDisableMobile, colSize])
 
   if (clearMenuData && clearMenuData?.length < 1 && getSplitMenu) {
     return null

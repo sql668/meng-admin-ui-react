@@ -1,8 +1,5 @@
 import { Button, Col, Form, Input, InputNumber, Modal, Radio, Row, Select, TreeSelect } from 'antd'
-import {
-  RetweetOutlined,
-  SearchOutlined,
-} from '@ant-design/icons'
+import { RetweetOutlined, SearchOutlined } from '@ant-design/icons'
 
 import { EditFormModel, QueryFormModel } from './type'
 import { useState } from 'react'
@@ -58,12 +55,11 @@ export interface EditFormProps {
 }
 
 export function EditForm(props: EditFormProps) {
-  const { title, open,initalData, onCancel, onSubmit } = props
+  const { title, open, initalData, onCancel, onSubmit } = props
   const [form] = Form.useForm()
-  const [_,setLoading] = useState(false)
+  const [_, setLoading] = useState(false)
   const afterOpenChangeHandle = (open: boolean) => {
     if (open) {
-
       form.setFieldsValue(initalData)
     } else {
       form.resetFields()
@@ -71,7 +67,7 @@ export function EditForm(props: EditFormProps) {
     }
   }
 
-  const {data:deptTree } = useQuery({
+  const { data: deptTree } = useQuery({
     queryKey: ['sys-dept', 'tree', 'get'],
     queryFn: () =>
       getDeptTreeApi().then((res) => {
@@ -82,7 +78,6 @@ export function EditForm(props: EditFormProps) {
         }
       }),
   })
-
 
   return (
     <Modal
@@ -140,9 +135,7 @@ export function EditForm(props: EditFormProps) {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              label='负责人'
-              name='leader'>
+            <Form.Item label='负责人' name='leader'>
               <Input placeholder='请输入部门负责人姓名' />
             </Form.Item>
           </Col>

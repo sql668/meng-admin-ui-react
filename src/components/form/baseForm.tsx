@@ -1,9 +1,6 @@
 import { createForm, Form, Field, FieldDataSource } from '@formily/core'
 import { action } from '@formily/reactive'
-import {
-  Form as AntdForm,
-  FormProps,
-} from '@formily/antd-v5'
+import { Form as AntdForm, FormProps } from '@formily/antd-v5'
 import { useEffect, useMemo } from 'react'
 import { FormAction } from './formAction'
 import { SchemaField } from './base'
@@ -27,11 +24,11 @@ export interface LoadRemoteDataSource {
 }
 
 export interface LoadRemoteDataSourceGroup {
-  [key:string]: LoadRemoteDataSource
+  [key: string]: LoadRemoteDataSource
 }
 
 export interface UseAsyncDataSource {
-  (service: LoadRemoteDataSource):void
+  (service: LoadRemoteDataSource): void
 }
 
 // const loadData = async (field: Field) => {
@@ -76,7 +73,6 @@ const useAsyncDataSource = (service: LoadRemoteDataSource) => (field: Field) => 
   )
 }
 
-
 const SearchForm = (props: SearchFormProps) => {
   const { schema, onSubmit, onReset, ...formProps } = props
   const form = useMemo(() => createForm(), [])
@@ -89,17 +85,14 @@ const SearchForm = (props: SearchFormProps) => {
   }
   const scope = useMemo(() => {
     return {
-      actionSlot: (
-        <FormAction form={form} onSubmit={onSubmit} onReset={rest}></FormAction>
-      ),
+      actionSlot: <FormAction form={form} onSubmit={onSubmit} onReset={rest}></FormAction>,
     }
-  },[form])
+  }, [form])
   return (
     <div className='meng-admin-schema-form search'>
       <AntdForm {...formProps} form={form}>
-        <SchemaField schema={schema} scope={ scope} />
+        <SchemaField schema={schema} scope={scope} />
       </AntdForm>
-
     </div>
   )
 }
@@ -145,7 +138,6 @@ const EditForm = (props: EditFormProps) => {
 }
 
 function Base(props: BaseFormProps) {
-
   const { mode = 'search', ...formProps } = props
   return mode === 'search' ? (
     <SearchForm {...formProps}></SearchForm>

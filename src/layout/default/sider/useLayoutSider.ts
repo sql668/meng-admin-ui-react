@@ -1,5 +1,5 @@
-import { useMenuSetting } from "@/hooks/setting/useMenuSetting"
-import { setMenuSetting } from "@/store/app"
+import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
+import { setMenuSetting } from '@/store/app'
 
 export function useSiderEvent() {
   const { getMiniWidthNumber } = useMenuSetting()
@@ -8,7 +8,7 @@ export function useSiderEvent() {
 
   function onBreakpointChange(broken: boolean) {
     setMenuSetting({
-      siderHidden: broken
+      siderHidden: broken,
     })
   }
 

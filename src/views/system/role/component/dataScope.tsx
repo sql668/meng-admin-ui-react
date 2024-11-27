@@ -1,10 +1,10 @@
-import { Button, Col,  Row, Select, Tree, TreeProps } from "antd";
-import { RoleEntity } from "../type";
-import { useQuery } from "@tanstack/react-query";
-import { getRoleDeptTreeApi, updateRoleDataScopeApi } from "@/api/system/role";
-import { Key, useEffect, useState } from "react";
-import { getAllExpandKeys } from "@/utils/tree";
-import { antdUtils } from "@/utils/antdUtil";
+import { Button, Col, Row, Select, Tree, TreeProps } from 'antd'
+import { RoleEntity } from '../type'
+import { useQuery } from '@tanstack/react-query'
+import { getRoleDeptTreeApi, updateRoleDataScopeApi } from '@/api/system/role'
+import { Key, useEffect, useState } from 'react'
+import { getAllExpandKeys } from '@/utils/tree'
+import { antdUtils } from '@/utils/antdUtil'
 
 // type FieldType = {
 //   dataScope?: string
@@ -25,7 +25,6 @@ export function DataScope(props: { role?: RoleEntity; close?: () => void }) {
     halfChecked: [],
   })
 
-
   const onExpand: TreeProps['onExpand'] = (expandedKeysValue: Key[]) => {
     setExpandedKeys(expandedKeysValue)
     setAutoExpandParent(false)
@@ -38,13 +37,13 @@ export function DataScope(props: { role?: RoleEntity; close?: () => void }) {
   }
 
   const { data: deptTree } = useQuery({
-    queryKey: ['sys-role', 'get', 'deptTree',role?.roleId],
+    queryKey: ['sys-role', 'get', 'deptTree', role?.roleId],
     queryFn: () =>
       getRoleDeptTreeApi(role?.roleId || 0).then((res) => {
         if (res.code === 0) {
           setCheckedKeys({
             checked: res.data?.checkedKeys || [],
-            halfChecked:[]
+            halfChecked: [],
           })
           return res.data?.depts
         } else {
@@ -62,19 +61,21 @@ export function DataScope(props: { role?: RoleEntity; close?: () => void }) {
     <div>
       <div className='head-container w-full flex justify-between'>
         <div className='w-300'></div>
-        <Button type='primary' onClick={() => {
-          updateRoleDataScopeApi({
-            roleId: role?.roleId!,
-            deptIds: checkedKeys.checked,
-            dataScope
-          }).then((res) => {
-            if (res.code === 0) {
-              antdUtils.message?.success(res.msg)
-            } else {
-              antdUtils.message?.error(res.msg)
-            }
-          })
-        }}>
+        <Button
+          type='primary'
+          onClick={() => {
+            updateRoleDataScopeApi({
+              roleId: role?.roleId!,
+              deptIds: checkedKeys.checked,
+              dataScope,
+            }).then((res) => {
+              if (res.code === 0) {
+                antdUtils.message?.success(res.msg)
+              } else {
+                antdUtils.message?.error(res.msg)
+              }
+            })
+          }}>
           确定
         </Button>
       </div>
@@ -86,14 +87,14 @@ export function DataScope(props: { role?: RoleEntity; close?: () => void }) {
           <Col span={16}>
             <Select
               style={{ width: '80%' }}
-              value={ dataScope}
+              value={dataScope}
               onChange={(val) => {
                 setCheckedKeys({
                   checked: [],
-                  halfChecked:[]
+                  halfChecked: [],
                 })
                 setDataScope(val)
-               }}
+              }}
               options={[
                 {
                   value: '1',

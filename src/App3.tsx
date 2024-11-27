@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo } from 'react'
 
 import {
   CaseWidget,
@@ -17,16 +17,11 @@ import {
   ViewToolsWidget,
   Workspace,
   WorkspacePanel,
-} from "@form-created/react";
-import {
-  createDesigner,
-  GlobalRegistry,
-  KeyCode,
-  Shortcut,
-} from "@form-created/core";
-import { ActionsWidget } from "./widgets/ActionsWidget";
-import { LogoWidget } from "./widgets/LogoWidget";
-import { saveSchema, setCaseSchema } from "./service";
+} from '@form-created/react'
+import { createDesigner, GlobalRegistry, KeyCode, Shortcut } from '@form-created/core'
+import { ActionsWidget } from './widgets/ActionsWidget'
+import { LogoWidget } from './widgets/LogoWidget'
+import { saveSchema, setCaseSchema } from './service'
 import {
   ArrayCards,
   ArrayTable,
@@ -56,52 +51,52 @@ import {
   Form,
   Field,
   Slot,
-} from "@form-created/formily-antd";
-import { SchemaEditorWidget } from "./widgets/SchemaEditorWidget";
-import { MarkupSchemaWidget } from "./widgets/MarkupSchemaWidget";
-import { PreviewWidget } from "./widgets/PreviewWidget";
-import { SettingsForm } from "@form-created/react-settings-form";
-import { CaseDemo } from "./case";
-import { BaseCase } from "./icons";
+} from '@form-created/formily-antd'
+import { SchemaEditorWidget } from './widgets/SchemaEditorWidget'
+import { MarkupSchemaWidget } from './widgets/MarkupSchemaWidget'
+import { PreviewWidget } from './widgets/PreviewWidget'
+import { SettingsForm } from '@form-created/react-settings-form'
+import { CaseDemo } from './case'
+import { BaseCase } from './icons'
 
 // 注册 自定义的locales
 GlobalRegistry.registerDesignerLocales({
-  "zh-CN": {
+  'zh-CN': {
     sources: {
-      Inputs: "输入控件",
-      Layouts: "布局组件",
-      Arrays: "自增组件",
-      Displays: "展示组件",
+      Inputs: '输入控件',
+      Layouts: '布局组件',
+      Arrays: '自增组件',
+      Displays: '展示组件',
     },
     panels: {
-      Case: "案例",
+      Case: '案例',
     },
   },
-  "en-US": {
+  'en-US': {
     sources: {
-      Inputs: "Inputs",
-      Layouts: "Layouts",
-      Arrays: "Arrays",
-      Displays: "Displays",
+      Inputs: 'Inputs',
+      Layouts: 'Layouts',
+      Arrays: 'Arrays',
+      Displays: 'Displays',
     },
     panels: {
-      Case: "Case",
+      Case: 'Case',
     },
   },
-  "ko-KR": {
+  'ko-KR': {
     sources: {
-      Inputs: "입력",
-      Layouts: "레이아웃",
-      Arrays: "배열",
-      Displays: "디스플레이",
+      Inputs: '입력',
+      Layouts: '레이아웃',
+      Arrays: '배열',
+      Displays: '디스플레이',
       panels: {},
     },
   },
-});
+})
 // 注册自定义icon，通过IconWidget组件显示图标
 GlobalRegistry.registerDesignerIcons({
   CaseBase: BaseCase,
-});
+})
 function App() {
   const engine = useMemo(
     () =>
@@ -113,25 +108,25 @@ function App() {
               [KeyCode.Control, KeyCode.S],
             ],
             handler(ctx) {
-              saveSchema(ctx.engine);
+              saveSchema(ctx.engine)
             },
           }),
         ],
-        rootComponentName: "Form",
+        rootComponentName: 'Form',
       }),
-    []
-  );
+    [],
+  )
   //const tree = useTree("form")
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: 'flex' }}>
       <div>左侧惨淡蓝</div>
       <div style={{ flex: 1 }}>
-        <Designer engine={engine} position="relative">
+        <Designer engine={engine} position='relative'>
           <StudioPanel logo={<LogoWidget />} actions={<ActionsWidget />}>
             <CompositePanel>
-              <CompositePanel.Item title="panels.Component" icon="Component">
+              <CompositePanel.Item title='panels.Component' icon='Component'>
                 <ResourceWidget
-                  title="sources.Inputs"
+                  title='sources.Inputs'
                   sources={[
                     Input,
                     Password,
@@ -152,55 +147,44 @@ function App() {
                   ]}
                 />
                 <ResourceWidget
-                  title="sources.Layouts"
-                  sources={[
-                    Card,
-                    FormGrid,
-                    FormTab,
-                    FormLayout,
-                    FormCollapse,
-                    Space,
-                  ]}
+                  title='sources.Layouts'
+                  sources={[Card, FormGrid, FormTab, FormLayout, FormCollapse, Space]}
                 />
-                <ResourceWidget
-                  title="sources.Arrays"
-                  sources={[ArrayCards, ArrayTable]}
-                />
-                <ResourceWidget title="sources.Displays" sources={[Text]} />
-                <ResourceWidget title="功能组件" sources={[Slot]} />
+                <ResourceWidget title='sources.Arrays' sources={[ArrayCards, ArrayTable]} />
+                <ResourceWidget title='sources.Displays' sources={[Text]} />
+                <ResourceWidget title='功能组件' sources={[Slot]} />
               </CompositePanel.Item>
-              <CompositePanel.Item title="panels.OutlinedTree" icon="Outline">
+              <CompositePanel.Item title='panels.OutlinedTree' icon='Outline'>
                 <OutlineTreeWidget />
               </CompositePanel.Item>
-              <CompositePanel.Item title="panels.History" icon="History">
+              <CompositePanel.Item title='panels.History' icon='History'>
                 <HistoryWidget />
               </CompositePanel.Item>
-              <CompositePanel.Item title="panels.Case" icon="Case">
+              <CompositePanel.Item title='panels.Case' icon='Case'>
                 <CaseWidget
-                  title="最佳实践"
+                  title='最佳实践'
                   cases={CaseDemo}
                   onClick={(_, item) => {
-                    setCaseSchema(engine, item.schema);
+                    setCaseSchema(engine, item.schema)
                     setTimeout(() => {
-                      console.log(engine.workbench.currentWorkspace.operation);
-                      engine.workbench.currentWorkspace.operation.selection.selected =
-                        [engine.workbench.currentWorkspace.operation.tree.id];
+                      console.log(engine.workbench.currentWorkspace.operation)
+                      engine.workbench.currentWorkspace.operation.selection.selected = [
+                        engine.workbench.currentWorkspace.operation.tree.id,
+                      ]
                       //engine.workbench.currentWorkspace.operation.selection.selected = [engine.workbench.currentWorkspace.operation.tree.children[0].id]
-                    }, 0);
+                    }, 0)
                   }}
                 />
               </CompositePanel.Item>
             </CompositePanel>
-            <Workspace id="form">
+            <Workspace id='form'>
               <WorkspacePanel>
                 <ToolbarPanel>
                   <DesignerToolsWidget />
-                  <ViewToolsWidget
-                    use={["DESIGNABLE", "JSONTREE", "MARKUP", "PREVIEW"]}
-                  />
+                  <ViewToolsWidget use={['DESIGNABLE', 'JSONTREE', 'MARKUP', 'PREVIEW']} />
                 </ToolbarPanel>
-                <ViewportPanel style={{ height: "100%" }}>
-                  <ViewPanel type="DESIGNABLE">
+                <ViewportPanel style={{ height: '100%' }}>
+                  <ViewPanel type='DESIGNABLE'>
                     {() => (
                       <ComponentTreeWidget
                         components={{
@@ -236,28 +220,24 @@ function App() {
                       />
                     )}
                   </ViewPanel>
-                  <ViewPanel type="JSONTREE" scrollable={false}>
-                    {(tree, onChange) => (
-                      <SchemaEditorWidget tree={tree} onChange={onChange} />
-                    )}
+                  <ViewPanel type='JSONTREE' scrollable={false}>
+                    {(tree, onChange) => <SchemaEditorWidget tree={tree} onChange={onChange} />}
                   </ViewPanel>
-                  <ViewPanel type="MARKUP" scrollable={false}>
+                  <ViewPanel type='MARKUP' scrollable={false}>
                     {(tree) => <MarkupSchemaWidget tree={tree} />}
                   </ViewPanel>
-                  <ViewPanel type="PREVIEW">
-                    {(tree) => <PreviewWidget tree={tree} />}
-                  </ViewPanel>
+                  <ViewPanel type='PREVIEW'>{(tree) => <PreviewWidget tree={tree} />}</ViewPanel>
                 </ViewportPanel>
               </WorkspacePanel>
             </Workspace>
-            <SettingsPanel title="panels.PropertySettings">
-              <SettingsForm uploadAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" />
+            <SettingsPanel title='panels.PropertySettings'>
+              <SettingsForm uploadAction='https://www.mocky.io/v2/5cc8019d300000980a055e76' />
             </SettingsPanel>
           </StudioPanel>
         </Designer>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

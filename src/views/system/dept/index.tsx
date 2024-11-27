@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {  Col, Modal, Row, Space, Table, TableColumnsType, Tag } from 'antd'
+import { Col, Modal, Row, Space, Table, TableColumnsType, Tag } from 'antd'
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { DeptModel, EditFormModel, QueryFormModel } from './type'
 import { EditForm, QueryForm } from './form'

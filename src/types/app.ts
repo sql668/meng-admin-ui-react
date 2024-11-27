@@ -1,5 +1,5 @@
-import { ThemeEnum } from "@/core/enums/appEnum";
-import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from "@/core/enums/menuEnum";
+import { ThemeEnum } from '@/core/enums/appEnum'
+import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from '@/core/enums/menuEnum'
 
 export interface MenuSetting {
   bgColor: string
@@ -36,7 +36,6 @@ export interface HeaderSetting {
 }
 
 export interface RootSetting {
-
   // 全局亮暗主题
   theme: ThemeEnum
   // 是否是移动端
@@ -56,8 +55,7 @@ export interface RootSetting {
   appName: string
 
   // 全屏 内容区域
-  fullContent:boolean
-
+  fullContent: boolean
 }
 
 export interface MultiTabsSetting {

@@ -118,7 +118,6 @@ function ScrollThumb(props: ThumbProps) {
 
     scrollbar.wrapElement!.current![bar.scroll] =
       (thumbPositionPercentage * scrollbar.wrapElement!.current![bar.scrollSize]) / 100
-
   }
 
   const mouseUpDocumentHandler = () => {

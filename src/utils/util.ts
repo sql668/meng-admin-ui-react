@@ -145,29 +145,29 @@ export function deepMerge<T extends object | null | undefined, U extends object 
   mergeArrays: 'union' | 'intersection' | 'concat' | 'replace' = 'replace',
 ): T & U {
   if (!target) {
-    return source as T & U;
+    return source as T & U
   }
   if (!source) {
-    return target as T & U;
+    return target as T & U
   }
   return mergeWith({}, source, target, (sourceValue, targetValue) => {
     if (isArray(targetValue) && isArray(sourceValue)) {
       switch (mergeArrays) {
         case 'union':
-          return unionWith(sourceValue, targetValue, isEqual);
+          return unionWith(sourceValue, targetValue, isEqual)
         case 'intersection':
-          return intersectionWith(sourceValue, targetValue, isEqual);
+          return intersectionWith(sourceValue, targetValue, isEqual)
         case 'concat':
-          return sourceValue.concat(targetValue);
+          return sourceValue.concat(targetValue)
         case 'replace':
-          return targetValue;
+          return targetValue
         default:
-          throw new Error(`Unknown merge array strategy: ${mergeArrays as string}`);
+          throw new Error(`Unknown merge array strategy: ${mergeArrays as string}`)
       }
     }
     if (isObject(targetValue) && isObject(sourceValue)) {
-      return deepMerge(sourceValue, targetValue, mergeArrays);
+      return deepMerge(sourceValue, targetValue, mergeArrays)
     }
-    return undefined;
-  });
+    return undefined
+  })
 }

@@ -62,11 +62,10 @@ const _RequstInterceptors: RequstInterceptors = {
         antdUtils.message?.error(data.msg)
       }
     }
-    
+
     return config
   },
   responseInterceptorsCatch(axiosInstance, err: AxiosError) {
-
     const message = err.code === 'ECONNABORTED' ? '请求超时' : undefined
     if (axios.isCancel(err)) {
       return Promise.reject(err)
@@ -82,7 +81,7 @@ const useRequest = new AxiosMax({
   directlyGetData: true,
   baseURL: staticAxiosConfig.baseUrl,
   timeout: 3000,
-  withCredentials:false,
+  withCredentials: false,
   interceptors: _RequstInterceptors,
   abortRepetitiveRequest: true,
   retryConfig: {

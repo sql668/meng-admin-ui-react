@@ -70,7 +70,6 @@ function BaseFormModal<T extends Store>(props: BaseFormModalProps<T>) {
                 setLoading(false)
               })
         } catch (error) {
-
           onFieldError?.(error)
         }
       }}

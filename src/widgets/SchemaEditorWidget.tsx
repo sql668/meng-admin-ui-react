@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  transformToSchema,
-  transformToTreeNode,
-} from '@form-created/formily-transformer'
+import { transformToSchema, transformToTreeNode } from '@form-created/formily-transformer'
 import { TreeNode, ITreeNode } from '@form-created/core'
 import { MonacoInput } from '@form-created/react-settings-form'
 
@@ -11,9 +8,7 @@ export interface ISchemaEditorWidgetProps {
   onChange?: (tree: ITreeNode) => void
 }
 
-export const SchemaEditorWidget: React.FC<ISchemaEditorWidgetProps> = (
-  props
-) => {
+export const SchemaEditorWidget: React.FC<ISchemaEditorWidgetProps> = (props) => {
   return (
     <MonacoInput
       {...props}
@@ -21,7 +16,7 @@ export const SchemaEditorWidget: React.FC<ISchemaEditorWidgetProps> = (
       onChange={(value) => {
         props.onChange?.(transformToTreeNode(JSON.parse(value)))
       }}
-      language="json"
+      language='json'
     />
   )
 }

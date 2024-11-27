@@ -1,10 +1,10 @@
-import { depsEqual } from '@/utils/depsEqual';
-import * as React from 'react';
-import { DependencyList } from 'react';
+import { depsEqual } from '@/utils/depsEqual'
+import * as React from 'react'
+import { DependencyList } from 'react'
 
 interface Cache<Value, Condition> {
-  condition?: Condition;
-  value?: Value;
+  condition?: Condition
+  value?: Value
 }
 
 export default function useMemo<Value, Condition = DependencyList>(
@@ -12,7 +12,7 @@ export default function useMemo<Value, Condition = DependencyList>(
   condition: Condition,
   shouldUpdate?: (prev: Condition, next: Condition) => boolean,
 ) {
-  const cacheRef = React.useRef<Cache<Value, Condition>>({});
+  const cacheRef = React.useRef<Cache<Value, Condition>>({})
 
   if (!shouldUpdate) {
     shouldUpdate = (pre: Condition, next: Condition) => {
@@ -20,15 +20,12 @@ export default function useMemo<Value, Condition = DependencyList>(
     }
   }
 
-  if (
-    !('value' in cacheRef.current) ||
-    shouldUpdate(cacheRef.current.condition!, condition)
-  ) {
-    cacheRef.current.value = getValue();
-    cacheRef.current.condition = condition;
+  if (!('value' in cacheRef.current) || shouldUpdate(cacheRef.current.condition!, condition)) {
+    cacheRef.current.value = getValue()
+    cacheRef.current.condition = condition
   }
 
-  return cacheRef.current.value!;
+  return cacheRef.current.value!
 }
 
-export { useMemo as useDeepMemo}
+export { useMemo as useDeepMemo }

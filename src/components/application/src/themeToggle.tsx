@@ -1,10 +1,10 @@
-import { SvgIcon } from "@/components/icon"
-import useRootSetting from "@/hooks/setting/useRootSetting"
-import {  useUpdateBg } from "@/hooks/setting/useUpdateBg"
-import { setRootSetting } from "@/store/app"
-import { useMemoizedFn } from "ahooks"
-import { Dropdown, MenuProps } from "antd"
-import { useMemo } from "react"
+import { SvgIcon } from '@/components/icon'
+import useRootSetting from '@/hooks/setting/useRootSetting'
+import { useUpdateBg } from '@/hooks/setting/useUpdateBg'
+import { setRootSetting } from '@/store/app'
+import { useMemoizedFn } from 'ahooks'
+import { Dropdown, MenuProps } from 'antd'
+import { useMemo } from 'react'
 
 interface ThemeToggleProps {
   className?: string
@@ -28,27 +28,27 @@ const darkLightItems: MenuProps['items'] = [
   },
 ]
 
-function ThemeToggle(props:ThemeToggleProps) { 
+function ThemeToggle(props: ThemeToggleProps) {
   const { className } = props
 
   const { getGlobalTheme } = useRootSetting()
 
-  const { updateSidebarBgColor,useUpdateHeaderBgColor } = useUpdateBg()
-  
-   const currentMode = useMemo(() => {
-     if (getGlobalTheme === 'dark') {
-       return <SvgIcon icon='dark_theme' className='anticon'></SvgIcon>
-     } else {
-       return <SvgIcon icon='light_theme' className='anticon'></SvgIcon>
-     }
-   }, [getGlobalTheme])
-  
-  const toggleTheme = useMemoizedFn((e) => { 
+  const { updateSidebarBgColor, useUpdateHeaderBgColor } = useUpdateBg()
+
+  const currentMode = useMemo(() => {
+    if (getGlobalTheme === 'dark') {
+      return <SvgIcon icon='dark_theme' className='anticon'></SvgIcon>
+    } else {
+      return <SvgIcon icon='light_theme' className='anticon'></SvgIcon>
+    }
+  }, [getGlobalTheme])
+
+  const toggleTheme = useMemoizedFn((e) => {
     setRootSetting({ theme: e.key })
     useUpdateHeaderBgColor(e.key)
     updateSidebarBgColor(e.key)
   })
-   
+
   return (
     <>
       <Dropdown

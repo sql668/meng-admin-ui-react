@@ -1,8 +1,8 @@
-import { forwardRef, memo, useImperativeHandle, useState } from "react";
-import Thumb from "./thumb";
-import { GAP } from "./util";
-import { useScrollBarContext } from "./context";
-import { BarRefExpose } from "./type";
+import { forwardRef, memo, useImperativeHandle, useState } from 'react'
+import Thumb from './thumb'
+import { GAP } from './util'
+import { useScrollBarContext } from './context'
+import { BarRefExpose } from './type'
 
 interface BarProps {
   // 滚动条总是显示 默认false
@@ -10,7 +10,6 @@ interface BarProps {
   // 滚动条最小尺寸 默认 20
   minSize: number
 }
-
 
 const ScrollBar = forwardRef<BarRefExpose, BarProps>((props: BarProps, ref) => {
   const { always = false, minSize = 20 } = props
@@ -56,7 +55,7 @@ const ScrollBar = forwardRef<BarRefExpose, BarProps>((props: BarProps, ref) => {
   }))
   return (
     <>
-      <Thumb always={always} ratio={ratioX} move={moveX} size={ sizeWidth}></Thumb>
+      <Thumb always={always} ratio={ratioX} move={moveX} size={sizeWidth}></Thumb>
       <Thumb vertical ratio={ratioY} always={always} move={moveY} size={sizeHeight}></Thumb>
     </>
   )

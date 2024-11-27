@@ -75,7 +75,6 @@ const RcSwitch = React.forwardRef<HTMLButtonElement, SwitchProps>(
             onChange?.(mergedChecked, event)
           }
         }
-
       }
 
       return mergedChecked

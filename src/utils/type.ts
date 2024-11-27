@@ -1,4 +1,3 @@
-
 /**
  * 将T类型的某些字段变为可选
  *
@@ -21,5 +20,5 @@ export type DeepPartial<T> = {
 export type AnyObject = {
   [key: string]: any
   [key: number]: any
-  [key: symbol]:any
+  [key: symbol]: any
 }

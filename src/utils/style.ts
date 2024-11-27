@@ -11,7 +11,6 @@ import { warning } from '@fdesign/util'
 export const setAlpha = (baseColor: string, alpha: number) =>
   new TinyColor(baseColor).setAlpha(alpha).toRgbString()
 
-
 export function addUnit(value?: string | number, defaultUnit = 'px') {
   if (!value) return ''
   if (isNum(value) || isStringNumber(value)) {
@@ -19,5 +18,5 @@ export function addUnit(value?: string | number, defaultUnit = 'px') {
   } else if (isStr(value)) {
     return value
   }
-  warning(true,'binding value must be a string or number')
+  warning(true, 'binding value must be a string or number')
 }

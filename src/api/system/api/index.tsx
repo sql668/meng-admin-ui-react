@@ -2,7 +2,6 @@ import { PageResultData, ResultData } from '@/types/api'
 import useRequest from '@/utils/http'
 import { ApiEntity, EditAPiModel, QueryApiModel } from '@/views/system/api/type'
 
-
 export const getApiPageApi = (data?: QueryApiModel) => {
   return useRequest.get<PageResultData<ApiEntity[]>>({
     url: '/sys-api',

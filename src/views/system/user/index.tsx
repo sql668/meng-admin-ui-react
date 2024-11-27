@@ -1,14 +1,5 @@
 import { Icon } from '@/components/icon'
-import {
-  Col,
-  Input,
-  Modal,
-  Pagination,
-  Row,
-  Space,
-  Table,
-  TableColumnsType,
-} from 'antd'
+import { Col, Input, Modal, Pagination, Row, Space, Table, TableColumnsType } from 'antd'
 //import { createForm, Form, Field, FieldDataSource } from '@formily/core'
 import { DeleteOutlined, PlusOutlined, EditOutlined } from '@ant-design/icons'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
@@ -34,7 +25,6 @@ import { getRolePageApi } from '@/api/system/role'
 import { AuthButton } from '@/components/auth'
 import { Tree as FTree } from '@fdesign/component'
 export default function User() {
-
   const [filterText, setFilterText] = useState('')
   const [queryKey, setQueryKey] = useState<QueryUserModel>()
   const [open, setOpen] = useState(false)
@@ -77,7 +67,7 @@ export default function User() {
   })
 
   const pageChange = (page: number, pageSize: number) => {
-    setQueryKey({ ...queryKey,pageNum: page, pageSize: pageSize })
+    setQueryKey({ ...queryKey, pageNum: page, pageSize: pageSize })
   }
 
   const addBtnHandle = () => {
@@ -269,14 +259,12 @@ export default function User() {
     },
   ]
 
-  const deptTreeSelectHandle = (val:any) => {
+  const deptTreeSelectHandle = (val: any) => {
     setQueryKey({
       ...queryKey,
       deptId: `/${val.checkedKeys[0]}/`,
     })
   }
-
-  
 
   return (
     <div className='app-container'>

@@ -21,7 +21,7 @@ function useRouter() {
           path: '/redirect/*',
           handle: {
             title: 'redirect',
-            hasLayout:true
+            hasLayout: true,
           },
         },
       ]),

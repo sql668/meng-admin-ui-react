@@ -1,1 +1,1 @@
- export * from './baseMenu'
+export * from './baseMenu'

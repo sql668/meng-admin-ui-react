@@ -17,10 +17,11 @@ export interface UserEntity {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date
-  editable:string
+  editable: string
   dept: DeptModel
 }
 
 //export type QueryUserModel = Optional<UserEntity, 'userName' | 'status' | 'nickName'> & IPage
-export type QueryUserModel = Partial<Pick<UserEntity, 'userName' | 'status' | 'nickName'>> & IPage & {deptId?:string}
+export type QueryUserModel = Partial<Pick<UserEntity, 'userName' | 'status' | 'nickName'>> &
+  IPage & { deptId?: string }
 export type EditUserModel = Partial<UserEntity>

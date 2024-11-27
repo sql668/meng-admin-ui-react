@@ -2,7 +2,6 @@ export interface MxAppProviderProps {
   prefixCls: string
 }
 
-
 export interface MxAppConfigProviderProps {
   prefixCls?: string
   children?: React.ReactNode

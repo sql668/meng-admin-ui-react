@@ -1,4 +1,4 @@
-import { IPage } from "@/types/common";
+import { IPage } from '@/types/common'
 //import { Optional } from "@/utils/type";
 
 export interface RoleEntity {
@@ -18,10 +18,9 @@ export type QueryRoleModel = Partial<Pick<RoleEntity, 'roleName' | 'status'>> & 
 
 export type EditRoleModel = Partial<RoleEntity>
 
-
 export interface CasbinRuleEntity {
-  path: string;
-  method: string;
+  path: string
+  method: string
 }
 
 export interface RoleApiDto {

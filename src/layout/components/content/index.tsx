@@ -1,11 +1,11 @@
 import { useTabs } from '@/hooks/useTabs'
-import {  FloatButton } from 'antd'
+import { FloatButton } from 'antd'
 import { useMemo, useRef } from 'react'
 import { useOutlet } from 'react-router-dom'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import { useDesign } from '@/hooks/useDesign'
 import classNames from 'classnames'
-import "./style/content.style.scss"
+import './style/content.style.scss'
 
 const LayoutContent = () => {
   const currentOutlet = useOutlet()

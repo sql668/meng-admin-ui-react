@@ -1,4 +1,3 @@
-
 export const searchFormSchema = {
   form: {
     labelWidth: 80,
@@ -57,7 +56,7 @@ export const searchFormSchema = {
             'x-component-props': {
               children: '{{actionSlot}}',
               gridSpan: -1,
-              className:'form-action'
+              className: 'form-action',
             },
           },
         },
@@ -69,7 +68,7 @@ export const searchFormSchema = {
 export const editFormSchema = {
   form: {
     labelCol: 6,
-    wrapperCol:16
+    wrapperCol: 16,
   },
   schema: {
     type: 'object',
@@ -122,12 +121,12 @@ export const editFormSchema = {
           {
             children: [],
             label: '正常',
-            value: "1",
+            value: '1',
           },
           {
             children: [],
             label: '停用',
-            value: "0",
+            value: '0',
           },
         ],
         'x-validator': [],
@@ -137,7 +136,7 @@ export const editFormSchema = {
         },
         'x-decorator-props': {},
         name: 'status',
-        default: "1",
+        default: '1',
         'x-designable-id': 'jo88x06tzu3',
         'x-index': 3,
       },
@@ -157,5 +156,3 @@ export const editFormSchema = {
     'x-designable-id': 'tils69zec7f',
   },
 }
-
-

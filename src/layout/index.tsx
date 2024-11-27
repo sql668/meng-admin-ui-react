@@ -30,10 +30,9 @@ const getChildMenu = (menu: MenuDataItem): MenuDataItem => {
 }
 
 const getFirstChildmenu = (menus: MenuDataItem[]): MenuDataItem => {
-  
   console.log(menus)
   if (menus && menus.length > 0) {
-    for (let i = 0; i < menus.length; i++) { 
+    for (let i = 0; i < menus.length; i++) {
       if (!menus[i].children || menus[i].children?.length == 0) {
         return menus[i]
       } else if (menus[i]?.children && menus[i]?.children!.length > 0) {
@@ -49,13 +48,12 @@ function MengLayout() {
 
   useRouter()
 
-
   useEffect(() => {
     setLocation({ pathname: pathname })
   }, [pathname])
   const nav = useNavigate()
   const allRouters = usePermissionStore.use.routes()
-  
+
   // useEffect(() => {
   //   if ((colSize === 'sm' || colSize === 'xs') && !getIsDisableMobile) {
   //     setRootSetting({ isMobile: true })
@@ -65,7 +63,6 @@ function MengLayout() {
   // }, [getIsDisableMobile, colSize])
 
   const [location, setLocation] = useState<{ pathname: string }>({ pathname: '/' })
-  
 
   const menuInfoData = useMemo<{
     breadcrumb?: Record<string, MenuDataItem>
@@ -88,7 +85,6 @@ function MengLayout() {
 
   const menuItemClick = useCallback(
     (e: any) => {
-      debugger
       const menu = getMenu(menuInfoData.menuData!, e.key)
       if (menu?.viewType === '2') {
         if (ishttp(menu.linkUrl || '')) {
@@ -120,7 +116,7 @@ function MengLayout() {
       matchMenuKeys: matchMenuKeys,
     }
   }, [menuItemClick, menuData, matchMenuKeys])
-  const {matchRoutes} = useRouter()
+  const { matchRoutes } = useRouter()
   return (
     <AuthRouter>
       <MenuContext.Provider value={menuContextValue}>

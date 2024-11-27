@@ -35,10 +35,7 @@ export const createPortalProvider = (id: string | symbol) => {
   return Portal
 }
 
-export function createPortalRoot<T extends React.ReactNode>(
-  host: HTMLElement,
-  id: string
-) {
+export function createPortalRoot<T extends React.ReactNode>(host: HTMLElement, id: string) {
   function render(renderer?: () => T) {
     if (PortalMap.has(id)) {
       PortalMap.set(id, renderer?.())

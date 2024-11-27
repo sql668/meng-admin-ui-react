@@ -1,4 +1,3 @@
-
 //import MengLayout from '@/layouts'
 import MengLayout from '@/layout'
 //import { CustomRouteConfig } from '@/types/route'
@@ -11,7 +10,7 @@ import Register from '@/views/register'
 import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom'
 import RouterErrorElement from '@/views/router-error-element'
 import { RouterVo } from '@/types/model'
-import CreatedForm from "@/views/tool/form/views/edit"
+import CreatedForm from '@/views/tool/form/views/edit'
 export const StaticRoute: RouteObject[] = [
   {
     index: false,
@@ -78,7 +77,6 @@ export const routerData: RouteObject[] = [
   },
 ]
 
-// @ts-ignore
 export const router = createBrowserRouter(routerData, {
   basename: import.meta.env.VITE_BASE_URL,
 }) as any
@@ -129,6 +127,6 @@ export const restRoutes = (routes: RouteObject[]) => {
 export const staticRouteData: RouterVo[] = StaticRoute.map((item) => {
   return {
     path: item.path!,
-    handle: item.handle
+    handle: item.handle,
   }
 })

@@ -375,7 +375,7 @@ export const editFormSchema = {
                   fieldNames: {
                     label: 'roleName',
                     value: 'roleId',
-                  }
+                  },
                 },
                 'x-decorator-props': {},
                 name: 'roleId',

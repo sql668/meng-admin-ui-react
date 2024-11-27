@@ -25,5 +25,14 @@ module.exports = {
     'space-infix-ops': 2, // 要求操作符周围有空格
     'space-before-blocks': 2, // 要求语句块之前有空格
     '@typescript-eslint/explicit-function-return-type': 0, // 禁止函数必须要定义返回类型
+    'react-hooks/rules-of-hooks': 1,// 0: 关闭  1:警告  2:报错
+    '@typescript-eslint/no-var-requires': 1,
+    'no-empty': 1,
+    '@typescript-eslint/no-unused-vars': 1,
+    '@typescript-eslint/no-non-null-asserted-optional-chain': 1,
+    'no-prototype-builtins': 1,
+    'no-case-declarations': 1,
+    '@typescript-eslint/ban-ts-comment': 1,
+    '@typescript-eslint/ban-ts-comment':1,
   },
 }

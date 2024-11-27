@@ -1,7 +1,7 @@
-import useEffectWithTarget from "@/utils/hooks/useEffectWithTarget"
-import { useMergedState } from "@fdesign/util"
-import { useLatest } from "ahooks"
-import { BasicTarget, getTargetElement } from "ahooks/lib/utils/domTarget"
+import useEffectWithTarget from '@/utils/hooks/useEffectWithTarget'
+import { useMergedState } from '@fdesign/util'
+import { useLatest } from 'ahooks'
+import { BasicTarget, getTargetElement } from 'ahooks/lib/utils/domTarget'
 type noop = (...p: any) => void
 
 export type Target = BasicTarget<HTMLElement | Element | Window | Document>
@@ -52,7 +52,7 @@ function useEventListener(
 function useEventListener(eventName: string, handler: noop, options: Options = {}) {
   const { enable } = options
   const [mergeEnable, setMergeEnable] = useMergedState(true, {
-    defaultValue:enable
+    defaultValue: enable,
   })
 
   const handlerRef = useLatest(handler)
@@ -70,7 +70,6 @@ function useEventListener(eventName: string, handler: noop, options: Options = {
       capture: options.capture,
     })
   }
-
 
   useEffectWithTarget(
     () => {
@@ -104,7 +103,7 @@ function useEventListener(eventName: string, handler: noop, options: Options = {
     setMergeEnable(false)
   }
 
-  return {stop}
+  return { stop }
 }
 
 export default useEventListener

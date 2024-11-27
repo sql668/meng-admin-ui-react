@@ -12,7 +12,7 @@ export interface IconType {
   className?: string
   [key: string]: any
 }
-const SVG_END_WITH_FLAG = '|svg';
+const SVG_END_WITH_FLAG = '|svg'
 const useStyles = createStyles(({ css }, props: { size: number | string; color: string }) => {
   const { size, color } = props
   let fs = size
@@ -37,7 +37,6 @@ export function Icon(props: IconType) {
   const { styles, cx } = useStyles({ size, color })
 
   useEffect(() => {
-
     if (mode != 'svg' && !icon?.endsWith(SVG_END_WITH_FLAG)) {
       const el = iconRef.current! as HTMLElement
       const svg = Iconify.renderSVG(icon, {})
@@ -54,8 +53,12 @@ export function Icon(props: IconType) {
     }
   }, [icon, mode])
   return mode === 'svg' || icon?.endsWith(SVG_END_WITH_FLAG) ? (
-    <SvgIcon icon={icon?.endsWith(SVG_END_WITH_FLAG) ? icon.replace(SVG_END_WITH_FLAG, ''): icon} color={color} size={size} {...restProps}></SvgIcon>
+    <SvgIcon
+      icon={icon?.endsWith(SVG_END_WITH_FLAG) ? icon.replace(SVG_END_WITH_FLAG, '') : icon}
+      color={color}
+      size={size}
+      {...restProps}></SvgIcon>
   ) : (
-    <span ref={iconRef} className={cx(styles.container, className,'anticon')}></span>
+    <span ref={iconRef} className={cx(styles.container, className, 'anticon')}></span>
   )
 }

@@ -1,7 +1,6 @@
-import { PageResultData, ResultData } from "@/types/api"
-import useRequest from "@/utils/http"
-import { FormInfoModel, QueryFormModel } from "@/views/tool/form/type"
-
+import { PageResultData, ResultData } from '@/types/api'
+import useRequest from '@/utils/http'
+import { FormInfoModel, QueryFormModel } from '@/views/tool/form/type'
 
 export const getFormGeneratePageApi = (data?: QueryFormModel) => {
   return useRequest.get<PageResultData<FormInfoModel[]>>({

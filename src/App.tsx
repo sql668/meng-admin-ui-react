@@ -20,8 +20,6 @@ import useRootSetting from './hooks/setting/useRootSetting'
 // const mapV4Token = theme.getDesignToken(defaultTheme)
 // const v4Vars = convertLegacyToken(mapV4Token)
 
-
-
 //import { frontEndRoutes } from './router/frontEnd'
 type Locale = ConfigProviderProps['locale']
 //dayjs.locale('zhCN')
@@ -37,7 +35,7 @@ const antdThemeConfig = {
 }
 export default function App() {
   const [locale] = useState<Locale>(zhCN)
-  const {getGlobalTheme} = useRootSetting()
+  const { getGlobalTheme } = useRootSetting()
   return (
     <MxAppConfigProvider>
       <ConfigProvider locale={locale} theme={antdThemeConfig}>

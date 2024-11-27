@@ -23,14 +23,13 @@ import LayoutTrigger from '../trigger'
 import useRootSetting from '@/hooks/setting/useRootSetting'
 import { SettingDrawer } from '../setting'
 import { AppLogo, ThemeToggle } from '@/components/application'
-import "./style/_style.scss"
+import './style/_style.scss'
 import LayoutMenu from '../menu'
 import { MenuModeEnum, MenuSplitTyeEnum } from '@/core/enums/menuEnum'
 
 interface LayoutHeaderProps {
   fixed?: boolean
 }
-
 
 const items: MenuProps['items'] = [
   {
@@ -44,7 +43,6 @@ const items: MenuProps['items'] = [
     icon: <LoginOutlined />,
   },
 ]
-
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -61,10 +59,17 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
   const nav = useNavigate()
   const { styles, cx } = useStyles()
   const { prefixCls } = useDesign('layout-header')
-  const { getShowTopMenu,getShowHeaderTrigger,getSplitMenu,getIsMixSidebar,getIsMixMode,getMenuWidth } = useMenuSetting()
-  const { getShowContent,getHeaderTheme,getShowHeaderLogo} = useHeaderSetting()
-  
-  const {getIsMobile } = useRootSetting()
+  const {
+    getShowTopMenu,
+    getShowHeaderTrigger,
+    getSplitMenu,
+    getIsMixSidebar,
+    getIsMixMode,
+    getMenuWidth,
+  } = useMenuSetting()
+  const { getShowContent, getHeaderTheme, getShowHeaderLogo } = useHeaderSetting()
+
+  const { getIsMobile } = useRootSetting()
   const getHeaderClass = useMemo(() => {
     return classNames([
       prefixCls,
@@ -74,7 +79,7 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
         [`${prefixCls}--${getHeaderTheme}`]: getHeaderTheme,
       },
     ])
-  }, [prefixCls, getIsMobile,getHeaderTheme])
+  }, [prefixCls, getIsMobile, getHeaderTheme])
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { clear } = useAliveController()
@@ -86,57 +91,56 @@ const LayoutHeader = memo(function LayoutHeader(props: LayoutHeaderProps) {
     }
   }
 
-   const handleOk = async () => {
-     const res = await LogoutApi()
-     if (res.code === 0) {
-       Session.remove('token')
+  const handleOk = async () => {
+    const res = await LogoutApi()
+    if (res.code === 0) {
+      Session.remove('token')
 
-       setIsModalOpen(false)
-       setTimeout(() => {
-         clear() // 清空路由缓存节点
-         nav(LOGIN_PATHNAME)
-         setPermissions([])
-         setPermissionRouters([])
-         restRoutes(router.routes)
-         resetTagsTab()
-       }, 0)
-     } else {
-       message.error(res.msg)
-     }
-   }
+      setIsModalOpen(false)
+      setTimeout(() => {
+        clear() // 清空路由缓存节点
+        nav(LOGIN_PATHNAME)
+        setPermissions([])
+        setPermissionRouters([])
+        restRoutes(router.routes)
+        resetTagsTab()
+      }, 0)
+    } else {
+      message.error(res.msg)
+    }
+  }
 
-   const handleCancel = () => {
-     setIsModalOpen(false)
-   }
-  
-   const getLogoWidth = useMemo(() => {
-     if (!getIsMixMode || getIsMobile) {
-       return undefined
-     }
-     const width = getMenuWidth < 180 ? 180 : getMenuWidth
-     return { width: `${width}px` }
-   }, [getIsMixMode, getIsMobile, getMenuWidth])
-  
+  const handleCancel = () => {
+    setIsModalOpen(false)
+  }
+
+  const getLogoWidth = useMemo(() => {
+    if (!getIsMixMode || getIsMobile) {
+      return undefined
+    }
+    const width = getMenuWidth < 180 ? 180 : getMenuWidth
+    return { width: `${width}px` }
+  }, [getIsMixMode, getIsMobile, getMenuWidth])
+
   const getSplitType = getSplitMenu ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE
 
-   const getMenuMode = getSplitMenu ? MenuModeEnum.HORIZONTAL : null
-  
+  const getMenuMode = getSplitMenu ? MenuModeEnum.HORIZONTAL : null
 
   return (
     <>
       <Layout.Header className={cx(getHeaderClass, styles.container)}>
         <div className={`${prefixCls}-left`}>
           {(getShowHeaderLogo || getIsMobile) && (
-              <AppLogo
-                wrapStyle={getLogoWidth}
-                theme={getHeaderTheme}
-                className={`${prefixCls}-logo`}></AppLogo>
-            )}
+            <AppLogo
+              wrapStyle={getLogoWidth}
+              theme={getHeaderTheme}
+              className={`${prefixCls}-logo`}></AppLogo>
+          )}
 
           {((getShowContent && getShowHeaderTrigger && !getSplitMenu && !getIsMixSidebar) ||
             getIsMobile) && <LayoutTrigger></LayoutTrigger>}
         </div>
-        {(getShowTopMenu && !getIsMobile) && (
+        {getShowTopMenu && !getIsMobile && (
           <div className={`${prefixCls}-menu`}>
             <LayoutMenu
               isHorizontal

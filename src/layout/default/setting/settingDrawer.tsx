@@ -14,20 +14,20 @@ interface SettingDrawerProps {
 function SettingDrawer(props: SettingDrawerProps) {
   const [visible, setVisible] = useState<boolean>(false)
 
-  const { getMenuType, getIsHorizontal,getSplitMenu,getShowMenu } = useMenuSetting()
-  
+  const { getMenuType, getIsHorizontal, getSplitMenu, getShowMenu } = useMenuSetting()
+
   const baseHandler = useSettingHandle()
 
   const getShowMenuRef = useMemo(() => {
     return getShowMenu && !getIsHorizontal
-  },[getShowMenu,getIsHorizontal])
+  }, [getShowMenu, getIsHorizontal])
 
-  function renderSiderbar() { 
+  function renderSiderbar() {
     return (
       <TypePicker
         menuTypeList={menuTypeListEnum}
         def={getMenuType}
-        handler={(item: typeof menuTypeListEnum[0]) => {
+        handler={(item: (typeof menuTypeListEnum)[0]) => {
           baseHandler(HandlerEnum.CHANGE_LAYOUT, {
             mode: item.mode,
             type: item.type,
@@ -37,7 +37,7 @@ function SettingDrawer(props: SettingDrawerProps) {
     )
   }
 
-  function renderFeatures() { 
+  function renderFeatures() {
     return (
       <>
         <SwitchItem

@@ -29,7 +29,6 @@ export default function useMatchRoute() {
 
   const [matchRoute, setMatchRoute] = useState<MatchRouteType>()
 
-
   // 监听pathname变了，说明路由有变化，重新匹配，返回新路由信息
   useEffect(() => {
     // 获取当前匹配的路由
@@ -48,7 +47,6 @@ export default function useMatchRoute() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, matches])
-
 
   return matchRoute
 }

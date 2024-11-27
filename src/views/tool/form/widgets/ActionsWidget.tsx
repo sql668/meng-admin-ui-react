@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Space, Button, Radio, message } from 'antd'
 import { useDesigner, TextWidget } from '@form-created/react'
 import { GlobalRegistry } from '@form-created/core'
@@ -7,7 +7,11 @@ import { loadInitialSchema } from '../service'
 import { EditForm } from '../component/form'
 import { FormInfoModel } from '../type'
 import { isFalse } from '@/utils/util'
-import { getFormGenerateById, insertFormGenerateApi, updateFormGenerateApi } from '@/api/tools/form-generate'
+import {
+  getFormGenerateById,
+  insertFormGenerateApi,
+  updateFormGenerateApi,
+} from '@/api/tools/form-generate'
 import { transformToSchema, transformToTreeNode } from '@form-created/formily-transformer'
 import { useParams } from 'react-router'
 import { useQueryClient } from '@tanstack/react-query'
@@ -15,10 +19,9 @@ import { useQueryClient } from '@tanstack/react-query'
 export const InitFormData: FormInfoModel = {
   sort: 1,
   status: 1,
-  formName: "",
+  formName: '',
   isModel: false,
 }
-
 
 export const ActionsWidget = observer(() => {
   const designer = useDesigner()
@@ -32,12 +35,10 @@ export const ActionsWidget = observer(() => {
         if (res.code === 0) {
           setFormInit(res.data!)
           console.log(JSON.parse(res.data?.jsonSchema || ''))
-          designer.setCurrentTree(
-            transformToTreeNode(JSON.parse(res.data?.jsonSchema || '')),
-          )
+          designer.setCurrentTree(transformToTreeNode(JSON.parse(res.data?.jsonSchema || '')))
         }
       })
-    } 
+    }
   }, [params])
   const supportLocales = ['zh-cn', 'en-us', 'ko-kr']
   useEffect(() => {
@@ -73,7 +74,7 @@ export const ActionsWidget = observer(() => {
   const editFormCancel = () => {
     setOpen(false)
   }
-  
+
   return (
     <Space style={{ marginRight: 10 }}>
       {/* <Button href="https://designable-fusion.formilyjs.org">

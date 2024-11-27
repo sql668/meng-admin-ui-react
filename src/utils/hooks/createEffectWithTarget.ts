@@ -1,7 +1,7 @@
-import { BasicTarget, getTargetElement } from "ahooks/lib/utils/domTarget"
-import { DependencyList, EffectCallback, useEffect, useLayoutEffect, useRef } from "react"
-import depsAreSame from "./depsAreSame"
-import { useUnmount } from "ahooks"
+import { BasicTarget, getTargetElement } from 'ahooks/lib/utils/domTarget'
+import { DependencyList, EffectCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import depsAreSame from './depsAreSame'
+import { useUnmount } from 'ahooks'
 
 const createEffectWithTarget = (useEffectType: typeof useEffect | typeof useLayoutEffect) => {
   /**

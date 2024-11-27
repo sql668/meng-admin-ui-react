@@ -1,9 +1,8 @@
-
 import React, { ReactElement } from 'react'
 import { Form } from '@formily/core'
 import { FormDialog, FormLayout, FormProps } from '@formily/antd-v5'
 import { SchemaField } from './base'
-import { nanoid} from "nanoid"
+import { nanoid } from 'nanoid'
 
 /** 确定和取消按钮事件 */
 export interface FormEvent<R = any> {
@@ -11,7 +10,7 @@ export interface FormEvent<R = any> {
 }
 
 export interface DialogFormProps extends FormProps {
-  id?:string
+  id?: string
   /** dialog标题 */
   title: string
   schema: any
@@ -23,9 +22,17 @@ export interface DialogFormProps extends FormProps {
   cancelHandle?: FormEvent
 }
 
-
 export function DialogForm(props: DialogFormProps) {
-  const { id = nanoid(),schema, title, formValues, confirmHandle, cancelHandle,children, ...restProps } = props
+  const {
+    id = nanoid(),
+    schema,
+    title,
+    formValues,
+    confirmHandle,
+    cancelHandle,
+    children,
+    ...restProps
+  } = props
   const clickHandle = (confirmHandle: FormEvent) => {
     const dialog = FormDialog({ title }, () => {
       return (
@@ -53,7 +60,7 @@ export function DialogForm(props: DialogFormProps) {
       .then(console.log)
   }
   return (
-    <FormDialog.Portal id={ id}>
+    <FormDialog.Portal id={id}>
       {React.cloneElement(children as ReactElement, {
         ...(children as ReactElement).props,
         onClick: () => {

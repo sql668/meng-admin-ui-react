@@ -1,7 +1,6 @@
-
-import type {  fieldNamesProp } from './type';
-import { useMemo } from 'react';
-import { convertDataToEntities } from './util';
+import type { fieldNamesProp } from './type'
+import { useMemo } from 'react'
+import { convertDataToEntities } from './util'
 
 /**
  * 将treeData转换成keyEntities
@@ -21,6 +20,6 @@ import { convertDataToEntities } from './util';
  * @returns
  */
 function useDataEntities(treeData: any, fieldNames: fieldNamesProp) {
-  return useMemo(() => convertDataToEntities(treeData, {fieldNames}),[treeData, fieldNames])
+  return useMemo(() => convertDataToEntities(treeData, { fieldNames }), [treeData, fieldNames])
 }
-export default useDataEntities;
+export default useDataEntities

@@ -16,7 +16,7 @@ const buildApiTree = (data: Array<ApiEntity>) => {
     apis.forEach((item) => {
       item.onlyId = 'p:' + item.path + 'm:' + item.method
       if (Object.prototype.hasOwnProperty.call(apiObj, item.apiGroup)) {
-        apiObj[item.apiGroup].push({...item,key:item.apiId,title:item.remark})
+        apiObj[item.apiGroup].push({ ...item, key: item.apiId, title: item.remark })
       } else {
         Object.assign(apiObj, {
           [item.apiGroup]: [{ ...item, key: item.apiId, title: item.remark }],
@@ -37,10 +37,7 @@ const buildApiTree = (data: Array<ApiEntity>) => {
 }
 
 export const ApiAuth = (props: { record?: RoleEntity; close?: () => void }) => {
-  const {
-    record,
-    close,
-  } = props
+  const { record, close } = props
   const [filterText, setFilterText] = useState('')
   const [autoExpandParent, setAutoExpandParent] = useState<boolean>(true)
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([])
@@ -90,9 +87,9 @@ export const ApiAuth = (props: { record?: RoleEntity; close?: () => void }) => {
   useQuery({
     queryKey: ['sys-api', 'get', 'auth', record?.roleCode],
     queryFn: () =>
-      getRoleCheckedByRoleCodeApi(record?.roleCode || "").then((res) => {
+      getRoleCheckedByRoleCodeApi(record?.roleCode || '').then((res) => {
         if (res.code === 0) {
-          const result:Array<string> = []
+          const result: Array<string> = []
           res.data.list.forEach((item) => {
             result.push('p:' + item.path + 'm:' + item.method)
           })
@@ -134,7 +131,7 @@ export const ApiAuth = (props: { record?: RoleEntity; close?: () => void }) => {
             }).then((res) => {
               if (res.code === 0) {
                 antdUtils.message?.success('操作成功')
-                close&&close()
+                close && close()
               } else {
                 antdUtils.message?.error(res.msg)
               }

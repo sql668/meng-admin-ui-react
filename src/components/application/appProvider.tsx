@@ -1,17 +1,22 @@
-import { useCallback, useContext, useEffect, useRef } from "react"
-import { MxAppConfigContext } from "./context"
-import { MxAppConfigConsumerProps, MxAppConfigProviderProps, ProviderChildrenProps } from "./type"
-import useMemo from "@/hooks/useMemo"
-import { useBreakpoint } from "@/hooks/useBreakpoint"
-import useRootSetting from "@/hooks/setting/useRootSetting"
-import { getBeforeminiInfoSetting, getMenuSetting, setBeforeMiniInfo, setMenuSetting, setRootSetting } from "@/store/app"
-import { MenuModeEnum, MenuTypeEnum } from "@/core/enums/menuEnum"
-
+import { useCallback, useContext, useEffect, useRef } from 'react'
+import { MxAppConfigContext } from './context'
+import { MxAppConfigConsumerProps, MxAppConfigProviderProps, ProviderChildrenProps } from './type'
+import useMemo from '@/hooks/useMemo'
+import { useBreakpoint } from '@/hooks/useBreakpoint'
+import useRootSetting from '@/hooks/setting/useRootSetting'
+import {
+  getBeforeminiInfoSetting,
+  getMenuSetting,
+  setBeforeMiniInfo,
+  setMenuSetting,
+  setRootSetting,
+} from '@/store/app'
+import { MenuModeEnum, MenuTypeEnum } from '@/core/enums/menuEnum'
 
 const ProviderChildren: React.FC<ProviderChildrenProps> = (props) => {
   const { parentContext, children } = props
   const isSetState = useRef(false)
-  const { getIsDisableMobile} = useRootSetting()
+  const { getIsDisableMobile } = useRootSetting()
   const getPrefixCls = useCallback(
     (suffixCls?: string) => {
       const { prefixCls } = props
@@ -42,12 +47,17 @@ const ProviderChildren: React.FC<ProviderChildrenProps> = (props) => {
     }
   }, [getIsDisableMobile, colSize])
 
-  const handleRestoreState = (isMobile:boolean) => {
+  const handleRestoreState = (isMobile: boolean) => {
     if (isMobile && !isSetState.current) {
       isSetState.current = true
-      const { type: menuType, mode: menuMode, collapsed: menuCollapsed, splitMenu: menuSplit } = getMenuSetting()
+      const {
+        type: menuType,
+        mode: menuMode,
+        collapsed: menuCollapsed,
+        splitMenu: menuSplit,
+      } = getMenuSetting()
       //console.log({ menuMode, menuCollapsed, menuType, menuSplit })
-      
+
       setMenuSetting({
         splitMenu: false,
         type: MenuTypeEnum.SIDEBAR,
@@ -75,25 +85,17 @@ const ProviderChildren: React.FC<ProviderChildrenProps> = (props) => {
     ...parentContext,
     getPrefixCls,
   }
-    
 
-  const memoedConfig = useMemo(
-    () => config || {},
-    [config],
+  const memoedConfig = useMemo(() => config || {}, [config])
+
+  const childNode = <>{children}</>
+
+  return (
+    <MxAppConfigContext.Provider value={memoedConfig as any}>
+      {childNode}
+    </MxAppConfigContext.Provider>
   )
-  
-
-  let childNode = (
-    <>
-      {children}
-    </>
-  )
-
-  return <MxAppConfigContext.Provider value={memoedConfig as any}>{childNode}</MxAppConfigContext.Provider>
-
 }
-
-
 
 const MxAppConfigProvider: React.FC<MxAppConfigProviderProps> & {
   ConfigContext: typeof MxAppConfigContext

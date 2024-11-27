@@ -16,7 +16,7 @@ const getOpenKeysProps = (
   { layout, collapsed }: BaseMenuProps,
 ): {
   openKeys?: undefined | string[]
-  } => {
+} => {
   let openKeysProps = {} as Record<string, any>
 
   if (openKeys && !collapsed && ['sidebar', 'mix'].includes(layout || 'mix')) {
@@ -45,7 +45,7 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
     handleOpenChange,
   } = props
 
-  console.log("basemenu:",props)
+  console.log('basemenu:', props)
 
   const baseClassName = `mx-layout-base-menu-${mode}`
 
@@ -131,13 +131,12 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
   )
 
   const openKeysProps = useMemo(
-    () => { 
+    () => {
       return getOpenKeysProps(openKeys, props)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [openKeys && openKeys.join(','), props.layout, props.collapsed],
   )
-
 
   // 这次 openKeys === false 的时候的情况，这种情况下帮用户选中一次
   // 第二此不会使用，所以用了 defaultOpenKeys
@@ -145,7 +144,6 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
   if (props.openKeys === false && !props.handleOpenChange) {
     defaultOpenKeysRef.current = matchMenuKeys
   }
-
 
   const finallyData = menuData
 

@@ -1,5 +1,4 @@
-import { isUndef } from "./is"
-
+import { isUndef } from './is'
 
 /**
  * 将数字限定于指定区间
@@ -13,7 +12,7 @@ clamp(2, 5); // -> 2
  * @param upper 上限
  * @returns 
  */
-export function clamp(n:number, lower:any, upper:number) {
+export function clamp(n: number, lower: any, upper: number) {
   if (isUndef(upper)) {
     upper = lower
     lower = undefined

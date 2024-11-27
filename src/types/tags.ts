@@ -1,4 +1,4 @@
-import { IRouteMeta } from "./route"
+import { IRouteMeta } from './route'
 
 export interface TagsTabProps {
   title: string

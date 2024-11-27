@@ -1,7 +1,7 @@
-import { BasicTarget } from "ahooks/lib/utils/domTarget"
-import { DependencyList, EffectCallback, useRef } from "react"
-import { depsEqual } from "../depsEqual"
-import useEffectWithTarget from "./useEffectWithTarget"
+import { BasicTarget } from 'ahooks/lib/utils/domTarget'
+import { DependencyList, EffectCallback, useRef } from 'react'
+import { depsEqual } from '../depsEqual'
+import useEffectWithTarget from './useEffectWithTarget'
 
 const useDeepCompareEffectWithTarget = (
   effect: EffectCallback,

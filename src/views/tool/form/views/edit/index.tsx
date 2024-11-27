@@ -1,6 +1,3 @@
-
-
-
 import {
   CaseWidget,
   ComponentTreeWidget,
@@ -52,7 +49,7 @@ import {
 } from '@form-created/formily-antd'
 
 import { BaseCase } from '../../icons'
-import {  useMemo } from 'react'
+import { useMemo } from 'react'
 import { saveSchema, setCaseSchema } from '../../service'
 import { LogoWidget } from '../../widgets/LogoWidget'
 import { ActionsWidget } from '../../widgets/ActionsWidget'
@@ -62,7 +59,6 @@ import { MarkupSchemaWidget } from '../../widgets/MarkupSchemaWidget'
 import { PreviewWidget } from '../../widgets/PreviewWidget'
 //import { SettingsForm } from '../../component/SettingsForm'
 import { SettingsForm } from '@form-created/react-settings-form'
-
 
 // 注册 自定义的locales
 GlobalRegistry.registerDesignerLocales({
@@ -74,8 +70,8 @@ GlobalRegistry.registerDesignerLocales({
       Displays: '展示组件',
     },
     panels: {
-      Case:'案例',
-    }
+      Case: '案例',
+    },
   },
   'en-US': {
     sources: {
@@ -85,8 +81,8 @@ GlobalRegistry.registerDesignerLocales({
       Displays: 'Displays',
     },
     panels: {
-      Case:'Case',
-    }
+      Case: 'Case',
+    },
   },
   'ko-KR': {
     sources: {
@@ -94,19 +90,16 @@ GlobalRegistry.registerDesignerLocales({
       Layouts: '레이아웃',
       Arrays: '배열',
       Displays: '디스플레이',
-      panels: {
-      
-    }
+      panels: {},
     },
   },
 })
 // 注册自定义icon，通过IconWidget组件显示图标
 GlobalRegistry.registerDesignerIcons({
-  'CaseBase': BaseCase
+  CaseBase: BaseCase,
 })
 
-export default function CreateFormView() { 
-
+export default function CreateFormView() {
   const engine = useMemo(
     () =>
       createDesigner({
@@ -126,7 +119,6 @@ export default function CreateFormView() {
     [],
   )
 
-  
   return (
     <div className='app-container'>
       <Designer engine={engine} position='relative'>

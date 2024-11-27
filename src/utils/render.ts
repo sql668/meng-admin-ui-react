@@ -36,8 +36,7 @@ function toggleWarning(skip: boolean) {
     __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED &&
     typeof __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED === 'object'
   ) {
-    __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.usingClientEntryPoint =
-      skip
+    __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.usingClientEntryPoint = skip
   }
 }
 

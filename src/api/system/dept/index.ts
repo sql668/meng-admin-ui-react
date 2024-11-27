@@ -2,7 +2,6 @@ import { ResultData } from '@/types/api'
 import useRequest from '@/utils/http'
 import { DeptModel, EditFormModel, QueryFormModel } from '@/views/system/dept/type'
 
-
 export const getDeptPageApi = (data?: QueryFormModel) => {
   return useRequest.get<ResultData<DeptModel[]>>({
     url: '/dept',
@@ -14,7 +13,7 @@ export const getDeptTreeApi = (data?: QueryFormModel) => {
   return useRequest.get<ResultData<DeptModel[]>>({
     url: '/dept/tree',
     params: data,
-  })        
+  })
 }
 
 export const getDeptById = (menuId: number) => {
@@ -36,7 +35,6 @@ export const updateDeptApi = (data: EditFormModel, id: number) => {
     data,
   })
 }
-
 
 export const deleteDeptByIdApi = (ids: number[]) => {
   return useRequest.delete<ResultData>({
