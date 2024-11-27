@@ -94,10 +94,10 @@ importers:
         version: 1.0.1-rc.1(react@18.3.1)
       '@tanstack/react-query':
         specifier: ^5.24.1
-        version: 5.61.3(react@18.3.1)
+        version: 5.61.5(react@18.3.1)
       '@tanstack/react-query-devtools':
         specifier: ^5.34.1
-        version: 5.61.3(@tanstack/react-query@5.61.3(react@18.3.1))(react@18.3.1)
+        version: 5.61.5(@tanstack/react-query@5.61.5(react@18.3.1))(react@18.3.1)
       ahooks:
         specifier: ^3.7.10
         version: 3.8.1(react@18.3.1)
@@ -199,11 +199,11 @@ importers:
         specifier: ^7.22.10
         version: 7.26.2
       '@commitlint/cli':
-        specifier: ^18.6.1
+        specifier: 18.6.1
         version: 18.6.1(@types/node@20.17.8)(typescript@5.7.2)
       '@commitlint/config-conventional':
-        specifier: ^18.6.2
-        version: 18.6.3
+        specifier: 18.6.2
+        version: 18.6.2
       '@iconify/json':
         specifier: ^2.2.187
         version: 2.2.276
@@ -215,7 +215,7 @@ importers:
         version: 0.10.0
       '@tanstack/eslint-plugin-query':
         specifier: ^5.32.1
-        version: 5.61.3(eslint@8.57.1)(typescript@5.7.2)
+        version: 5.61.4(eslint@8.57.1)(typescript@5.7.2)
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -275,7 +275,7 @@ importers:
         version: 4.3.4(vite@5.4.11(@types/node@20.17.8)(sass@1.81.0)(terser@5.36.0))
       '@vitejs/plugin-react-swc':
         specifier: ^3.7.1
-        version: 3.7.1(vite@5.4.11(@types/node@20.17.8)(sass@1.81.0)(terser@5.36.0))
+        version: 3.7.2(vite@5.4.11(@types/node@20.17.8)(sass@1.81.0)(terser@5.36.0))
       '@welldone-software/why-did-you-render':
         specifier: ^8.0.1
         version: 8.0.3(react@18.3.1)
@@ -286,11 +286,11 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0
       cz-git:
-        specifier: ^1.8.0
-        version: 1.11.0
+        specifier: 1.8.0
+        version: 1.8.0
       czg:
-        specifier: ^1.8.0
-        version: 1.11.0
+        specifier: 1.8.0
+        version: 1.8.0
       eslint:
         specifier: ^8.55.0
         version: 8.57.1
@@ -943,8 +943,8 @@ packages:
     engines: {node: '>=v18'}
     hasBin: true
 
-  '@commitlint/config-conventional@18.6.3':
-    resolution: {integrity: sha512-8ZrRHqF6je+TRaFoJVwszwnOXb/VeYrPmTwPhf0WxpzpGTcYy1p0SPyZ2eRn/sRi/obnWAcobtDAq6+gJQQNhQ==}
+  '@commitlint/config-conventional@18.6.2':
+    resolution: {integrity: sha512-PcgSYg1AKGQIwDQKbaHtJsfqYy4uJTC7crLVZ83lfjcPaec4Pry2vLeaWej7ao2KsT20l9dWoMPpEGg8LWdUuA==}
     engines: {node: '>=v18'}
 
   '@commitlint/config-validator@18.6.1':
@@ -1999,25 +1999,25 @@ packages:
   '@swc/types@0.1.17':
     resolution: {integrity: sha512-V5gRru+aD8YVyCOMAjMpWR1Ui577DD5KSJsHP8RAxopAH22jFz6GZd/qxqjO6MJHQhcsjvjOFXyDhyLQUnMveQ==}
 
-  '@tanstack/eslint-plugin-query@5.61.3':
-    resolution: {integrity: sha512-tcP6xfoi/22oylcIUCWnfsfSpHZO/2MNq1pzex5NuwbeqEU2TQYJyoUp0Rdmtx9Pl9csPSNK70gBcCjuPQ0+ng==}
+  '@tanstack/eslint-plugin-query@5.61.4':
+    resolution: {integrity: sha512-QVVsY8hwrX9r6c8lLV48oY682SU2GeVlo0hWMSaOKkI05Yi4bXhw5jv7E2qkbjGrgA6DcVl3o/F0dT4wpT+/SQ==}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
-  '@tanstack/query-core@5.60.6':
-    resolution: {integrity: sha512-tI+k0KyCo1EBJ54vxK1kY24LWj673ujTydCZmzEZKAew4NqZzTaVQJEuaG1qKj2M03kUHN46rchLRd+TxVq/zQ==}
+  '@tanstack/query-core@5.61.5':
+    resolution: {integrity: sha512-iG5vqurEOEbv+paP6kW3zPENa99kSIrd1THISJMaTwVlJ+N5yjVDNOUwp9McK2DWqWCXM3v13ubBbAyhxT78UQ==}
 
-  '@tanstack/query-devtools@5.61.3':
-    resolution: {integrity: sha512-AoRco+DMw7Xy9fFs+5BxBop82YPKs1/tWpTPoO1iYVwPLmAU+znnLfWyZ8Qr5OiEqoS0dCyEe6F5V11/JkCK/A==}
+  '@tanstack/query-devtools@5.61.4':
+    resolution: {integrity: sha512-21Tw+u8E3IJJj4A/Bct4H0uBaDTEu7zBrR79FeSyY+mS2gx5/m316oDtJiKkILc819VSTYt+sFzODoJNcpPqZQ==}
 
-  '@tanstack/react-query-devtools@5.61.3':
-    resolution: {integrity: sha512-bR/TaiOSqTq0M5dmYY+pJeSnl5QAuCaRRmJg+Q5hEqt6uTHgKz5WO4jdi8BywRJiZhpXLirlUAIOXJsZ8ukqSA==}
+  '@tanstack/react-query-devtools@5.61.5':
+    resolution: {integrity: sha512-P2DwlKyoGar6FX2XL324gM7AX8fuXm6DecLvfUoGpWbxtbuAtfzglRiCDLKkc5tJ7pekuaZsFFas/cyfTymoCQ==}
     peerDependencies:
-      '@tanstack/react-query': ^5.61.3
+      '@tanstack/react-query': ^5.61.5
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.61.3':
-    resolution: {integrity: sha512-c3Oz9KaCBapGkRewu7AJLhxE9BVqpMcHsd3KtFxSd7FSCu2qGwqfIN37zbSGoyk6Ix9LGZBNHQDPI6GpWABnmA==}
+  '@tanstack/react-query@5.61.5':
+    resolution: {integrity: sha512-rjy8aqPgBBEz/rjJnpnuhi8TVkVTorMUsJlM3lMvrRb5wK6yzfk34Er0fnJ7w/4qyF01SnXsLB/QsTBsLF5PaQ==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -2297,10 +2297,10 @@ packages:
       terser: ^5.4.0
       vite: ^5.0.0
 
-  '@vitejs/plugin-react-swc@3.7.1':
-    resolution: {integrity: sha512-vgWOY0i1EROUK0Ctg1hwhtC3SdcDjZcdit4Ups4aPkDcB1jYhmo+RMYWY87cmXMhvtD5uf8lV89j2w16vkdSVg==}
+  '@vitejs/plugin-react-swc@3.7.2':
+    resolution: {integrity: sha512-y0byko2b2tSVVf5Gpng1eEhX1OvPC7x8yns1Fx8jDzlJp4LS6CMkCPfLw47cjyoMrshQDoQw4qcgjsU9VvlCew==}
     peerDependencies:
-      vite: ^4 || ^5
+      vite: ^4 || ^5 || ^6
 
   '@vitejs/plugin-react@4.3.4':
     resolution: {integrity: sha512-SCCPBJtYLdE8PX/7ZQAs1QAZ8Jqwih+0VBLum1EGqmCCQal+MIUqLCzj3ZUy8ufbC0cAM4LRlSTm7IQJwWT4ug==}
@@ -2808,12 +2808,12 @@ packages:
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
-  cz-git@1.11.0:
-    resolution: {integrity: sha512-FCNkpyVmNPX0P8kHtX8uoFcXsJ4bjivMXVS5vc/qCyM8jj+Tuqo6CXQjGQKwKl0Lk9VNz7o6JfPoU/mM/XhxqA==}
+  cz-git@1.8.0:
+    resolution: {integrity: sha512-XL5nXiqbW10YswQqWODrbwyWhydw3mLhP8OBrXyl8u4sIjTf/6mhGsizd6FA2VgPc4tZaNGguFoUyDj7vIBouw==}
     engines: {node: '>=v12.20.0'}
 
-  czg@1.11.0:
-    resolution: {integrity: sha512-go39avnHPvDn1HF4LS1qxj5XPGCQexZ9+y8f+0VlE9plZgRyWUOl4rUCwE4vD1azouIhz/KaauB45A7jPfMxpw==}
+  czg@1.8.0:
+    resolution: {integrity: sha512-vLX3AIUaE30C/qkeuL+g1fcdjZ72vBdON12E4V4vmuTKKe7OMoQ2MxBYbWhl5OP28+ggCrajxGBk6bdjIn5LgQ==}
     engines: {node: '>=v12.20.0'}
     hasBin: true
 
@@ -3031,8 +3031,8 @@ packages:
     resolution: {integrity: sha512-3T8uNMC3OQTHkFUsFq8r/BwAXLHvU/9O9mE0fBc/MY5iq/8H7ncvO947LmYA6ldWw9Uh8Yhf25zu6n7nML5QWQ==}
     engines: {node: '>= 0.4'}
 
-  es-to-primitive@1.2.1:
-    resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
+  es-to-primitive@1.3.0:
+    resolution: {integrity: sha512-w+5mJ3GuFL+NjVtJlvydShqE1eN3h3PbI7/5LAsYJP/2qtuMXjfL2LpHSRqo4b4eSF5K/DH1JXKUAHSB2UW50g==}
     engines: {node: '>= 0.4'}
 
   esbuild-android-64@0.14.54:
@@ -6535,7 +6535,7 @@ snapshots:
       - '@types/node'
       - typescript
 
-  '@commitlint/config-conventional@18.6.3':
+  '@commitlint/config-conventional@18.6.2':
     dependencies:
       '@commitlint/types': 18.6.1
       conventional-changelog-conventionalcommits: 7.0.2
@@ -7609,7 +7609,7 @@ snapshots:
     dependencies:
       '@swc/counter': 0.1.3
 
-  '@tanstack/eslint-plugin-query@5.61.3(eslint@8.57.1)(typescript@5.7.2)':
+  '@tanstack/eslint-plugin-query@5.61.4(eslint@8.57.1)(typescript@5.7.2)':
     dependencies:
       '@typescript-eslint/utils': 8.16.0(eslint@8.57.1)(typescript@5.7.2)
       eslint: 8.57.1
@@ -7617,19 +7617,19 @@ snapshots:
       - supports-color
       - typescript
 
-  '@tanstack/query-core@5.60.6': {}
+  '@tanstack/query-core@5.61.5': {}
 
-  '@tanstack/query-devtools@5.61.3': {}
+  '@tanstack/query-devtools@5.61.4': {}
 
-  '@tanstack/react-query-devtools@5.61.3(@tanstack/react-query@5.61.3(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-query-devtools@5.61.5(@tanstack/react-query@5.61.5(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tanstack/query-devtools': 5.61.3
-      '@tanstack/react-query': 5.61.3(react@18.3.1)
+      '@tanstack/query-devtools': 5.61.4
+      '@tanstack/react-query': 5.61.5(react@18.3.1)
       react: 18.3.1
 
-  '@tanstack/react-query@5.61.3(react@18.3.1)':
+  '@tanstack/react-query@5.61.5(react@18.3.1)':
     dependencies:
-      '@tanstack/query-core': 5.60.6
+      '@tanstack/query-core': 5.61.5
       react: 18.3.1
 
   '@trysound/sax@0.2.0': {}
@@ -8030,7 +8030,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-react-swc@3.7.1(vite@5.4.11(@types/node@20.17.8)(sass@1.81.0)(terser@5.36.0))':
+  '@vitejs/plugin-react-swc@3.7.2(vite@5.4.11(@types/node@20.17.8)(sass@1.81.0)(terser@5.36.0))':
     dependencies:
       '@swc/core': 1.9.3
       vite: 5.4.11(@types/node@20.17.8)(sass@1.81.0)(terser@5.36.0)
@@ -8658,9 +8658,9 @@ snapshots:
 
   csstype@3.1.3: {}
 
-  cz-git@1.11.0: {}
+  cz-git@1.8.0: {}
 
-  czg@1.11.0: {}
+  czg@1.8.0: {}
 
   dargs@7.0.0: {}
 
@@ -8854,7 +8854,7 @@ snapshots:
       es-errors: 1.3.0
       es-object-atoms: 1.0.0
       es-set-tostringtag: 2.0.3
-      es-to-primitive: 1.2.1
+      es-to-primitive: 1.3.0
       function.prototype.name: 1.1.6
       get-intrinsic: 1.2.4
       get-symbol-description: 1.0.2
@@ -8906,7 +8906,7 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.2
 
-  es-to-primitive@1.2.1:
+  es-to-primitive@1.3.0:
     dependencies:
       is-callable: 1.2.7
       is-date-object: 1.0.5
