@@ -29,6 +29,21 @@ const getChildMenu = (menu: MenuDataItem): MenuDataItem => {
   }
 }
 
+const getFirstChildmenu = (menus: MenuDataItem[]): MenuDataItem => {
+  
+  console.log(menus)
+  if (menus && menus.length > 0) {
+    for (let i = 0; i < menus.length; i++) { 
+      if (!menus[i].children || menus[i].children?.length == 0) {
+        return menus[i]
+      } else if (menus[i]?.children && menus[i]?.children!.length > 0) {
+        return getFirstChildmenu(menus[i]?.children || [])
+      }
+    }
+  }
+  return menus[0]
+}
+
 function MengLayout() {
   const { pathname } = useLocation()
 
@@ -73,6 +88,7 @@ function MengLayout() {
 
   const menuItemClick = useCallback(
     (e: any) => {
+      debugger
       const menu = getMenu(menuInfoData.menuData!, e.key)
       if (menu?.viewType === '2') {
         if (ishttp(menu.linkUrl || '')) {
@@ -86,7 +102,8 @@ function MengLayout() {
         }
       } else {
         if (menu && menu.children && menu.children.length > 0) {
-          const kk: string = getChildMenu(menu.children[0]).key!
+          //getFirstChildmenu(menu.children)
+          const kk: string = getFirstChildmenu(menu.children).key!
           nav(kk)
         } else {
           nav(menu?.key!)

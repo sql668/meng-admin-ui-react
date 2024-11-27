@@ -88,6 +88,7 @@ const Sider = () => {
   const showClassSideBarRef = useMemo(() => {
     return getSplitMenu ? !hiddenSideBar : true
   }, [getSplitMenu, hiddenSideBar])
+  //console.log("siderbar menu:",menuData)
   const clearMenuData = clearMenuItem(menuData || [])
 
   useDeepCompareEffect(() => {

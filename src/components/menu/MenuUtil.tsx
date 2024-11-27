@@ -1,7 +1,7 @@
 import { MenuDataItem } from '@/types/menu'
 import { BaseMenuProps } from './type'
 import classNames from 'classnames'
-import type { ItemType } from 'antd/lib/menu/hooks/useItems'
+import type { ItemType } from 'antd/lib/menu/interface'
 import { isUrl } from '@/utils/util'
 import { useEffect, useState } from 'react'
 import { Tooltip } from 'antd'

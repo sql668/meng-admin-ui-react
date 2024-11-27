@@ -36,6 +36,34 @@ body {
   justify-content: center;
 }
 
+.mx-page-wrap{
+  .ka-wrapper{
+    height: 100%;
+    overflow: hidden;
+  }
+  .ka-content{
+height: 100%;
+    overflow: hidden;
+  }
+}
+
+.app-container{
+  position: relative;
+  top:0;
+  left:0;
+}
+
+.dn-app {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.dn-main-panel-container.relative{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 
 
 

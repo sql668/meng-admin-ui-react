@@ -62,6 +62,7 @@ const LayoutMenu = memo((props: LayoutMenuProps) => {
   }, [prefixCls, getComputedMenuTheme, getIsMobile])
 
   const menuData = useDeepMemo(() => {
+    debugger
     let menuData: MenuDataItem[] = []
     if (isMixSplitMenu && type === "top") {
       menuData = (originMenuData || []).map((item) => ({
@@ -74,15 +75,17 @@ const LayoutMenu = memo((props: LayoutMenuProps) => {
       if (key) {
         menuData = originMenuData?.find((item) => item.key === key)?.children || []
       }
-      return menuData
+      return clearMenuItem(menuData)
     } else {
       menuData = originMenuData!
     }
-    return clearMenuItem(menuData || [])
+    
+    const menu = clearMenuItem(menuData || [])
+    return menu
   }, [isMixSplitMenu, originMenuData, getIsMobile, matchMenuKeys,type])
 
   //const clearMenuData = clearMenuItem(menuData || [])
-  
+  //console.log('menuData: ', menuData)
   const getUseScroll = useMemo(() => {
     
     return (

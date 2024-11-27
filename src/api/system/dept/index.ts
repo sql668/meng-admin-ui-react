@@ -14,7 +14,7 @@ export const getDeptTreeApi = (data?: QueryFormModel) => {
   return useRequest.get<ResultData<DeptModel[]>>({
     url: '/dept/tree',
     params: data,
-  })
+  })        
 }
 
 export const getDeptById = (menuId: number) => {

@@ -66,4 +66,4 @@ export const SchemaField = createSchemaField({
     TreeSelect,
     Upload,
   },
-})
+}) as any

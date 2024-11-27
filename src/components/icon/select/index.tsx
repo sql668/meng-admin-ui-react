@@ -2,7 +2,7 @@
 import { Select } from 'antd'
 import defaultIcon from '../data'
 import { createStyles } from 'antd-style'
-  import svgIcons from 'virtual:svg-icons-names';
+import svgIcons from 'virtual:svg-icons-names';
 import { Icon } from '../icon'
 import { useEffect, useState } from 'react';
 import type { SelectProps} from 'antd/es/select';
@@ -70,5 +70,5 @@ export function IconSelect(props: IconSelectProps) {
       SetOptions(iconData)
     }
   },[iconMode])
-  return <Select options={options} className={cx(styles.container)} {...restProps}></Select>
+  return <Select options={options as any} className={cx(styles.container)} {...restProps}></Select>
 }

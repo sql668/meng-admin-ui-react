@@ -159,6 +159,7 @@ export default function User() {
                 updateUserStatusApi({ userId: row.userId, status: checked ? '1' : '0' }).then(
                   (res) => {
                     if (res.code === 0) {
+                      // 将缓存key失效，以触发重新查询
                       queryClient.invalidateQueries({ queryKey: ['sys-user', 'page', 'get'] })
                       resolve()
                     } else {

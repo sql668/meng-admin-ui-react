@@ -3,8 +3,7 @@ name: build and deploy mx admin
 on:
   push:
     branches:
-      - main
-      - dev
+      - main  # 只有向main分支push时才会重新打包部署
   # 这个选项可以使你手动在 Action tab 页面触发工作流
   workflow_dispatch:
 

@@ -29,7 +29,7 @@ import 'virtual:svg-icons-register'
 // import accountBook from '@iconify/icons-ant-design/account-book' //@iconify/icons-ant-design需要安装 pnpm add @iconify/icons-ant-design -D
 // Iconify.addIcon('xxx:account-book', accountBook) //可以自定义 icon的key <Icon icon='xxx:account-book'></Icon>
 
-import App from './App.tsx'
+import App from './App'
 
 NProgress.configure({
   minimum: 0.3,
@@ -46,16 +46,15 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  //<React.StrictMode>
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={false} />
-    {/* <BrowserRouter> */}
     <AliveScope>
       <App />
     </AliveScope>
-    {/* </BrowserRouter> */}
   </QueryClientProvider>,
-  //</React.StrictMode>,
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
 )
 
 // ReactDOM.render(

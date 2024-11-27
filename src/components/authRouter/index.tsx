@@ -16,7 +16,7 @@ import { RedirectView } from '@/views/redirect'
 import { setDefaultTag } from '@/store/tagsView'
 //import { NoLayout } from '@/layouts/noLayout'
 import { RouterVo } from '@/types/model/routerVo'
-import { NoLayout } from '@/layout/page'
+//import { NoLayout } from '@/layout/page'
 import { setRouters } from '@/store/router'
 const whiteList = ['/login', '/register']
 
@@ -42,7 +42,8 @@ const handleElement = (data: RouterVo[]) => {
 const handleNoLayoutElement = (data: RouterVo[]) => {
   const result: RouteObject[] = []
   for (let i = 0; i < data.length; i++) {
-    if (!data[i].handle.hasLayout && data[i].path.includes('/noLayout')) {
+    // !data[i].handle.hasLayout && data[i].path.includes('/noLayout')
+    if (!data[i].handle.hasLayout) {
       const r: RouteObject = {
         path: `${data[i].path}`,
         element: LoadView(data[i]),
@@ -53,6 +54,9 @@ const handleNoLayoutElement = (data: RouterVo[]) => {
         r.children = handleNoLayoutElement(data[i].children!)
       }
       result.push(r)
+    }
+    if (data[i].children && data[i].children!.length > 0) {
+      result.push(...handleNoLayoutElement(data[i].children!))
     }
   }
   return result
@@ -93,16 +97,19 @@ export default function AuthRouter(props: { children: JSX.Element }) {
               if (res.code === 0) {
                 setPermissionRouters(res.data || [])
                 setRouters(res.data || [])
+
                 const routers = handleElement(res.data || [])
+                //console.log(res.data)
                 const nolayout = handleNoLayoutElement(res.data || [])
 
                 replaceRoutes('*', [
-                  {
-                    id: '/noLayout',
-                    path: '/noLayout',
-                    element: <NoLayout></NoLayout>,
-                    children: [...nolayout],
-                  },
+                  // {
+                  //   id: '/noLayout',
+                  //   path: '/noLayout',
+                  //   element: <NoLayout></NoLayout>,
+                  //   children: [...nolayout],
+                  // },
+                  ...nolayout,
                   {
                     id: '/',
                     path: '/',
@@ -133,6 +140,8 @@ export default function AuthRouter(props: { children: JSX.Element }) {
                   },
                 ])
                 const path = `${location.pathname}${location.search}`
+
+                console.log(router.routes)
                 //const repath = path.replace(import.meta.env.VITE_BASE_URL, '/')
                 // replace一下当前路由，为了触发路由匹配
                 router.navigate(path.replace(import.meta.env.VITE_BASE_URL, '/'), { replace: true })

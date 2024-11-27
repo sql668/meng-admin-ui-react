@@ -57,18 +57,18 @@ export const useAppConfigStore = createSelectors(
 
 export const setHeaderSetting = (config: DeepPartial<HeaderSetting>) => {
   useAppConfigStore.setState((state) => {
-    state.headerSetting = deepMerge(state.headerSetting || {}, config)
+    state.headerSetting = deepMerge(state.headerSetting || {}, config) as any
   })
 }
 
 export const setMenuSetting = (config: DeepPartial<MenuSetting>) => {
   useAppConfigStore.setState((state) => {
-    state.menuSetting = deepMerge(state.menuSetting || {}, config)
+    state.menuSetting = deepMerge(state.menuSetting || {}, config) as any
   })
 }
 export const setMultipleTabsSetting = (config: DeepPartial<MultiTabsSetting>) => {
   useAppConfigStore.setState((state) => {
-    state.multiTabsSetting = deepMerge(state.multiTabsSetting || {}, config)
+    state.multiTabsSetting = deepMerge(state.multiTabsSetting || {}, config) as any
   })
 }
 

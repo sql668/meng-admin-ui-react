@@ -49,7 +49,9 @@ export const getMatchMenu = (
     .map((menuPathKey) => {
       const menuItem = flatMenus[menuPathKey] || {
         pro_layout_parentKeys: '',
+        layout_parentKeys:[],
         key: '',
+        path: '',
       }
 
       // 去重
@@ -87,7 +89,7 @@ export const getOpenKeysFromMenuData = (menuData?: MenuDataItem[]) => {
 }
 
 export function clearMenuItem(menusData: MenuDataItem[]): MenuDataItem[] {
-  return menusData
+  const result = menusData
     .map((item) => {
       const children: MenuDataItem[] = item.children || []
       const finalItem = { ...item }
@@ -113,7 +115,9 @@ export function clearMenuItem(menusData: MenuDataItem[]): MenuDataItem[] {
       delete finalItem.routes
       return finalItem
     })
-    .filter((item) => item) as MenuDataItem[]
+    .filter((item) => !item?.isHide) as MenuDataItem[]
+  //console.log(result)
+  return result
 }
 
 export const getMenuMatches = (

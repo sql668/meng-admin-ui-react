@@ -89,7 +89,7 @@ const ProviderChildren: React.FC<ProviderChildrenProps> = (props) => {
     </>
   )
 
-  return <MxAppConfigContext.Provider value={memoedConfig!}>{childNode}</MxAppConfigContext.Provider>
+  return <MxAppConfigContext.Provider value={memoedConfig as any}>{childNode}</MxAppConfigContext.Provider>
 
 }
 

@@ -35,7 +35,6 @@ const antdThemeConfig = {
   cssVar: true,
   hashed: false,
 }
-
 export default function App() {
   const [locale] = useState<Locale>(zhCN)
   const {getGlobalTheme} = useRootSetting()
@@ -51,6 +50,7 @@ export default function App() {
         </ThemeProvider>
       </ConfigProvider>
     </MxAppConfigProvider>
+    // <CreatedForm></CreatedForm>
   )
 }
 {

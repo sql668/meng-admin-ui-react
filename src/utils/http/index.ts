@@ -56,7 +56,8 @@ const _RequstInterceptors: RequstInterceptors = {
           })
         }
       } else if (data.code === 3) {
-        antdUtils.message?.warning(data.msg)
+        // 无效token 禁止访问 重定向到登陆页
+        location.href = '/login'
       } else {
         antdUtils.message?.error(data.msg)
       }

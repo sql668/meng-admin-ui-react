@@ -11,6 +11,7 @@ import Register from '@/views/register'
 import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom'
 import RouterErrorElement from '@/views/router-error-element'
 import { RouterVo } from '@/types/model'
+import CreatedForm from "@/views/tool/form/views/edit"
 export const StaticRoute: RouteObject[] = [
   {
     index: false,
@@ -19,6 +20,14 @@ export const StaticRoute: RouteObject[] = [
     handle: {
       title: '登录',
       fullPath: '/login',
+    },
+  },
+  {
+    path: '/form-created',
+    element: <CreatedForm></CreatedForm>,
+    handle: {
+      title: '表单测试',
+      fullPath: '/form-created',
     },
   },
   {
@@ -69,9 +78,10 @@ export const routerData: RouteObject[] = [
   },
 ]
 
+// @ts-ignore
 export const router = createBrowserRouter(routerData, {
   basename: import.meta.env.VITE_BASE_URL,
-})
+}) as any
 
 function findNodeByPath(routes: RouteObject[], path: string) {
   for (let i = 0; i < routes.length; i += 1) {

@@ -39,7 +39,9 @@ export const getMatchRoute = (
     .map((routePath) => {
       const routeItem = flatRoutes[routePath] || {
         key: '',
+        path:"",
         handle: {
+          title: "",
           parentPaths: [],
         },
       }
