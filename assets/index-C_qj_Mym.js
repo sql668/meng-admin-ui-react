@@ -1,1 +1,0 @@
-import{l as t}from"./index-CPMGXKlS.js";const a=a=>t.get({url:"/dept",params:a}),e=a=>t.get({url:"/dept/tree",params:a}),d=a=>t.get({url:"/dept/".concat(a)}),s=a=>t.post({url:"/dept",data:a}),p=(a,e)=>t.put({url:"/dept/".concat(e),data:a}),r=a=>t.delete({url:"/dept/",data:{ids:a}});export{d as a,a as b,r as d,e as g,s as i,p as u};
