@@ -11,6 +11,7 @@ import './_style.scss'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import useRootSetting from '@/hooks/setting/useRootSetting'
+import { Assistant } from '@/components/assistant'
 
 function BaseLayout() {
   const { prefixCls } = useDesign('default-layout')
@@ -39,6 +40,7 @@ function BaseLayout() {
             <LayoutFooter></LayoutFooter>
           </Layout>
         </Layout>
+        <Assistant></Assistant>
       </Layout>
     </>
   )
