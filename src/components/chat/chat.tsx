@@ -1,5 +1,4 @@
 import {
-  AttachmentsProps,
   Bubble,
   Conversation,
   Prompts,
@@ -9,7 +8,7 @@ import {
   useXChat,
   Welcome,
 } from '@ant-design/x'
-import { Button, GetProp, Space, Spin } from 'antd'
+import { Button, Space, Spin } from 'antd'
 import { createStyles } from 'antd-style'
 import { memo, useEffect, useRef, useState, type FC } from 'react'
 import { ChatProps } from './type'
@@ -156,18 +155,18 @@ const useChatStyle = createStyles(({ token, css }) => {
   }
 })
 
-export const Chat: FC<ChatProps> = memo(({ drawerWidth = 500, token, style, onClose }) => {
+export const Chat: FC<ChatProps> = memo(({ drawerWidth = 500, style, onClose }) => {
   const { styles } = useChatStyle()
-  const tokenRef = useRef<string | undefined>(token)
+  //const tokenRef = useRef<string | undefined>(token)
   const abortController = useRef<AbortController | null>(null)
 
-  const [messageHistory, setMessageHistory] = useState<Record<string, any>>({})
+  const [_, setMessageHistory] = useState<Record<string, any>>({})
 
   const [sessionList, setSessionList] = useState<Conversation[]>(MOCK_SESSION_LIST)
-  const [curSession, setCurSession] = useState(sessionList[0].key)
+  const [curSession] = useState(sessionList[0].key)
 
   const [attachmentsOpen, setAttachmentsOpen] = useState(false)
-  const [files, setFiles] = useState<GetProp<AttachmentsProps, 'items'>>([])
+  //const [files, setFiles] = useState<GetProp<AttachmentsProps, 'items'>>([])
 
   const [inputValue, setInputValue] = useState('')
 
@@ -177,7 +176,8 @@ export const Chat: FC<ChatProps> = memo(({ drawerWidth = 500, token, style, onCl
     dangerouslyApiKey: 'Bearer sk-xxxxxxxxxxxxxxxxxxxx',
   })
   const loading = agent.isRequesting()
-  const { messages, onRequest, setMessages } = useXChat({
+  const { messages, onRequest } = useXChat({
+    // { messages, onRequest, setMessages }
     agent,
     requestFallback: (_, { error }) => {
       console.error(error)
