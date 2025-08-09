@@ -1,1 +1,0 @@
-System.register(["./index-legacy-BeApHy_j.js"],(function(s,a){"use strict";var t;return{setters:[s=>{t=s.l}],execute:function(){s("g",(s=>t.get({url:"/sys-api",params:s}))),s("a",(s=>t.get({url:"/sys-api/all",params:s}))),s("i",(s=>t.post({url:"/sys-api",data:s}))),s("u",(s=>t.put({url:`/sys-api/${s.apiId}`,data:s}))),s("d",(s=>t.delete({url:"/sys-api/",data:{ids:s}})))}}}));
