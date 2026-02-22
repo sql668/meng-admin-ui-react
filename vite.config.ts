@@ -65,9 +65,9 @@ export default defineConfig((config) => {
     },
     css: {
       preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@/style/var.scss";',
-          javascriptEnabled: true,
+        scss: {//scss全局变量
+          additionalData: '@import "@/style/var.scss";',//在每个scss文件中自动引入var.scss
+          javascriptEnabled: true,//允许在scss文件中使用javascript表达式，如@import (reference) "xxx";，需要开启此选项
         },
       },
     },
@@ -83,7 +83,7 @@ export default defineConfig((config) => {
       legacy({
         targets: ['> 2%', 'last 2 versions and not dead'],
       }),
-      createSvgIconsPlugin({
+      createSvgIconsPlugin({//svg图标插件
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
         symbolId: 'icon-[dir]-[name]',
       }),
@@ -99,8 +99,8 @@ export default defineConfig((config) => {
       port: 5174,
       proxy: {
         '/api': {
-          target: 'http://127.0.0.1:8090', // 目标服务器的地址
-          //target: 'http://122.152.198.22:8091', // 目标服务器的地址
+          //target: 'http://127.0.0.1:8090', // 目标服务器的地址
+          //target: 'http://111.231.94.236:8090', // 目标服务器的地址
           //changeOrigin: true, // 是否改变源地址
           //rewrite: (path) => path.replace(/^\/api/, ''), // 重写路径
         },
