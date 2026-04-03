@@ -193,13 +193,15 @@ export const Chat: FC<ChatProps> = memo(({ drawerWidth = 500, style, onClose }) 
       }
     },
     transformMessage: (info) => {
+      //console.log('transformMessage', info)
       const { originMessage, chunk } = info || {}
       let currentContent = ''
-      let currentThink = ''
+      const currentThink = ''
       try {
         if (chunk?.data && !chunk?.data.includes('DONE')) {
           const message = JSON.parse(chunk?.data)
-          currentThink = message?.choices?.[0]?.delta?.reasoning_content || ''
+          console.log('message: ', message)
+          //currentThink = message?.choices?.[0]?.delta?.reasoning_content || ''
           currentContent = message?.choices?.[0]?.delta?.content || ''
         }
       } catch (error) {
@@ -219,6 +221,8 @@ export const Chat: FC<ChatProps> = memo(({ drawerWidth = 500, style, onClose }) 
       } else {
         content = `${originMessage?.content || ''}${currentThink}${currentContent}`
       }
+
+      console.log('content: ', content)
 
       return {
         content: content,
